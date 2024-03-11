@@ -15,7 +15,7 @@ public interface ICategoryService {
 
     boolean updateCategory(int id,CategoryDTO categoryDTO) throws Exception;
 
-    void enableCategory(long id);
+    void enableCategory(int id);
 
-    void deleteCategory(long id);
+    void deleteCategory(int id);
 }

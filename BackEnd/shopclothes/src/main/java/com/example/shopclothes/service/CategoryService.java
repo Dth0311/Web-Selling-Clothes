@@ -53,12 +53,29 @@ public class CategoryService implements ICategoryService {
     }
 
     @Override
-    public void enableCategory(long id) {
-
+    public void enableCategory(int id) {
+        Category category = null;
+        try {
+            category = categoryRepository.findById(id).orElseThrow();
+            if (category.isEnable()){
+                category.setEnable(false);
+            }else {
+                category.setEnable(true);
+            }
+            categoryRepository.save(category);
+        } catch (Exception e) {
+            System.out.println("Error enable category: " + e.getMessage());
+        }
     }
 
     @Override
-    public void deleteCategory(long id) {
-
+    public void deleteCategory(int id) {
+        Category category = null;
+        try {
+            category = categoryRepository.findById(id).orElseThrow();
+            categoryRepository.delete(category);
+        } catch (Exception e) {
+            System.out.println("Error update category: " + e.getMessage());
+        }
     }
 }

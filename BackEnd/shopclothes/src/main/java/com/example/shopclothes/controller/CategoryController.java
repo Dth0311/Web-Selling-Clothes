@@ -35,4 +35,18 @@ public class CategoryController {
             boolean isSuccess = categoryService.updateCategory(id,categoryDTO);
         return ResponseEntity.ok(isSuccess);
     }
+
+    @PutMapping("/enable/{id}")
+    public ResponseEntity<?> enableById(@PathVariable int id){
+        categoryService.enableCategory(id);
+        return ResponseEntity.ok("Cập nhật thành công");
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteCategoryById(@PathVariable int id){
+        categoryService.deleteCategory(id);
+        return ResponseEntity.ok("Xóa thành công category id: " + id);
+    }
+
+
 }
