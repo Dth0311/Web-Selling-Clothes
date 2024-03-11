@@ -9,14 +9,14 @@ CREATE TABLE role (
 
 CREATE TABLE user (
     id int PRIMARY KEY AUTO_INCREMENT,
-    first_Name VARCHAR(255),
-    last_Name VARCHAR(255),
-    user_Name VARCHAR(255) not null,
+    first_Name NVARCHAR(255),
+    last_Name NVARCHAR(255),
+    user_Name NVARCHAR(255) not null,
     email VARCHAR(255) UNIQUE not null,
     password VARCHAR(255) not null,
-    country VARCHAR(255),
-    address VARCHAR(255),
-    state VARCHAR(255),
+    country NVARCHAR(255),
+    address NVARCHAR(255),
+    state NVARCHAR(255),
     phone VARCHAR(255),
     enable BOOLEAN,
     verification_code VARCHAR(64)
@@ -33,23 +33,23 @@ CREATE TABLE user_role (
 CREATE TABLE orders (
     id int PRIMARY KEY AUTO_INCREMENT,
     user_id int,
-    first_name VARCHAR(255),
-    last_name VARCHAR(255),
-    user_name VARCHAR(255),
+    first_name NVARCHAR(255),
+    last_name NVARCHAR(255),
+    user_name NVARCHAR(255),
     email VARCHAR(255),
-    country VARCHAR(255),
-    address VARCHAR(255),
-    state VARCHAR(255),
+    country NVARCHAR(255),
+    address NVARCHAR(255),
+    state NVARCHAR(255),
     phone VARCHAR(255),
-    town VARCHAR(255),
+    town NVARCHAR(255),
     post_code BIGINT,
-    note VARCHAR(255),
+    note NVARCHAR(255),
 	FOREIGN KEY (user_id) REFERENCES user(id)
 );
 
 CREATE TABLE order_detail (
     id int PRIMARY KEY AUTO_INCREMENT,
-    name VARCHAR(255),
+    name NVARCHAR(255),
     price BIGINT,
     quantity INT,
     sub_total BIGINT,
@@ -60,7 +60,7 @@ CREATE TABLE order_detail (
 CREATE TABLE image (
     id int PRIMARY KEY AUTO_INCREMENT,
     user_id int,
-    name VARCHAR(255),
+    name NVARCHAR(255),
     size BIGINT,
     type VARCHAR(255),
     data LONGBLOB,
@@ -69,8 +69,8 @@ CREATE TABLE image (
 
 CREATE TABLE category (
     id INT PRIMARY KEY AUTO_INCREMENT,
-    name VARCHAR(255),
-    enable BIT(1)
+    name NVARCHAR(255),
+    enable boolean
 );
 
 CREATE TABLE product (
@@ -93,13 +93,13 @@ CREATE TABLE product_image (
 
 CREATE TABLE tag (
     id INT PRIMARY KEY AUTO_INCREMENT,
-    name VARCHAR(255),
+    name NVARCHAR(255),
     enable BIT(1)
 );
 
 CREATE TABLE blog (
     id INT PRIMARY KEY AUTO_INCREMENT,
-    title VARCHAR(255),
+    title NVARCHAR(255),
     description TEXT,
     content TEXT,
     created_At DATETIME default current_timestamp,
@@ -115,3 +115,6 @@ CREATE TABLE blog_tag (
     FOREIGN KEY (blog_id) REFERENCES blog(id),
     FOREIGN KEY (tag_id) REFERENCES tag(id)
 );
+
+ALTER TABLE category
+MODIFY COLUMN enable boolean DEFAULT true;
