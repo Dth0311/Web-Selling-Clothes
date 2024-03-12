@@ -25,7 +25,7 @@ public interface IProductService {
 
     Product createProduct(ProductDTO productDTO) throws DataNotFoundException;
 
-    Product updateProduct(int id, ProductDTO productDTO);
+    Product updateProduct(int id, ProductDTO productDTO) throws DataNotFoundException;
 
-    void deleteProduct(int id);
+    void deleteProduct(int id) throws DataNotFoundException;
 }

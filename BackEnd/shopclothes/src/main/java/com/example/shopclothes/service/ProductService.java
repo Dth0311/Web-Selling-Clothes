@@ -12,6 +12,7 @@ import com.example.shopclothes.service.Imp.IProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.data.domain.Sort;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
@@ -37,32 +38,32 @@ public class ProductService implements IProductService {
 
     @Override
     public List<Product> getListNewst(int number) {
-        return null;
+        return productRepository.getListNewest(number);
     }
 
     @Override
     public List<Product> getListByPrice() {
-        return null;
+        return productRepository.getListByPrice();
     }
 
     @Override
     public List<Product> findRelatedProduct(int id) {
-        return null;
+        return productRepository.findRelatedProduct(id);
     }
 
     @Override
     public List<Product> getListProductByCategory(int id) {
-        return null;
+        return productRepository.getListProductByCategory(id);
     }
 
     @Override
     public List<Product> getListByPriceRange(int id, int min, int max) {
-        return null;
+        return productRepository.getListProductByPriceRange(id,min,max);
     }
 
     @Override
     public List<Product> searchProduct(String keyword) {
-        return null;
+        return productRepository.searchProduct(keyword);
     }
 
     @Override
@@ -93,12 +94,33 @@ public class ProductService implements IProductService {
     }
 
     @Override
-    public Product updateProduct(int id, ProductDTO productDTO) {
-        return null;
+    public Product updateProduct(int id, ProductDTO productDTO) throws DataNotFoundException {
+        Product product= productRepository.findById(id).orElseThrow(() -> new DataNotFoundException("Không tìm thấy product id: " + id));
+        product.setName(productDTO.getName());
+        product.setDescription(productDTO.getDescription());
+        product.setPrice(productDTO.getPrice());
+        product.setQuantity(productDTO.getQuantity());
+        Category category = categoryRepository.findById(productDTO.getCategoryId()).orElseThrow(()-> new DataNotFoundException("Không tìm thấy category với id: " + productDTO.getCategoryId()));
+        product.setCategory(category);
+
+        if(!productDTO.getImageIds().isEmpty()){
+            Set<Image> images = new HashSet<>();
+            for(int imageId: productDTO.getImageIds()){
+                Image image = imageRepository.findById(imageId).orElseThrow(() -> new DataNotFoundException("Không tìm thấy image id: " + imageId));
+                images.add(image);
+            }
+            product.setImages(images);
+        }
+        productRepository.save(product);
+        return product;
     }
 
     @Override
-    public void deleteProduct(int id) {
-
+    public void deleteProduct(int id) throws DataNotFoundException {
+        Product product= productRepository.findById(id).orElseThrow(() -> new DataNotFoundException("Không tìm thấy product id: " + id));
+//        if(!product.getImages().isEmpty()){
+//            product.getImages().remove(this);
+//        }
+        productRepository.delete(product);
     }
 }

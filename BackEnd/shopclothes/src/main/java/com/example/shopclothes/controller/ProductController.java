@@ -44,6 +44,72 @@ public class ProductController {
         }
     }
 
+    @GetMapping("/listnew/{number}")
+    public ResponseEntity<?> getListNewst(@PathVariable int number){
+        List<Product> list =productService.getListNewst(number);
+        List<ProductDTO> productDTOList = new ArrayList<>();
+        for (var item:list) {
+            ProductDTO productDTO = ProductDTO.fromProduct(item);
+            productDTOList.add(productDTO);
+        }
+        return ResponseEntity.ok(productDTOList);
+    }
+
+    @GetMapping("/price")
+    public ResponseEntity<?> getListByPrice(){
+        List<Product> list =productService.getListByPrice();
+        List<ProductDTO> productDTOList = new ArrayList<>();
+        for (var item:list) {
+            ProductDTO productDTO = ProductDTO.fromProduct(item);
+            productDTOList.add(productDTO);
+        }
+        return ResponseEntity.ok(productDTOList);
+    }
+
+    @GetMapping("/related/{id}")
+    public ResponseEntity<?> getListRelatedProduct(@PathVariable int id){
+        List<Product> list = productService.findRelatedProduct(id);
+        List<ProductDTO> productDTOList = new ArrayList<>();
+        for (var item:list) {
+            ProductDTO productDTO = ProductDTO.fromProduct(item);
+            productDTOList.add(productDTO);
+        }
+        return ResponseEntity.ok(productDTOList);
+    }
+
+    @GetMapping("/category/{id}")
+    public ResponseEntity<?> getListProductByCategory(@PathVariable int id){
+        List<Product> list =  productService.getListProductByCategory(id);
+        List<ProductDTO> productDTOList = new ArrayList<>();
+        for (var item:list) {
+            ProductDTO productDTO = ProductDTO.fromProduct(item);
+            productDTOList.add(productDTO);
+        }
+        return ResponseEntity.ok(productDTOList);
+    }
+
+    @GetMapping("/range")
+    public ResponseEntity<?> getListProductByPriceRange(@RequestParam("id") int id,@RequestParam("min") int min, @RequestParam("max") int max){
+        List<Product> list = productService.getListByPriceRange(id, min, max);
+        List<ProductDTO> productDTOList = new ArrayList<>();
+        for (var item:list) {
+            ProductDTO productDTO = ProductDTO.fromProduct(item);
+            productDTOList.add(productDTO);
+        }
+        return ResponseEntity.ok(productDTOList);
+    }
+
+    @GetMapping("/search")
+    public ResponseEntity<?> searchProduct(@RequestParam("keyword") String keyword){
+        List<Product> list = productService.searchProduct(keyword);
+        List<ProductDTO> productDTOList = new ArrayList<>();
+        for (var item:list) {
+            ProductDTO productDTO = ProductDTO.fromProduct(item);
+            productDTOList.add(productDTO);
+        }
+        return ResponseEntity.ok(productDTOList);
+    }
+
     @PostMapping("")
     public ResponseEntity<?> createProduct(@RequestBody ProductDTO productDTO){
         try{
@@ -53,4 +119,26 @@ public class ProductController {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
+
+    @PutMapping("/update/{id}")
+    public ResponseEntity<?> updateProduct(@PathVariable int id,@RequestBody ProductDTO productDTO){
+        try{
+            Product product = productService.updateProduct(id,productDTO);
+            return ResponseEntity.ok(ProductDTO.fromProduct(product));
+        }catch (Exception e){
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<?> deleteProduct(@PathVariable int id){
+        try{
+            productService.deleteProduct(id);
+            return ResponseEntity.ok("Xóa sản phẩm thành công");
+        }catch (Exception e){
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+
 }

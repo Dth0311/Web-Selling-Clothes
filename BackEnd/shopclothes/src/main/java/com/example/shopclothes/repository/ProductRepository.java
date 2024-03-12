@@ -16,13 +16,13 @@ public interface ProductRepository extends JpaRepository<Product,Integer> {
     List<Product> getListByPrice();
 
     @Query(value ="Select * from Product where category_id = :id order by rand() limit 4",nativeQuery = true)
-    List<Product> findRelatedProduct(long id);
+    List<Product> findRelatedProduct(int id);
 
     @Query(value ="Select * from Product where category_id = :id",nativeQuery = true)
-    List<Product> getListProductByCategory(long id);
+    List<Product> getListProductByCategory(int id);
 
     @Query(value = "Select * from Product where category_id = :id and price between :min and :max",nativeQuery = true)
-    List<Product> getListProductByPriceRange(long id,int min,int max);
+    List<Product> getListProductByPriceRange(int id,int min,int max);
 
     @Query(value= "Select p from Product p where p.name like %:keyword% order by id desc")
     List<Product> searchProduct(String keyword);

@@ -118,3 +118,6 @@ CREATE TABLE blog_tag (
 
 ALTER TABLE category
 MODIFY COLUMN enable boolean DEFAULT true;
+
+ALTER TABLE tag
+MODIFY COLUMN enable boolean DEFAULT false;
