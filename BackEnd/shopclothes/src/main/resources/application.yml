@@ -15,5 +15,9 @@ spring:
   servlet:
     multipart:
       max-file-size: 10MB
+
+jwt:
+  privateKey: BuyWkVX1rtFgUgIMNDTAmXMfs7t4TbvhZxOJWfULYSQ=
+
 api:
   prefix: api/v1
