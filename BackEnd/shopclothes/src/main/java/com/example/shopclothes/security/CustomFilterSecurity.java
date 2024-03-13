@@ -1,6 +1,7 @@
 package com.example.shopclothes.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -15,6 +16,9 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableWebSecurity
 public class CustomFilterSecurity {
 
+    @Value("${api.prefix}")
+    private String apiPrefix;
+
     @Autowired
     CustomUserDetailService customUserDetailService;
 
@@ -27,8 +31,13 @@ public class CustomFilterSecurity {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeHttpRequests()
-                .requestMatchers("/**")
-                .permitAll();
+                .requestMatchers(
+                        String.format("%s/login/signup",apiPrefix),
+                        String.format("%s/login/signin",apiPrefix)
+                )
+                .permitAll()
+                .anyRequest()
+                .authenticated();
 
         http.addFilterBefore(customJwtFilter, UsernamePasswordAuthenticationFilter.class);
         return http.build();
