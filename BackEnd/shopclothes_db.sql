@@ -35,7 +35,6 @@ CREATE TABLE orders (
     user_id int,
     first_name NVARCHAR(255),
     last_name NVARCHAR(255),
-    user_name NVARCHAR(255),
     email VARCHAR(255),
     country NVARCHAR(255),
     address NVARCHAR(255),
@@ -49,7 +48,6 @@ CREATE TABLE orders (
 
 CREATE TABLE order_detail (
     id int PRIMARY KEY AUTO_INCREMENT,
-    name NVARCHAR(255),
     price BIGINT,
     quantity INT,
     sub_total BIGINT,
@@ -121,3 +119,11 @@ MODIFY COLUMN enable boolean DEFAULT true;
 
 ALTER TABLE tag
 MODIFY COLUMN enable boolean DEFAULT false;
+
+ALTER TABLE orders
+ADD COLUMN total_price Long;
+
+ALTER TABLE order_detail
+ADD COLUMN product_id INT,
+ADD FOREIGN KEY (product_id) REFERENCES product(id);
+

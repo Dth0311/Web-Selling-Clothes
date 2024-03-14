@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.sql.Timestamp;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -29,8 +30,8 @@ public class Blog {
     @Column(name = "content",columnDefinition = "TEXT")
     private String content;
 
-    @Column(name = "create_At")
-    private Timestamp createAt;
+    @Column(name = "created_at")
+    private Date createAt;
 
     @ManyToOne
     @JoinColumn(name="image_id")

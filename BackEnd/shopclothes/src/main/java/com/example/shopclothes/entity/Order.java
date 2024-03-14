@@ -48,6 +48,9 @@ public class Order {
     @Column(name="note")
     private String note;
 
+    @Column(name="total_price")
+    private long totalPrice;
+
     @ManyToOne
     @JoinColumn(name="user_id")
     private User user;
