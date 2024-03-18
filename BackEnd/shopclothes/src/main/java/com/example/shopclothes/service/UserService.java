@@ -30,38 +30,6 @@ public class UserService implements IUserService {
     PasswordEncoder passwordEncoder;
 
     @Override
-    public void register(UserRequest userRequest) {
-        User user = new User();
-        user.setUsername(userRequest.getUsername());
-        user.setEmail(userRequest.getEmail());
-        user.setPassword(passwordEncoder.encode(userRequest.getPassword()));
-        Set<String> strRoles = userRequest.getRole();
-        Set<Role> roles = new HashSet<>();
-        if (strRoles == null) {
-            Role userRole = roleRepository.findByName(ERole.ROLE_USER)
-                    .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
-            roles.add(userRole);
-        }
-        else {
-            for (var item:strRoles) {
-                Role role = new Role();
-                if (Objects.equals(item, "admin")){
-                    role.setName(ERole.ROLE_ADMIN);
-                    roles.add(role);
-                } else if (Objects.equals(item, "mod")) {
-                    role.setName(ERole.ROLE_MODERATOR);
-                    roles.add(role);
-                }else {
-                    role.setName(ERole.ROLE_USER);
-                    roles.add(role);
-                }
-            }
-            user.setRoles(roles);
-        }
-        userRepository.save(user);
-    }
-
-    @Override
     public User getUserByUsername(String username) throws DataNotFoundException {
         User user = userRepository.findByUserName(username);
         if(user == null){

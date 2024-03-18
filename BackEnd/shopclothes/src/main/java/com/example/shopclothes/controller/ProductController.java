@@ -7,6 +7,7 @@ import com.example.shopclothes.entity.Product;
 import com.example.shopclothes.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -111,6 +112,7 @@ public class ProductController {
     }
 
     @PostMapping("")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<?> createProduct(@RequestBody ProductDTO productDTO){
         try{
             Product product = productService.createProduct(productDTO);
@@ -121,6 +123,7 @@ public class ProductController {
     }
 
     @PutMapping("/update/{id}")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<?> updateProduct(@PathVariable int id,@RequestBody ProductDTO productDTO){
         try{
             Product product = productService.updateProduct(id,productDTO);
@@ -131,6 +134,7 @@ public class ProductController {
     }
 
     @DeleteMapping("/delete/{id}")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<?> deleteProduct(@PathVariable int id){
         try{
             productService.deleteProduct(id);

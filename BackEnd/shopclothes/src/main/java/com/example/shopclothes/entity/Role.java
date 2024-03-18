@@ -17,4 +17,7 @@ public class Role {
 
     @Enumerated(EnumType.STRING)
     private ERole name;
+
+    public static String ADMIN = "ADMIN";
+    public static String USER = "USER";
 }

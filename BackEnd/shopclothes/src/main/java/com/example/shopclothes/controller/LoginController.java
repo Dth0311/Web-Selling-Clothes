@@ -20,11 +20,7 @@ public class LoginController {
 
     @PostMapping("/signin")
     public ResponseEntity<?> signin(@RequestParam String userName, @RequestParam String password) {
-        if(loginService.checkLogin(userName,password)){
-            String token = jwtUtilsHelper.generateToken(userName);
-            return new ResponseEntity<>(token, HttpStatus.OK);
-        }
-        return new ResponseEntity<>("", HttpStatus.OK);
+        return new ResponseEntity<>(loginService.checkLogin(userName,password), HttpStatus.OK);
     }
 
     @PostMapping("/signup")

@@ -1,16 +1,32 @@
 package com.example.shopclothes.security;
 
+import com.example.shopclothes.entity.ERole;
+import com.example.shopclothes.entity.Role;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.util.Pair;
+import org.springframework.http.HttpMethod;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.Customizer;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.config.annotation.web.configurers.CorsConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+
+import java.util.Arrays;
+import java.util.List;
+
+import static org.springframework.http.HttpMethod.GET;
 
 @Configuration
 @EnableWebSecurity
@@ -26,25 +42,49 @@ public class CustomFilterSecurity {
     CustomJwtFilter customJwtFilter;
 
     @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http.cors().and().csrf().disable()
-                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                .and()
-                .authorizeHttpRequests()
-                .requestMatchers(
-                        String.format("%s/login/signup",apiPrefix),
-                        String.format("%s/login/signin",apiPrefix)
-                )
-                .permitAll()
-                .anyRequest()
-                .authenticated();
+    public AuthenticationManager authenticationManager(HttpSecurity httpSecurity) throws Exception {
+        AuthenticationManagerBuilder authenticationManagerBuilder = httpSecurity.getSharedObject(AuthenticationManagerBuilder.class);
+        authenticationManagerBuilder.userDetailsService(customUserDetailService).passwordEncoder(passwordEncoder());
 
-        http.addFilterBefore(customJwtFilter, UsernamePasswordAuthenticationFilter.class);
-        return http.build();
+        return authenticationManagerBuilder.build();
     }
 
     @Bean
-    public PasswordEncoder passwordEncoder(){
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        http
+                .addFilterBefore(customJwtFilter, UsernamePasswordAuthenticationFilter.class)
+                .authorizeHttpRequests(request -> {
+                    request.requestMatchers(
+//                            String.format("%s/product", apiPrefix),
+//                            String.format("%s/category", apiPrefix),
+                            String.format("%s/login/signup", apiPrefix),
+                            String.format("%s/login/signin", apiPrefix)
+                    )
+                            .permitAll()
+                            .requestMatchers(GET,
+                                    String.format("%s/category/**", apiPrefix)).permitAll()
+                            .requestMatchers(GET,
+                                    String.format("%s/product/**", apiPrefix)).permitAll()
+                            .requestMatchers(GET,
+                                    String.format("%s/tag/**", apiPrefix)).permitAll()
+                            .requestMatchers(GET,
+                                    String.format("%s/blog/**", apiPrefix)).permitAll()
+                            .requestMatchers(GET,
+                                    String.format("%s/image/**", apiPrefix)).permitAll()
+                            .requestMatchers(GET,
+                                    String.format("%s/order/**", apiPrefix)).permitAll()
+                            .anyRequest()
+                            .authenticated();
+                })
+                .csrf(AbstractHttpConfigurer::disable);
+
+        return http.build();
+    }
+
+
+
+    @Bean
+    public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 }

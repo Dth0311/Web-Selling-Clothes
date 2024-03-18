@@ -5,6 +5,7 @@ import com.example.shopclothes.entity.Tag;
 import com.example.shopclothes.service.TagService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -29,6 +30,7 @@ public class TagController {
     }
 
     @PutMapping("/update/{id}")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<?> updateTag(@PathVariable int id,@RequestBody TagDTO tagDTO){
         try {
             Tag tag = tagService.updateTag(id, tagDTO);
@@ -39,6 +41,7 @@ public class TagController {
     }
 
     @PutMapping("/enable/{id}")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<?> enabled(@PathVariable int id){
         try {
             tagService.enableTag(id);
@@ -50,6 +53,7 @@ public class TagController {
     }
 
     @DeleteMapping("/delete/{id}")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<?> deleteTag(@PathVariable int id){
         try {
             tagService.deleleTag(id);

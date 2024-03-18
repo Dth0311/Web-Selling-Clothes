@@ -8,6 +8,7 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Encoders;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.crypto.SecretKey;
@@ -20,6 +21,7 @@ public class UserController {
     UserService userService;
 
     @GetMapping("")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<?> getuser(@RequestParam("username") String username){
         User user = null;
         try {
@@ -31,6 +33,7 @@ public class UserController {
     }
 
     @PutMapping("/update")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<?> updateProfile(@RequestBody UserDTO userDTO){
         User user = null;
         try {

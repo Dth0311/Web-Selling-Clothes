@@ -15,6 +15,9 @@ spring:
   servlet:
     multipart:
       max-file-size: 10MB
+  main:
+    allow-circular-references: true
+    allow-bean-definition-overriding: true
 
 jwt:
   privateKey: BuyWkVX1rtFgUgIMNDTAmXMfs7t4TbvhZxOJWfULYSQ=

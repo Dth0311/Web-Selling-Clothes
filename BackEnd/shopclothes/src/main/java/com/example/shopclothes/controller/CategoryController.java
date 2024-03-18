@@ -5,6 +5,7 @@ import com.example.shopclothes.entity.Category;
 import com.example.shopclothes.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -25,24 +26,28 @@ public class CategoryController {
     }
 
     @PostMapping("")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<?> createCategory(@RequestBody CategoryDTO categoryDTO){
         Category category = categoryService.createCategory(categoryDTO);
         return ResponseEntity.ok(category);
     }
 
     @PutMapping("/{id}")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<?> updateCategoryById(@PathVariable int id, @RequestBody CategoryDTO categoryDTO){
             boolean isSuccess = categoryService.updateCategory(id,categoryDTO);
         return ResponseEntity.ok(isSuccess);
     }
 
     @PutMapping("/enable/{id}")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<?> enableById(@PathVariable int id){
         categoryService.enableCategory(id);
         return ResponseEntity.ok("Cập nhật thành công");
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<?> deleteCategoryById(@PathVariable int id){
         categoryService.deleteCategory(id);
         return ResponseEntity.ok("Xóa thành công category id: " + id);

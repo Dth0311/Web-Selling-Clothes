@@ -6,7 +6,6 @@ import com.example.shopclothes.exception.DataNotFoundException;
 import com.example.shopclothes.request.UserRequest;
 
 public interface IUserService {
-    void register(UserRequest userRequest);
 
     User getUserByUsername(String username) throws DataNotFoundException;
 

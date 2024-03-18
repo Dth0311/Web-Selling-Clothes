@@ -6,6 +6,7 @@ import com.example.shopclothes.exception.DataNotFoundException;
 import com.example.shopclothes.service.BlogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -54,6 +55,7 @@ public class BlogController {
     }
 
     @PostMapping("/create")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<?> create(@RequestBody BlogDTO blogDTO){
         Blog blog = null;
         try {
@@ -65,6 +67,7 @@ public class BlogController {
     }
 
     @PutMapping("/update/{id}")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<?> update(@PathVariable int id, @RequestBody BlogDTO blogDTO){
         Blog blog = null;
         try {
@@ -76,6 +79,7 @@ public class BlogController {
     }
 
     @DeleteMapping("/delete/{id}")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<?> delete(@PathVariable int id){
         try {
             blogService.deleteBlog(id);

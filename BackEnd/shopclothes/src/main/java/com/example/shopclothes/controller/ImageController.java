@@ -6,6 +6,7 @@ import com.example.shopclothes.exception.BadRequestException;
 import com.example.shopclothes.service.ImageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -39,6 +40,7 @@ public class ImageController {
     }
 
     @PostMapping("/upload")
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')")
     public ResponseEntity<?> uploadFile(@RequestParam("file") MultipartFile file) throws BadRequestException {
         File uploadDir = new File(UPLOAD_DIR);
         if (!uploadDir.exists()) {
