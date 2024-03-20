@@ -61,6 +61,9 @@ public class BlogService implements IBlogService {
         Image image = imageRepository.findById(blogDTO.getImageId()).orElseThrow(() -> new DataNotFoundException("Không tìm thấy image id: " + blogDTO.getImageId()));
         blog.setImage(image);
         User user = userRepository.findByUserName(blogDTO.getUsername());
+        if (user == null){
+            throw new DataNotFoundException("Không tìm thấy username");
+        }
         blog.setUser(user);
         blog.setCreateAt(new Timestamp(System.currentTimeMillis()));
         Set<Tag> tags = new HashSet<>();

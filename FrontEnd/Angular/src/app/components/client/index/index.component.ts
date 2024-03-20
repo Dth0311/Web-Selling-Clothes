@@ -1,16 +1,17 @@
-import { Component } from '@angular/core';
+import { Component} from '@angular/core';
 import { Router } from '@angular/router';
-
+import { HttpClient,HttpHeaders } from '@angular/common/http';
 @Component({
   selector: 'app-index',
-  // standalone: true,
+  //  standalone: true,
   // imports: [],
   templateUrl: './index.component.html',
-  styleUrl:'./index.component.css'
+  styleUrl:'./index.component.css',
+  providers: [],
+
 })
 export class IndexComponent {
-  constructor(private router: Router) {}
-  goToLoginPage() {
-    this.router.navigate(['/login']);
-  }
+
+  constructor(private http: HttpClient,private router: Router) {}
+
 }

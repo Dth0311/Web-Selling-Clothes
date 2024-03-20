@@ -19,15 +19,9 @@ CREATE TABLE user (
     state NVARCHAR(255),
     phone VARCHAR(255),
     enable BOOLEAN,
-    verification_code VARCHAR(64)
-);
-
-CREATE TABLE user_role (
-    user_id int,
+    verification_code VARCHAR(64),
     role_id int,
-    primary key(user_id,role_id),
-    FOREIGN KEY (user_id) REFERENCES user(id),
-    FOREIGN KEY (role_id) REFERENCES role(id)
+     FOREIGN KEY (role_id) REFERENCES role(id)
 );
 
 CREATE TABLE orders (
@@ -43,6 +37,7 @@ CREATE TABLE orders (
     town NVARCHAR(255),
     post_code BIGINT,
     note NVARCHAR(255),
+    total_price long,
 	FOREIGN KEY (user_id) REFERENCES user(id)
 );
 
@@ -67,8 +62,8 @@ CREATE TABLE image (
 
 CREATE TABLE category (
     id INT PRIMARY KEY AUTO_INCREMENT,
-    name NVARCHAR(255),
-    enable boolean
+    name VARCHAR(255),
+    enable boolean default true
 );
 
 CREATE TABLE product (
@@ -92,7 +87,7 @@ CREATE TABLE product_image (
 CREATE TABLE tag (
     id INT PRIMARY KEY AUTO_INCREMENT,
     name NVARCHAR(255),
-    enable BIT(1)
+    enable boolean default true
 );
 
 CREATE TABLE blog (
@@ -114,16 +109,8 @@ CREATE TABLE blog_tag (
     FOREIGN KEY (tag_id) REFERENCES tag(id)
 );
 
-ALTER TABLE category
-MODIFY COLUMN enable boolean DEFAULT true;
-
-ALTER TABLE tag
-MODIFY COLUMN enable boolean DEFAULT false;
-
-ALTER TABLE orders
-ADD COLUMN total_price Long;
-
 ALTER TABLE order_detail
 ADD COLUMN product_id INT,
 ADD FOREIGN KEY (product_id) REFERENCES product(id);
+
 

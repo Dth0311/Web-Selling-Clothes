@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "*",maxAge = 3600)
 @RequestMapping("${api.prefix}/order")
 public class OrderController {
 

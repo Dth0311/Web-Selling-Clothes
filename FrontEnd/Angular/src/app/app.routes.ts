@@ -1,5 +1,7 @@
-import { NgModule } from '@angular/core';
+import { NgModule,CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { BrowserModule } from '@angular/platform-browser';
+import { AccordionModule } from 'primeng/accordion';
 import { HomeComponent } from './components/client/home/home.component';
 import { LoginComponent } from './components/client/login/login.component';
 import { IndexComponent } from './components/client/index/index.component';
@@ -11,6 +13,14 @@ import { BlogComponent } from './components/client/blog/blog.component';
 import { BlogDetailComponent } from './components/client/blog-detail/blog-detail.component';
 import { UserDetailComponent } from './components/client/user-detail/user-detail.component';
 import { OrderComponent } from './components/client/order/order.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { RegisterComponent} from './components/client/register/register.component';
+import { AppComponent } from './app.component';
+import { FormsModule } from '@angular/forms'; 
+import { HttpClientModule } from '@angular/common/http';
+import {HttpClient } from '@angular/common/http';
+
+
 
 export const routes: Routes = [
     { path:'',component: IndexComponent,
@@ -24,15 +34,35 @@ export const routes: Routes = [
             {path:'blogid', component: BlogDetailComponent},
             {path:'user',component: UserDetailComponent},
             {path:'order',component: OrderComponent},
+            
         ]
     },
-    { path:'login',component: LoginComponent}
+    { path:'login',component: LoginComponent},
+    {path:'register',component: RegisterComponent},
 ];
 @NgModule({
     declarations: [
-        IndexComponent
+        IndexComponent,RegisterComponent
     ],
-    imports: [RouterModule.forRoot(routes)],
+    imports: [
+        HttpClientModule,
+        ReactiveFormsModule,
+        BrowserModule,
+        RouterModule.forRoot(routes),
+        FormsModule,        
+        AccordionModule,
+        // HomeComponent,
+        // LoginComponent,
+        // ShopGridComponent,
+        // ProductDetailComponent,
+        // CartComponent,
+        // CheckoutComponent,
+        // BlogComponent,
+        // BlogDetailComponent,
+        // UserDetailComponent,
+        // OrderComponent,
+    ],
+    providers: [HttpClientModule],
     exports: [RouterModule]
 })
 export class AppRoutingModule { }

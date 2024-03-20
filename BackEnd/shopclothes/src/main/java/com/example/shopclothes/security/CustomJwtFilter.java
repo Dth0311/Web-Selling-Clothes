@@ -86,12 +86,13 @@ public class CustomJwtFilter extends OncePerRequestFilter {
 
     private boolean isBypassToken(@NonNull HttpServletRequest request){
         final List<Pair<String,String>> bypassTokens = Arrays.asList(
+                Pair.of(String.format("%s/login/signin",apiPrefix),"POST"),
+                Pair.of(String.format("%s/login/signup",apiPrefix),"POST"),
                 Pair.of(String.format("%s/product",apiPrefix),"GET"),
                 Pair.of(String.format("%s/category",apiPrefix),"GET"),
                 Pair.of(String.format("%s/tag",apiPrefix),"GET"),
-                Pair.of(String.format("%s/blog",apiPrefix),"GET"),
-                Pair.of(String.format("%s/login/signin",apiPrefix),"POST"),
-                Pair.of(String.format("%s/login/signup",apiPrefix),"POST")
+                Pair.of(String.format("%s/blog",apiPrefix),"GET")
+
         );
 //        String requestPath = request.getServletPath();
 //        String requestMethod = request.getMethod();

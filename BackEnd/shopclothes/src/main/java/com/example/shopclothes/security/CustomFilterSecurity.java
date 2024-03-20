@@ -27,6 +27,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import static org.springframework.http.HttpMethod.GET;
+import static org.springframework.http.HttpMethod.POST;
 
 @Configuration
 @EnableWebSecurity
@@ -55,12 +56,14 @@ public class CustomFilterSecurity {
                 .addFilterBefore(customJwtFilter, UsernamePasswordAuthenticationFilter.class)
                 .authorizeHttpRequests(request -> {
                     request.requestMatchers(
-//                            String.format("%s/product", apiPrefix),
-//                            String.format("%s/category", apiPrefix),
-                            String.format("%s/login/signup", apiPrefix),
+                           // String.format("%s/login/signup", apiPrefix),
                             String.format("%s/login/signin", apiPrefix)
                     )
                             .permitAll()
+                            .requestMatchers(POST,
+                                    String.format("%s/login/signup", apiPrefix)).permitAll()
+                            .requestMatchers(GET,
+                                    String.format("%s/category/**", apiPrefix)).permitAll()
                             .requestMatchers(GET,
                                     String.format("%s/category/**", apiPrefix)).permitAll()
                             .requestMatchers(GET,
@@ -77,6 +80,20 @@ public class CustomFilterSecurity {
                             .authenticated();
                 })
                 .csrf(AbstractHttpConfigurer::disable);
+
+        http.cors(new Customizer<CorsConfigurer<HttpSecurity>>() {
+            @Override
+            public void customize(CorsConfigurer<HttpSecurity> httpSecurityCorsConfigurer) {
+                CorsConfiguration configuration = new CorsConfiguration();
+                configuration.setAllowedOrigins(List.of("*"));
+                configuration.setAllowedMethods(Arrays.asList("GET","POST","PUT","PATCH","DELETE","OPTIONS"));
+                configuration.setAllowedHeaders(Arrays.asList("authorization","content-type","x-auth-token"));
+                configuration.setExposedHeaders(List.of("x-auth-token"));
+                UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+                source.registerCorsConfiguration("/**",configuration);
+                httpSecurityCorsConfigurer.configurationSource(source);
+            }
+        });
 
         return http.build();
     }

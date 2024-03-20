@@ -1,5 +1,7 @@
 package com.example.shopclothes.controller;
 
+import com.example.shopclothes.exception.DataNotFoundException;
+import com.example.shopclothes.request.LoginRequest;
 import com.example.shopclothes.request.UserRequest;
 import com.example.shopclothes.service.LoginService;
 import com.example.shopclothes.utils.JwtUtilsHelper;
@@ -9,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@CrossOrigin(origins = "*",maxAge = 3600)
 @RequestMapping("${api.prefix}/login")
 public class LoginController {
 
@@ -19,8 +22,12 @@ public class LoginController {
     JwtUtilsHelper jwtUtilsHelper;
 
     @PostMapping("/signin")
-    public ResponseEntity<?> signin(@RequestParam String userName, @RequestParam String password) {
-        return new ResponseEntity<>(loginService.checkLogin(userName,password), HttpStatus.OK);
+    public ResponseEntity<?> signin(@RequestBody LoginRequest loginRequest) {
+        try {
+            return new ResponseEntity<>(loginService.checkLogin(loginRequest), HttpStatus.OK);
+        } catch (DataNotFoundException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
     }
 
     @PostMapping("/signup")

@@ -15,8 +15,8 @@ import javax.crypto.SecretKey;
 
 @RestController
 @RequestMapping("${api.prefix}/user")
+@CrossOrigin(origins = "*")
 public class UserController {
-
     @Autowired
     UserService userService;
 

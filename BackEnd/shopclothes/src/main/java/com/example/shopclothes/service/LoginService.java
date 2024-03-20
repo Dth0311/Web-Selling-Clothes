@@ -4,8 +4,10 @@ import com.example.shopclothes.dto.UserDTO;
 import com.example.shopclothes.entity.ERole;
 import com.example.shopclothes.entity.Role;
 import com.example.shopclothes.entity.User;
+import com.example.shopclothes.exception.DataNotFoundException;
 import com.example.shopclothes.repository.RoleRepository;
 import com.example.shopclothes.repository.UserRepository;
+import com.example.shopclothes.request.LoginRequest;
 import com.example.shopclothes.request.UserRequest;
 import com.example.shopclothes.service.Imp.ILoginService;
 import com.example.shopclothes.utils.JwtUtilsHelper;
@@ -48,39 +50,31 @@ public class LoginService implements ILoginService {
     }
 
     @Override
-    public String checkLogin(String userName, String password) {
-        User user = userRepository.findByUserName(userName);
+    public String checkLogin(LoginRequest loginRequest) throws DataNotFoundException {
+        User user = userRepository.findByUserName(loginRequest.getUserName());
 //        UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
 //                userName, password,
 //                user.getAuthorities()
 //        );
 //        authenticationManager.authenticate(authenticationToken);
-        if(passwordEncoder.matches(password,user.getPassword())){
-            return jwtUtilsHelper.generateToken(userName);
+        if(passwordEncoder.matches(loginRequest.getPassword(),user.getPassword())){
+            return jwtUtilsHelper.generateToken(loginRequest.getUserName());
         }
-            return "";
+        else {
+            throw new DataNotFoundException("Sai tài khoản hoặc mật khẩu");
+        }
     }
 
     @Override
     public boolean addUser(UserRequest userRequest) {
+        try {
         User user = new User();
-        user.setUsername(userRequest.getUsername());
+        user.setUsername(userRequest.getUserName());
         user.setEmail(userRequest.getEmail());
         user.setPassword(passwordEncoder.encode(userRequest.getPassword()));
         user.setEnable(true);
-        String strRole = userRequest.getRole().getName().name();
-        Role roles = new Role();
-        if (strRole == null) {
-            Role userRole = roleRepository.findByName(ERole.ROLE_USER)
-                    .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
-            user.setRole(userRole);
-        }
-        else {
-            Role userRole = roleRepository.findByName(ERole.ROLE_USER)
-                    .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
-            user.setRole(userRole);
-        }
-        try {
+        Role role = roleRepository.findByName(ERole.ROLE_USER).orElseThrow(() -> new DataNotFoundException("Không có role"));
+        user.setRole(role);
             userRepository.save(user);
             return true;
         } catch (Exception ex) {
