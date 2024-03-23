@@ -20,6 +20,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule ,HTTP_INTERCEPTORS} from '@angular/common/http';
 import {HttpClient } from '@angular/common/http';
 import { TokenInterceptor } from './interceptors/token.interceptors';
+import { MessageService } from 'primeng/api';
 
 
 
@@ -28,11 +29,11 @@ export const routes: Routes = [
         children: [
             { path:'',component: HomeComponent},
             { path:'category',component: ShopGridComponent},
-            { path:'product',component: ProductDetailComponent},
+            { path:'product/:id',component: ProductDetailComponent},
             { path:'cart',component: CartComponent},
             { path:'checkout',component: CheckoutComponent}, // check quyền truy cập
             {path:'blog',component: BlogComponent},
-            {path:'blogid', component: BlogDetailComponent},
+            {path:'blog/:id', component: BlogDetailComponent},
             {path:'user',component: UserDetailComponent},
             {path:'order',component: OrderComponent},
             
@@ -46,7 +47,10 @@ export const routes: Routes = [
         IndexComponent,
         RegisterComponent,
         LoginComponent,
-        HomeComponent
+        HomeComponent,
+        ProductDetailComponent,
+        BlogComponent,
+        BlogDetailComponent
     ],
     imports: [
         HttpClientModule,
@@ -55,16 +59,6 @@ export const routes: Routes = [
         RouterModule.forRoot(routes),
         FormsModule,        
         AccordionModule,
-        // HomeComponent,
-        // LoginComponent,
-        // ShopGridComponent,
-        // ProductDetailComponent,
-        // CartComponent,
-        // CheckoutComponent,
-        // BlogComponent,
-        // BlogDetailComponent,
-        // UserDetailComponent,
-        // OrderComponent,
     ],
     providers: [
         {

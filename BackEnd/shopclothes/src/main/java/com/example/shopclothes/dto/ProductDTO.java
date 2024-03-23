@@ -15,6 +15,7 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ProductDTO {
+    private int id;
     private String name;
     private String description;
     private long price;
@@ -24,6 +25,7 @@ public class ProductDTO {
 
     public static ProductDTO fromProduct(Product product){
         ProductDTO productDTO = new ProductDTO();
+        productDTO.setId(product.getId());
         productDTO.setName(product.getName());
         productDTO.setPrice(product.getPrice());
         productDTO.setQuantity(product.getQuantity());

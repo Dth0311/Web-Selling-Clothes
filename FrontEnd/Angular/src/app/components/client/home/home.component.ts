@@ -33,6 +33,7 @@ export class HomeComponent implements OnInit {
       next: res =>{
         debugger
         this.listProductNewest = res;
+        console.log(this.listProductNewest)
       },error: err =>{
         debugger
         console.log(err);

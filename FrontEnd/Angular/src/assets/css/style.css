@@ -6,6 +6,7 @@ body {
 	font-family: "Cairo", sans-serif;
 	-webkit-font-smoothing: antialiased;
 	font-smoothing: antialiased;
+	font-family: 'Product sans','Roboto', sans-serif !important;
 }
 
 
@@ -109,7 +110,7 @@ ol {
 	bottom: -15px;
 	right: 0;
 	height: 4px;
-	width: 80px;
+	width: 100px;
 	background: #D62D2D;
 	content: "";
 	margin: 0 auto;
@@ -148,9 +149,11 @@ ol {
 	color: #ffffff;
 	text-transform: uppercase;
 	font-weight: 700;
-	background: #7fad39;
+	background: #D62D2D;
 	letter-spacing: 2px;
+	text-decoration: none;
 }
+
 
 .site-btn {
 	font-size: 14px;
@@ -1043,38 +1046,34 @@ ol {
 	display: flex;
 	align-items: center;
 	padding: 45px 0 40px;
+	height: auto;
+	
 }
 
 .breadcrumb__text h2 {
 	font-size: 46px;
-	color: #ffffff;
+	color: #fff;
 	font-weight: 700;
+
 }
 
 .breadcrumb__option a {
 	display: inline-block;
+	/* text-decoration: none; */
 	font-size: 16px;
-	color: #ffffff;
+	color: #fff;
 	font-weight: 700;
 	margin-right: 20px;
 	position: relative;
 }
-
-.breadcrumb__option a:after {
-	position: absolute;
-	right: -12px;
-	top: 13px;
-	height: 1px;
-	width: 10px;
-	background: #ffffff;
-	content: "";
+.breadcrumb__option h2 {
+	font-size: 46px;
+    color: #ffffff;
+    font-weight: 700;
+    margin-bottom: 10px;
 }
 
-.breadcrumb__option span {
-	display: inline-block;
-	font-size: 16px;
-	color: #ffffff;
-}
+
 
 /*---------------------
   Sidebar
@@ -1666,10 +1665,13 @@ ol {
 
 .product__details__pic__item {
 	margin-bottom: 20px;
+	width: 500px;
+	height: 600px;
 }
 
 .product__details__pic__item img {
-	min-width: 100%;
+	width: 500px;
+	height: 600px;
 }
 
 .product__details__pic__slider img {
@@ -1847,19 +1849,6 @@ ol {
 	padding: 0;
 }
 
-.product__details__tab .product__details__tab__desc {
-	padding-top: 44px;
-}
-
-.product__details__tab .product__details__tab__desc h6 {
-	font-weight: 700;
-	color: #333333;
-	margin-bottom: 26px;
-}
-
-.product__details__tab .product__details__tab__desc p {
-	color: #666666;
-}
 
 /*---------------------
   Shop Details
@@ -1871,6 +1860,10 @@ ol {
 
 .related__product__title {
 	margin-bottom: 70px;
+}
+
+.related__product__title h2 {	
+	font-size: 30px;
 }
 
 /*---------------------
@@ -2423,6 +2416,9 @@ ol {
 	height: 100%;
 	padding: 0px 18px;
 }
+.blog__sidebar__recent {
+	width: 250px;
+}
 
 .blog__sidebar__recent .blog__sidebar__recent__item {
 	display: block;
@@ -2538,6 +2534,7 @@ ol {
 
 .blog__details__text img {
 	margin-bottom: 30px;
+	text-align: center;
 }
 
 .blog__details__text p {
@@ -2562,22 +2559,6 @@ ol {
 	width: 92px;
 	border-radius: 50%;
 }
-
-.blog__details__author__text {
-	overflow: hidden;
-	padding-top: 30px;
-}
-
-.blog__details__author__text h6 {
-	color: #1c1c1c;
-	font-weight: 700;
-}
-
-.blog__details__author__text span {
-	font-size: 16px;
-	color: #6f6f6f;
-}
-
 .blog__details__widget ul {
 	margin-bottom: 5px;
 }
