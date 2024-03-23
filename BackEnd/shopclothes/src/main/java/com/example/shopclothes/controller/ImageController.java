@@ -3,8 +3,10 @@ package com.example.shopclothes.controller;
 
 import com.example.shopclothes.entity.Image;
 import com.example.shopclothes.exception.BadRequestException;
+import com.example.shopclothes.exception.DataNotFoundException;
 import com.example.shopclothes.service.ImageService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -13,11 +15,12 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.UUID;
 
 @RestController
-@CrossOrigin(origins = "*",maxAge = 3600)
+@CrossOrigin(origins = "*")
 @RequestMapping("${api.prefix}/image")
 public class ImageController {
 
@@ -38,6 +41,19 @@ public class ImageController {
         List<Image> listImage = imageService.getListByUser(userId);
 
         return ResponseEntity.ok(listImage);
+    }
+
+    @GetMapping(value = "/{id}",produces = MediaType.IMAGE_JPEG_VALUE)
+    public ResponseEntity<?> getImageByID(@PathVariable int id){
+        Image image = null;
+        try {
+            image = imageService.getImageById(id);
+            byte[] imageData = image.getData();
+            return ResponseEntity.ok().contentType(MediaType.IMAGE_JPEG).body(imageData);
+        } catch (DataNotFoundException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+
     }
 
     @PostMapping("/upload")

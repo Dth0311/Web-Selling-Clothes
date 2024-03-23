@@ -29,11 +29,11 @@ public class ProductDTO {
         productDTO.setQuantity(product.getQuantity());
         productDTO.setCategoryId(product.getCategory().getId());
         productDTO.setDescription(product.getDescription());
-//        if(!product.getImages().isEmpty()){
-//            productDTO.setImageIds(product.getImages().stream()
-//                    .map(Image::getId)
-//                    .collect(Collectors.toSet()));
-//        }
+        if(!product.getImages().isEmpty()){
+            productDTO.setImageIds(product.getImages().stream()
+                    .map(Image::getId)
+                    .collect(Collectors.toSet()));
+        }
         return productDTO;
     }
 }

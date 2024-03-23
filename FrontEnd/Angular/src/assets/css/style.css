@@ -110,7 +110,7 @@ ol {
 	right: 0;
 	height: 4px;
 	width: 80px;
-	background: #7fad39;
+	background: #D62D2D;
 	content: "";
 	margin: 0 auto;
 }
@@ -159,7 +159,7 @@ ol {
 	text-transform: uppercase;
 	display: inline-block;
 	padding: 13px 30px 12px;
-	background: #7fad39;
+	background: #D62D2D;
 	border: none;
 }
 
@@ -390,6 +390,10 @@ ol {
 
 .header__logo {
 	padding: 15px 0;
+	display: flex;
+  	justify-content: center; /* căn giữa theo chiều ngang */
+ 	 align-items: center;
+	
 }
 
 .header__logo a {
@@ -405,6 +409,7 @@ ol {
 	display: inline-block;
 	margin-right: 50px;
 	position: relative;
+	list-style-type: none;
 }
 
 .header__menu ul li .header__menu__dropdown {
@@ -439,9 +444,12 @@ ol {
 	font-weight: 400;
 	padding: 5px 15px;
 }
+.header__menu ul li  a {
+	text-decoration: none;
+}
 
 .header__menu ul li.active a {
-	color: #7fad39;
+	color: #D62D2D;
 }
 
 .header__menu ul li:hover .header__menu__dropdown {
@@ -478,6 +486,10 @@ ol {
 	padding: 24px 0;
 }
 
+.header__cart .fa {
+	color: #000;
+}
+
 .header__cart ul {
 	display: inline-block;
 	margin-right: 25px;
@@ -505,7 +517,7 @@ ol {
 .header__cart ul li a span {
 	height: 13px;
 	width: 13px;
-	background: #7fad39;
+	background: #D62D2D;
 	font-size: 10px;
 	color: #ffffff;
 	line-height: 13px;
@@ -569,7 +581,7 @@ ol {
 }
 
 .hero__categories__all {
-	background: #7fad39;
+	background: #D62D2D;
 	position: relative;
 	padding: 10px 25px 10px 40px;
 	cursor: pointer;
@@ -678,7 +690,7 @@ ol {
 
 .hero__search__phone__icon {
 	font-size: 18px;
-	color: #7fad39;
+	color: #D62D2D;
 	height: 50px;
 	width: 50px;
 	background: #f5f5f5;
@@ -706,29 +718,28 @@ ol {
 
 .hero__item {
 	height: 431px;
-	display: flex;
-	align-items: center;
-	padding-left: 75px;
+	width: 100%;
+	background-size: cover;
 }
 
-.hero__text span {
-	font-size: 14px;
-	text-transform: uppercase;
-	font-weight: 700;
-	letter-spacing: 4px;
-	color: #7fad39;
-}
 
 .hero__text h2 {
 	font-size: 46px;
-	color: #252525;
+	color: #977878;
 	line-height: 52px;
 	font-weight: 700;
-	margin: 10px 0;
+	text-align: center;
+	text-shadow: 4px 4px 4px rgba(223, 215, 215, 0.5);
 }
 
 .hero__text p {
 	margin-bottom: 35px;
+	text-align: center;
+	color: #0f0f0f;
+	text-decoration: underline;
+  letter-spacing: 2px;
+  line-height: 1.5;
+  font-weight: bold;
 }
 
 /*---------------------
@@ -838,12 +849,17 @@ ol {
 }
 
 .featured__item__pic {
-	height: 270px;
+	height: 380px;
 	position: relative;
 	overflow: hidden;
 	background-position: center center;
 	background-repeat: no-repeat;
 	background-size: contain;
+}
+
+
+.featured__item__pic a {
+	text-decoration: none;
 }
 
 .featured__item__pic__hover {
@@ -917,11 +933,14 @@ ol {
 }
 
 .featured__item__text h6 a {
+	text-decoration: none;
+	font-size: 18px;
+	font-weight: 600;
 	color: #252525;
 }
 
 .featured__item__text h5 {
-	color: #252525;
+	color: #D62D2D;
 	font-weight: 700;
 }
 

@@ -12,7 +12,7 @@ public interface ProductRepository extends JpaRepository<Product,Integer> {
     @Query(value = "Select * from Product order by id desc limit :number",nativeQuery = true)
     List<Product> getListNewest(int number);
 
-    @Query(value = "Select * from Product order by price limit 8 ",nativeQuery = true)
+    @Query(value = "Select * from Product order by price desc limit 8 ",nativeQuery = true)
     List<Product> getListByPrice();
 
     @Query(value ="Select * from Product where category_id = :id order by rand() limit 4",nativeQuery = true)

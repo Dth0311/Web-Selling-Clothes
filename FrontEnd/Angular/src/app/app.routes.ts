@@ -17,8 +17,9 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { RegisterComponent} from './components/client/register/register.component';
 import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms'; 
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule ,HTTP_INTERCEPTORS} from '@angular/common/http';
 import {HttpClient } from '@angular/common/http';
+import { TokenInterceptor } from './interceptors/token.interceptors';
 
 
 
@@ -42,7 +43,10 @@ export const routes: Routes = [
 ];
 @NgModule({
     declarations: [
-        IndexComponent,RegisterComponent
+        IndexComponent,
+        RegisterComponent,
+        LoginComponent,
+        HomeComponent
     ],
     imports: [
         HttpClientModule,
@@ -62,7 +66,13 @@ export const routes: Routes = [
         // UserDetailComponent,
         // OrderComponent,
     ],
-    providers: [HttpClientModule],
+    providers: [
+        {
+            provide: HTTP_INTERCEPTORS,
+            useClass: TokenInterceptor,
+            multi:true
+        },
+    ],
     exports: [RouterModule]
 })
 export class AppRoutingModule { }

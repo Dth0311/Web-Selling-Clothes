@@ -5,31 +5,18 @@
         <div class="col-lg-6 col-md-6">
           <div class="header__top__left">
             <ul>
-              <li><i class="fa fa-envelope"></i> hellocolorlib.com</li>
-              <li>Free Shipping for all Order of $99</li>
+              <li>
+                <i class="fa fa-envelope"></i>danghai03112002&#64;gmail.com
+              </li>
+              <li>Free Shipping for all Order of 999K</li>
             </ul>
           </div>
         </div>
         <div class="col-lg-6 col-md-6">
-          <div class="header__top__right">
-            <div class="header__top__right__social">
-              <a href="#"><i class="fa fa-facebook"></i></a>
-              <a href="#"><i class="fa fa-twitter"></i></a>
-              <a href="#"><i class="fa fa-linkedin"></i></a>
-              <a href="#"><i class="fa fa-pinterest-p"></i></a>
-            </div>
-            <div class="header__top__right__language">
-              <img src="assets/img/language.png" alt="" />
-              <div>English</div>
-              <span class="arrow_carrot-down"></span>
-              <ul>
-                <li><a href="#">Spanis</a></li>
-                <li><a href="#">English</a></li>
-              </ul>
-            </div>
+          <div class="header__top__right" *ngIf="showLogin">
             <div class="header__top__right__auth">
               <a href="javascript:void(0)" routerLink="/login"
-                ><i class="fa fa-user"></i>Loginn
+                ><i class="fa fa-user"></i>Login /
               </a>
             </div>
             <div class="header__top__right__auth">
@@ -46,7 +33,9 @@
     <div class="row">
       <div class="col-lg-3">
         <div class="header__logo">
-          <a href="./index.html"><img src="assets/img/logo.png" alt="" /></a>
+          <a href="./index.html"
+            ><img src="assets/img/logo.png" style="height: 70px" alt=""
+          /></a>
         </div>
       </div>
       <div class="col-lg-6">
@@ -80,14 +69,10 @@
               <a href="javascript:void(0)" routerLink="/cart"
                 ><i class="fa fa-shopping-bag"></i> <span>3</span></a
               >
-            </li>
+            </li>            
             <li>
-              <a href="javascript:void(0)" routerLink="/user"
-                ><i class="fa fa-user"></i
-              ></a>
-            </li>
+              <a href="javascript:void(0)" routerLink="/user" *ngIf="!showLogin"><i class="fa fa-user"></i></a></li>
           </ul>
-          <div class="header__cart__price">item: <span>$150.00</span></div>
         </div>
       </div>
     </div>
@@ -101,22 +86,19 @@
     <div class="row">
       <div class="col-lg-3">
         <div class="hero__categories">
-          <div class="hero__categories__all">
+          <div class="hero__categories__all" (click)="showDepartmentClick()">
             <i class="fa fa-bars"></i>
-            <span>All departments</span>
+            <span> All departments</span>
           </div>
-          <ul>
-            <li><a routerLink="/category">Fresh Meat</a></li>
-            <li><a routerLink="/category">Vegetables</a></li>
-            <li><a routerLink="/category">Fruit & Nut Gifts</a></li>
-            <li><a routerLink="/category">Fresh Berries</a></li>
-            <li><a routerLink="/category">Ocean Foods</a></li>
-            <li><a routerLink="/category">Butter & Eggs</a></li>
-            <li><a routerLink="/category">Fastfood</a></li>
-            <li><a routerLink="/category">Fresh Onion</a></li>
-            <li><a routerLink="/category">Papayaya & Crisps</a></li>
-            <li><a routerLink="/category">Oatmeal</a></li>
-            <li><a routerLink="/category">Fresh Bananas</a></li>
+          <ul *ngIf="showDepartment">
+            <li>
+              <a
+                href="javascript:void(0)"
+                *ngFor="let category of listCategoryEnable"
+                routerLink="category/{{ category.id }}"
+                >{{ category.name }}</a
+              >
+            </li>
           </ul>
         </div>
       </div>
@@ -137,12 +119,12 @@
               <i class="fa fa-phone"></i>
             </div>
             <div class="hero__search__phone__text">
-              <h5>+65 11.188.888</h5>
+              <h5>+35 588 8068</h5>
               <span>support 24/7 time</span>
             </div>
           </div>
         </div>
-        <div
+        <!-- <div
           class="hero__item set-bg"
           data-setbg="assets/img/hero/banner.jpg"
           style="background-image: url('assets/img/hero/banner.jpg')"
@@ -153,7 +135,7 @@
             <p>Free Pickup and Delivery Available</p>
             <a href="#" class="primary-btn">SHOP NOW</a>
           </div>
-        </div>
+        </div> -->
       </div>
     </div>
   </div>
@@ -173,7 +155,7 @@
           <ul>
             <li>Address: 60-49 Road 11378 New York</li>
             <li>Phone: +65 11.188.888</li>
-            <li>Email: hellocolorlib.com</li>
+            <li>Email: danghai03112002&#64;gmail.com</li>
           </ul>
         </div>
       </div>
