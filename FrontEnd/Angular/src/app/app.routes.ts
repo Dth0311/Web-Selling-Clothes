@@ -15,12 +15,13 @@ import { UserDetailComponent } from './components/client/user-detail/user-detail
 import { OrderComponent } from './components/client/order/order.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RegisterComponent} from './components/client/register/register.component';
-import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms'; 
 import { HttpClientModule ,HTTP_INTERCEPTORS} from '@angular/common/http';
 import {HttpClient } from '@angular/common/http';
 import { TokenInterceptor } from './interceptors/token.interceptors';
-import { MessageService } from 'primeng/api';
+import { OverlayPanelModule } from 'primeng/overlaypanel';
+import { ToastModule } from 'primeng/toast';
+// import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 
@@ -59,6 +60,9 @@ export const routes: Routes = [
         RouterModule.forRoot(routes),
         FormsModule,        
         AccordionModule,
+        OverlayPanelModule,
+        ToastModule,
+        // BrowserAnimationsModule
     ],
     providers: [
         {

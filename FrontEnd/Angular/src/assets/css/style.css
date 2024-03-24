@@ -532,6 +532,31 @@ ol {
 	right: -10px;
 }
 
+.listItemInCart ul{
+	width: 400px;
+	background-color: rgb(0, 0, 0);
+	text-decoration: none;
+	padding: 0;
+}
+.listItemInCart .cart-box-text{
+	margin-left: 20px;
+	color: #D62D2D;
+}
+.listItemInCart ul li button{
+	margin-left: 30px;
+	padding: 0px 5px;
+	background-color: #D62D2D;
+	color: #fff;
+}
+.cart-box-image, .cart-box-text{
+	display: inline-block;
+}
+
+.listItemInCart a{
+	text-decoration: none;
+	color: #fff;
+}
+
 .header__cart .header__cart__price {
 	font-size: 14px;
 	color: #6f6f6f;

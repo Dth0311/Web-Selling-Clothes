@@ -1,10 +1,10 @@
 import { Component, OnInit} from '@angular/core';
 import { Router } from '@angular/router';
-import { HttpClient,HttpHeaders } from '@angular/common/http';
 import { TokenService } from '../../../services/token.service';
 import { LoginService } from '../../../services/login.service';
 import { CategoryService } from '../../../services/category.service';
 import { CartService } from '../../../services/cart.service';
+import { FavoriteService } from '../../../services/favorite.service';
 @Component({
   selector: 'app-index',
   //  standalone: true,
@@ -23,7 +23,8 @@ export class IndexComponent implements OnInit {
     private tokenService: TokenService,
     private loginService: LoginService,
     private categoryService: CategoryService,
-    private cartService: CartService
+    public cartService: CartService,
+    public favoriteService: FavoriteService
     ) {}
 
   ngOnInit(): void {
@@ -32,6 +33,15 @@ export class IndexComponent implements OnInit {
         this.showLoginAndRegister()
     }
     this.cartService.loadCart();
+    this.favoriteService.loadWishList();
+  }
+
+  removeWishList(item: any){
+    this.favoriteService.remove(item);
+  }
+
+  removeFromCart(item:any){
+    this.cartService.remove(item);
   }
 
   showDepartmentClick(){

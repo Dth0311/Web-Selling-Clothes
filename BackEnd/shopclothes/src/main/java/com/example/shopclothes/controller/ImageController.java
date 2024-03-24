@@ -72,7 +72,7 @@ public class ImageController {
             }
             try {
                 Image img = new Image();
-                img.setName(file.getName());
+                img.setName(file.getOriginalFilename());
                 img.setSize(file.getSize());
                 img.setType(extension);
                 img.setData(file.getBytes());

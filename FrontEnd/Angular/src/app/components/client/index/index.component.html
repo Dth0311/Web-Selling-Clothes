@@ -60,16 +60,47 @@
       <div class="col-lg-3">
         <div class="header__cart">
           <ul>
-            <li>
-              <a href="javascript:void(0)" routerLink="/order"
-                ><i class="fa fa-heart"></i> <span>1</span></a
-              >
-            </li>
-            <li>
-              <a href="javascript:void(0)" routerLink="/cart"
-                ><i class="fa fa-shopping-bag"></i> <span>3</span></a
-              >
-            </li>            
+            <li><a href="javascript:void(0)" (click)="wishlist.toggle($event)" class="fa fa-heart"><span>{{favoriteService.items.length}}</span></a></li>
+                <p-overlayPanel #wishlist>
+                  <ng-template pTemplate>
+                      <div class="listItemInCart">
+                          <ul>
+                              <li *ngFor="let product of favoriteService.items" class="cart-box">
+                                  <div class="cart-box-image p-2">
+                                      <a href="javascript:void(0)" class="block"><img  src="http://localhost:8088/api/v1/image/+ {{ product.imageIds[0] }}" alt="" width="80px"></a>
+                                  </div>
+                                  <div class="cart-box-text">
+                                      <a href="javascript:void(0)" routerLink="/product/{{product.id}}">{{product.name}}</a>
+                                  </div>
+                                  <button pButton pRipple type="button" icon="pi pi-times" class="p-button-rounded p-button-danger p-button-text" (click)="removeWishList(product)">
+                                    <span aria-hidden="true">&times;</span>
+                                  </button>
+                              </li>
+                          </ul>   
+                      </div>
+                  </ng-template>
+              </p-overlayPanel>
+              <li><a href="javascript:void(0)" (click)="cart.toggle($event)" class="fa fa-shopping-bag"><span>{{cartService.items.length}}</span></a></li>
+              <p-overlayPanel #cart>
+                  <ng-template pTemplate>
+                      <div class="listItemInCart">
+                          <ul>
+                              <li *ngFor="let product of cartService.items" class="cart-box">
+                                  <div class="cart-box-image p-2">
+                                      <a href="javascript:void(0)" class="block"><img  src="http://localhost:8088/api/v1/image/+ {{ product.imageIds[0] }}" alt="" width="80px"></a>
+                                  </div>
+                                  <div class="cart-box-text">
+                                      <a href="javascript:void(0)">{{product.name}}</a>
+                                      <div><span>{{product.quantity}} x </span>{{product.price}} VNĐ</div>
+                                  </div>
+                                  <button pButton pRipple type="button" icon="pi pi-times" class="p-button-rounded p-button-danger p-button-text" (click)="removeFromCart(product)">
+                                    <span aria-hidden="true">&times;</span>
+                                  </button>
+                              </li>
+                          </ul>  
+                      </div>
+                  </ng-template>
+              </p-overlayPanel>           
             <li>
               <a href="javascript:void(0)" routerLink="/user" *ngIf="!showLogin"><i class="fa fa-user"></i></a></li>
           </ul>
@@ -124,18 +155,6 @@
             </div>
           </div>
         </div>
-        <!-- <div
-          class="hero__item set-bg"
-          data-setbg="assets/img/hero/banner.jpg"
-          style="background-image: url('assets/img/hero/banner.jpg')"
-        >
-          <div class="hero__text">
-            <span>FRUIT FRESH</span>
-            <h2>Vegetable <br />100% Organic</h2>
-            <p>Free Pickup and Delivery Available</p>
-            <a href="#" class="primary-btn">SHOP NOW</a>
-          </div>
-        </div> -->
       </div>
     </div>
   </div>
