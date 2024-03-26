@@ -18,6 +18,7 @@ export class IndexComponent implements OnInit {
   showDepartment = false;
   showLogin = true;
   listCategoryEnable : any;
+  keyword: any;
   constructor(
     private router: Router,
     private tokenService: TokenService,
@@ -60,6 +61,11 @@ export class IndexComponent implements OnInit {
         console.log(err);
       }
     })
+  }
+
+  logout(){
+    this.tokenService.removeToken();
+    this.showLoginAndRegister();
   }
 
 }

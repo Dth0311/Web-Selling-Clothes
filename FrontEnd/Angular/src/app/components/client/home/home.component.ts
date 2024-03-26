@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { ProductService } from '../../../services/product.service';
 import { FavoriteService } from '../../../services/favorite.service';
 import { CartService } from '../../../services/cart.service';
+import { BlogService } from '../../../services/blog.service';
 
 @Component({
   selector: 'app-home',
@@ -14,14 +15,17 @@ import { CartService } from '../../../services/cart.service';
 export class HomeComponent implements OnInit {
   listProductNewest : any;
   listProductPrice: any;
+  listBlogNewest: any;
   constructor(
     private router: Router,
     private productService: ProductService,
     private favoriteService: FavoriteService,
-    private cartService: CartService
+    private cartService: CartService,
+    private blogService: BlogService
     ) {}
   ngOnInit(): void {
-    this.getListProduct()
+    this.getListProduct();
+    this.getListBlog();
   }
 
   goToProductDetail() {
@@ -33,7 +37,6 @@ export class HomeComponent implements OnInit {
       next: res =>{
         debugger
         this.listProductNewest = res;
-        console.log(this.listProductNewest)
       },error: err =>{
         debugger
         console.log(err);
@@ -43,6 +46,19 @@ export class HomeComponent implements OnInit {
       next:res =>{
         this.listProductPrice =res;
       },error: err=>{
+        console.log(err);
+      }
+    })
+  }
+
+  
+  getListBlog(){
+    this.blogService.getListNewest(3).subscribe({
+      next: res =>{
+        debugger
+        this.listBlogNewest = res;
+      },error: err =>{
+        debugger
         console.log(err);
       }
     })

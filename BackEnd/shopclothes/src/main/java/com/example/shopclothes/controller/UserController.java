@@ -21,7 +21,6 @@ public class UserController {
     UserService userService;
 
     @GetMapping("")
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<?> getuser(@RequestParam("username") String username){
         User user = null;
         try {
@@ -33,7 +32,6 @@ public class UserController {
     }
 
     @PutMapping("/update")
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<?> updateProfile(@RequestBody UserDTO userDTO){
         User user = null;
         try {

@@ -16,12 +16,14 @@ import { OrderComponent } from './components/client/order/order.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RegisterComponent} from './components/client/register/register.component';
 import { FormsModule } from '@angular/forms'; 
-import { HttpClientModule ,HTTP_INTERCEPTORS} from '@angular/common/http';
-import {HttpClient } from '@angular/common/http';
-import { TokenInterceptor } from './interceptors/token.interceptors';
+import { HttpClientModule} from '@angular/common/http';
 import { OverlayPanelModule } from 'primeng/overlaypanel';
 import { ToastModule } from 'primeng/toast';
-// import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {ButtonModule} from 'primeng/button';
+import {DividerModule} from 'primeng/divider';
+import { DataViewModule } from 'primeng/dataview';
+import { SliderModule } from 'primeng/slider';
+import { SearchComponent } from './components/client/search/search.component';
 
 
 
@@ -29,7 +31,7 @@ export const routes: Routes = [
     { path:'',component: IndexComponent,
         children: [
             { path:'',component: HomeComponent},
-            { path:'category',component: ShopGridComponent},
+            { path:'category/:id',component: ShopGridComponent},
             { path:'product/:id',component: ProductDetailComponent},
             { path:'cart',component: CartComponent},
             { path:'checkout',component: CheckoutComponent}, // check quyền truy cập
@@ -37,7 +39,7 @@ export const routes: Routes = [
             {path:'blog/:id', component: BlogDetailComponent},
             {path:'user',component: UserDetailComponent},
             {path:'order',component: OrderComponent},
-            
+            {path:'search/:keyword',component: SearchComponent},   
         ]
     },
     { path:'login',component: LoginComponent},
@@ -51,7 +53,11 @@ export const routes: Routes = [
         HomeComponent,
         ProductDetailComponent,
         BlogComponent,
-        BlogDetailComponent
+        BlogDetailComponent,
+        CartComponent,
+        UserDetailComponent,
+        ShopGridComponent,
+        SearchComponent
     ],
     imports: [
         HttpClientModule,
@@ -62,14 +68,10 @@ export const routes: Routes = [
         AccordionModule,
         OverlayPanelModule,
         ToastModule,
-        // BrowserAnimationsModule
-    ],
-    providers: [
-        {
-            provide: HTTP_INTERCEPTORS,
-            useClass: TokenInterceptor,
-            multi:true
-        },
+        ButtonModule,
+        DividerModule,
+        DataViewModule,
+        SliderModule
     ],
     exports: [RouterModule]
 })

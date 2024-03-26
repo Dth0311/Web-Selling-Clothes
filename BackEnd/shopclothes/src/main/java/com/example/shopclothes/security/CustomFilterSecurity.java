@@ -76,6 +76,8 @@ public class CustomFilterSecurity {
                                     String.format("%s/image/**", apiPrefix)).permitAll()
                             .requestMatchers(GET,
                                     String.format("%s/order/**", apiPrefix)).permitAll()
+                            .requestMatchers(GET,
+                                    String.format("%s/user/**", apiPrefix)).permitAll()
                             .anyRequest()
                             .authenticated();
                 })

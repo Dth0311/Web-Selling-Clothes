@@ -1,45 +1,50 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
 import { CategoryService } from '../../../services/category.service';
 import { ProductService } from '../../../services/product.service';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CartService } from '../../../services/cart.service';
 import { FavoriteService } from '../../../services/favorite.service';
-import { MessageService } from 'primeng/api';
+
 @Component({
-  selector: 'app-shop-grid',
-  templateUrl: './shop-grid.component.html',
-  styleUrl: './shop-grid.component.css',
-  providers: [MessageService]
+  selector: 'app-search',
+  templateUrl: './search.component.html',
+  styleUrl: './search.component.css'
 })
-export class ShopGridComponent implements OnInit {
-  id: number = 0;
-  listProduct : any;
-  listCategory : any;
-  listProductNewest : any[] = [];
+export class SearchComponent implements OnInit {
+ 
+  keyword: any;
+  listProduct:any;
+  listProductNewest:any;
+  listCategory :any;
   rangeValues = [0,100];
+
+  
   constructor(
     private categoryService:CategoryService,
     private productService: ProductService,
     private router: Router,
     private route: ActivatedRoute,
     public cartService:CartService,
-    public favoriteService:FavoriteService){
+    public favoriteSevice:FavoriteService){
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+
   }
+
   ngOnInit(): void {
-    this.id = this.route.snapshot.params['id'];
-    this.getListProductByCategory();
+    this.keyword = this.route.snapshot.params['keyword'];
+    this.getListProduct();
     this.getListCategoryEnabled();
     this.getNewestProduct();
   }
 
-  getListProductByCategory(){
-    this.productService.getListByCategory(this.id).subscribe({
-      next: res =>{
+  getListProduct(){
+    this.productService.searchProduct(this.keyword).subscribe({
+      next:res =>{
         this.listProduct = res;
+        console.log(this.listProduct);
       },error: err =>{
         console.log(err);
-      } 
+      }
     })
   }
 
@@ -63,16 +68,6 @@ export class ShopGridComponent implements OnInit {
     })
   }
 
-  getListProductByPriceRange(){
-    this.productService.getListByPriceRange(this.id,this.rangeValues[0],this.rangeValues[1]).subscribe({
-      next: res =>{
-        this.listProduct = res;
-        console.log(this.listProduct);
-      },error: err =>{
-        console.log(err);
-      }
-    })
-  }
 
   addToCart(item: any){
     this.cartService.getItems();
@@ -80,8 +75,8 @@ export class ShopGridComponent implements OnInit {
   }
   
   addToWishList(item: any){
-    if(!this.favoriteService.productInWishList(item)){
-      this.favoriteService.addToWishList(item);
+    if(!this.favoriteSevice.productInWishList(item)){
+      this.favoriteSevice.addToWishList(item);
     }
   }
 }

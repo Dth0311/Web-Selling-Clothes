@@ -32,12 +32,11 @@ export class LoginComponent {
   }
 
   login(){
-    alert(this.userName + this.password)
    debugger
     this.loginService.login(this.userName,this.password).subscribe({
       next: res =>{
         if(res == true){
-          alert("Đăng ký thành công")
+          alert("Đăng nhập thành công")
           this.router.navigate(['/login']);
         }
         else{
@@ -50,7 +49,7 @@ export class LoginComponent {
       ,error: err =>{
         if(err.status === 200 && err.error.text != null){
           const token = err.error.text
-          this.tokenService.setToken(token)
+          this.tokenService.setToken(token,this.userName)
           alert("Đăng nhập thành công")
           this.router.navigate(['']);
         }else{

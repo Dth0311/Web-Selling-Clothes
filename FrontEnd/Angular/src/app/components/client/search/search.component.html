@@ -1,0 +1,87 @@
+<section class="breadcrumb-section set-bg" style="background-image: url('assets/img/breadcrumb.jpg')">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <div class="breadcrumb__text">
+                    <h2>Search</h2>
+                    <div class="breadcrumb__option">
+                        <div class="breadcrumb__option">
+                            <a href="javascript:void(0)" routerLink="/">Home - Clothes Package</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<section class="product spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 col-md-5">
+                <div class="sidebar">
+                    <div class="sidebar__item">
+                        <h4>Department</h4>
+                        <ul>
+                            <li><a routerLink="/category/{{category.id}}" *ngFor="let category of listCategory">{{category.name}}</a></li>
+
+                        </ul>
+                    </div>
+                    <div class="sidebar__item">
+                        <h4>Price</h4>
+                        <p-slider [(ngModel)]="rangeValues" [range]="true" [min]="0" [max]="500" [style]="{'background':'#dd2222'}"  ></p-slider>
+                        <div class="price-input mt-3">
+                            {{rangeValues[0] | currency}} - {{rangeValues[1] | currency}} 
+                        </div>
+                    </div>
+                    <div class="sidebar__item">
+                        <div class="latest-product__text">
+                            <h4>Latest Products</h4>
+                            <div class="latest-product__slider">
+                                <div class="latest-prdouct__slider__item">
+                                    <a href="#" class="latest-product__item" *ngFor="let product of listProductNewest">
+                                        <div class="latest-product__item__pic">
+                                            <img src="http://localhost:8088/api/v1/image/+ {{product.imageIds[0]}}" alt="">
+                                        </div>
+                                        <div class="latest-product__item__text">
+                                            <h6>{{product.name}}</h6>
+                                            <span>{{product.price | currency}}</span>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-9">
+                <div class="row shop-grid-item">
+                    <div class="col-lg-3 col-md-4 col-sm-6" *ngFor="let product of listProduct">
+                        <div class="featured__item">
+                          <div class="featured__item__pic set-bg" [ngStyle]="{'background-image':'url(http://localhost:8088/api/v1/image/' +product.imageIds[0] +')'}">
+                            <ul class="featured__item__pic__hover">
+                              <li>
+                                <a href="javascript:void(0)" (click)="addToWishList(product)" class="fa fa-heart"></a>
+                              </li>
+                              <li>
+                                <a href="javascript:void(0)" routerLink="/product/{{ product.id }}" class="fa fa-retweet"></a>
+                              </li>
+                              <li>
+                                <a href="javascript:void(0)"(click)="addToCart(product)" class="fa fa-shopping-bag"></a>
+                              </li>
+                            </ul>
+                          </div>
+                          <div class="featured__item__text">
+                            <h6>
+                              <a href="javascript:void(0)" class="text-uppercase" routerLink="/product/{{product.id}}">{{ product.name }}</a>
+                            </h6>
+                            <h5>{{ product.price }} VNĐ</h5>
+                          </div>
+                        </div>
+                      </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

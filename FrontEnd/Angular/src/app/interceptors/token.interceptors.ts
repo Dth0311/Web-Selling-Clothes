@@ -6,18 +6,21 @@ import { TokenService } from "../services/token.service";
 @Injectable()
 export class TokenInterceptor implements HttpInterceptor{
 
-    constructor(private tokenService: TokenService){}
+    constructor(public tokenService: TokenService){
+    }
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-       const token = this.tokenService.getToken();
-       if(token != null){
+       const token = localStorage.getItem("auth-user");
+      //  alert(token);
+       if(token){
         req = req.clone({
-           setHeaders: {
-                Authorization: `Bearer ${token}`,
+         setHeaders: {
+               Authorization: `Bearer ${token}`,
            }, 
         });
+
        }
        return next.handle(req);
     }
-
 }
+
