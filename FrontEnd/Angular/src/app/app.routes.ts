@@ -1,4 +1,4 @@
-import { NgModule,CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
+import { NgModule,CUSTOM_ELEMENTS_SCHEMA, inject} from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { BrowserModule } from '@angular/platform-browser';
 import { AccordionModule } from 'primeng/accordion';
@@ -24,8 +24,13 @@ import {DividerModule} from 'primeng/divider';
 import { DataViewModule } from 'primeng/dataview';
 import { SliderModule } from 'primeng/slider';
 import { SearchComponent } from './components/client/search/search.component';
+import {AuthGuard, AuthService} from './services/auth.service';
+import { DashboardComponent } from './components/client/dashboard/dashboard.component';
+import { RoleGuard } from './services/role.service';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { faBell } from '@fortawesome/free-solid-svg-icons';
 
-
+library.add(faBell);
 
 export const routes: Routes = [
     { path:'',component: IndexComponent,
@@ -34,16 +39,21 @@ export const routes: Routes = [
             { path:'category/:id',component: ShopGridComponent},
             { path:'product/:id',component: ProductDetailComponent},
             { path:'cart',component: CartComponent},
-            { path:'checkout',component: CheckoutComponent}, // check quyền truy cập
+            { path:'checkout',component: CheckoutComponent, canActivate: [AuthGuard]}, // check quyền truy cập
             {path:'blog',component: BlogComponent},
             {path:'blog/:id', component: BlogDetailComponent},
             {path:'user',component: UserDetailComponent},
-            {path:'order',component: OrderComponent},
+            {path:'order',component: OrderComponent, canActivate: [AuthGuard]},// check quyền truy cập
             {path:'search/:keyword',component: SearchComponent},   
         ]
     },
     { path:'login',component: LoginComponent},
     {path:'register',component: RegisterComponent},
+    { path:'admin',component: DashboardComponent,canActivate: [RoleGuard],data: {expectedRole: "ROLE_ADMIN"},
+    children:[
+        
+      ]
+    },
 ];
 @NgModule({
     declarations: [
@@ -57,7 +67,8 @@ export const routes: Routes = [
         CartComponent,
         UserDetailComponent,
         ShopGridComponent,
-        SearchComponent
+        SearchComponent,
+        DashboardComponent
     ],
     imports: [
         HttpClientModule,
@@ -73,7 +84,8 @@ export const routes: Routes = [
         DataViewModule,
         SliderModule
     ],
-    exports: [RouterModule]
+    exports: [RouterModule],
+    schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppRoutingModule { }
 

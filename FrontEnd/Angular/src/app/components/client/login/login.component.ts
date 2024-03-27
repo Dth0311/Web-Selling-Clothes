@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { LoginService } from '../../../services/login.service';
 import { NgForm } from '@angular/forms';
 import { TokenService } from '../../../services/token.service';
+import { UserService } from '../../../services/user.service';
 
 
 @Component({
@@ -20,7 +21,8 @@ export class LoginComponent {
   constructor(
     private loginService: LoginService,
     private router: Router,
-    private tokenService: TokenService
+    private tokenService: TokenService,
+    private userService:UserService
     ){
     this.userName = '';
     this.password = '';
@@ -50,6 +52,13 @@ export class LoginComponent {
         if(err.status === 200 && err.error.text != null){
           const token = err.error.text
           this.tokenService.setToken(token,this.userName)
+          this.userService.getUserByUsername(this.userName).subscribe({
+            next: res =>{
+              this.tokenService.saveUser(res);
+            },error: err=>{
+              console.log(err);
+            }
+          });
           alert("Đăng nhập thành công")
           this.router.navigate(['']);
         }else{

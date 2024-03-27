@@ -20,6 +20,11 @@ export class UserService {
     return this.http.get(USER_API,{params: params})
   }
 
+  
+  getUserByUsername(username: string):Observable<any>{
+    return this.http.get(USER_API + "?username=" + username,httpOptions)
+  }
+
 
   updateProfile(userName: string,firstName: string,lastName:string,email:string,country:string,state:string,address: string,phone: string):Observable<any>{
     return this.http.put(USER_API +'/update',{userName,firstName,lastName,email,country,state,address,phone},httpOptions);
