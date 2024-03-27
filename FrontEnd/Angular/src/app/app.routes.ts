@@ -29,6 +29,8 @@ import { DashboardComponent } from './components/client/dashboard/dashboard.comp
 import { RoleGuard } from './services/role.service';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faBell } from '@fortawesome/free-solid-svg-icons';
+import { CategoryComponent } from './components/admin/category/category.component';
+import { ProductComponent } from './components/admin/product/product.component';
 
 library.add(faBell);
 
@@ -51,7 +53,8 @@ export const routes: Routes = [
     {path:'register',component: RegisterComponent},
     { path:'admin',component: DashboardComponent,canActivate: [RoleGuard],data: {expectedRole: "ROLE_ADMIN"},
     children:[
-        
+        { path:'category',component: CategoryComponent},
+        { path:'product',component: ProductComponent},
       ]
     },
 ];
@@ -68,7 +71,8 @@ export const routes: Routes = [
         UserDetailComponent,
         ShopGridComponent,
         SearchComponent,
-        DashboardComponent
+        DashboardComponent,
+        CategoryComponent
     ],
     imports: [
         HttpClientModule,

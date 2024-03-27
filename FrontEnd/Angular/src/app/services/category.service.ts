@@ -23,7 +23,7 @@ export class CategoryService {
   }
 
   createCategory(name: string){
-    return this.http.post(CATEGORY_API + '/create',{name},httpOptions);
+    return this.http.post(CATEGORY_API,{name},httpOptions);
   }
 
   updateCategory(id: number, name: string){
@@ -35,7 +35,7 @@ export class CategoryService {
   }
 
   deleteCategory(id:number){
-    return this.http.delete(CATEGORY_API + '/delete/'+ id,httpOptions);
+    return this.http.delete(CATEGORY_API + "/"+ id,httpOptions);
   }
 
 }

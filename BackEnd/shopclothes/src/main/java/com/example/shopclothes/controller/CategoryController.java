@@ -2,6 +2,7 @@ package com.example.shopclothes.controller;
 
 import com.example.shopclothes.dto.CategoryDTO;
 import com.example.shopclothes.entity.Category;
+import com.example.shopclothes.exception.DataNotFoundException;
 import com.example.shopclothes.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -50,8 +51,13 @@ public class CategoryController {
     @DeleteMapping("/{id}")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<?> deleteCategoryById(@PathVariable int id){
-        categoryService.deleteCategory(id);
-        return ResponseEntity.ok("Xóa thành công category id: " + id);
+        try {
+            categoryService.deleteCategory(id);
+            return ResponseEntity.ok("Xóa thành công category id: " + id);
+        } catch (DataNotFoundException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+
     }
 
 

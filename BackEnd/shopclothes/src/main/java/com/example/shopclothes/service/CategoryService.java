@@ -2,6 +2,7 @@ package com.example.shopclothes.service;
 
 import com.example.shopclothes.dto.CategoryDTO;
 import com.example.shopclothes.entity.Category;
+import com.example.shopclothes.exception.DataNotFoundException;
 import com.example.shopclothes.repository.CategoryRepository;
 import com.example.shopclothes.service.Imp.ICategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -69,13 +70,9 @@ public class CategoryService implements ICategoryService {
     }
 
     @Override
-    public void deleteCategory(int id) {
+    public void deleteCategory(int id) throws DataNotFoundException {
         Category category = null;
-        try {
-            category = categoryRepository.findById(id).orElseThrow();
+            category = categoryRepository.findById(id).orElseThrow(() ->new DataNotFoundException("Không thấy danh mục"));
             categoryRepository.delete(category);
-        } catch (Exception e) {
-            System.out.println("Error update category: " + e.getMessage());
-        }
     }
 }

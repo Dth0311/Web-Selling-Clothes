@@ -1083,6 +1083,42 @@ ol {
 /*---------------------
   Breadcrumb
 -----------------------*/
+.tile-body .button-action-insert{
+	height: 35px;
+  	background-color: #3CC032; 
+	border-radius: 3%; 
+  	color: white; 
+  	border: none; 
+  	cursor: pointer;
+}
+.tile-body .table-data .button-action{
+	height: 35px;
+  	background-color: #007bff; 
+	border-radius: 10%; 
+  	color: white; 
+  	border: none; 
+  	cursor: pointer;
+}
+
+.tile-body .table-data .button-action-update{
+	width: 40px;
+  	height: 40px;
+  	border-radius: 50%; 
+  	background-color: #007bff; 
+  	color: white; 
+  	border: none; 
+  	cursor: pointer;
+}
+
+.tile-body .table-data .button-action-delete{
+	width: 40px;
+  	height: 40px;
+  	border-radius: 50%; 
+  	background-color: #D62D2D; 
+  	color: white; 
+  	border: none; 
+  	cursor: pointer;
+}
 
 .breadcrumb-section {
 	display: flex;
