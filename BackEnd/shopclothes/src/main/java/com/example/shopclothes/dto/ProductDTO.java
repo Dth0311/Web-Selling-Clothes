@@ -1,5 +1,6 @@
 package com.example.shopclothes.dto;
 
+import com.example.shopclothes.entity.Category;
 import com.example.shopclothes.entity.Image;
 import com.example.shopclothes.entity.Product;
 import com.example.shopclothes.exception.DataNotFoundException;

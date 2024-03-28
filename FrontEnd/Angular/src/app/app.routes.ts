@@ -72,7 +72,8 @@ export const routes: Routes = [
         ShopGridComponent,
         SearchComponent,
         DashboardComponent,
-        CategoryComponent
+        CategoryComponent,
+        ProductComponent
     ],
     imports: [
         HttpClientModule,

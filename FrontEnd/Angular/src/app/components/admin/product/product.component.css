@@ -1,0 +1,21 @@
+.image-upload{
+    width: 180px;
+    height: 200px;
+    border: 1px solid black;
+    margin-top: 10px;
+    padding: 0;
+}
+
+.clicked {
+    border: 2px solid red;
+  }
+
+.product-image{
+    display: inline;
+}
+
+.product-image img {
+    width: 80px;
+    height: 80px;
+    border: 1px solid red;
+}

@@ -27,12 +27,7 @@ public class ProductController {
     @GetMapping("")
     public ResponseEntity<?> getAllProduct(){
         List<Product> productList = productService.getList();
-        List<ProductDTO> productDTOList = new ArrayList<>();
-        for (var item:productList) {
-            ProductDTO productDTO = ProductDTO.fromProduct(item);
-            productDTOList.add(productDTO);
-        }
-        return ResponseEntity.ok(productDTOList);
+        return ResponseEntity.ok(productList);
     }
 
     @GetMapping("/{id}")
