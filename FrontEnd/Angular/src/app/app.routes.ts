@@ -73,7 +73,8 @@ export const routes: Routes = [
         SearchComponent,
         DashboardComponent,
         CategoryComponent,
-        ProductComponent
+        ProductComponent,
+        CheckoutComponent
     ],
     imports: [
         HttpClientModule,

@@ -93,7 +93,8 @@ public class CustomJwtFilter extends OncePerRequestFilter {
                 Pair.of(String.format("%s/tag",apiPrefix),"GET"),
                 Pair.of(String.format("%s/blog",apiPrefix),"GET"),
                 Pair.of(String.format("%s/image",apiPrefix),"GET"),
-                Pair.of(String.format("%s/user",apiPrefix),"GET")
+                Pair.of(String.format("%s/user",apiPrefix),"GET"),
+                Pair.of(String.format("%s/order",apiPrefix),"GET")
 
         );
 //        String requestPath = request.getServletPath();
