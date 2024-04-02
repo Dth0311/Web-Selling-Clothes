@@ -33,8 +33,8 @@ export class BlogService {
     return  this.http.post(BLOG_API +'/create',{title,description,content,imageId,tags,username},httpOptions);
   }
 
-  updateBLog(id: number,title: string,description: string,content: string, imageId: number,tags: number[]):Observable<any>{
-    return this.http.put(BLOG_API + '/update/' +id,{id,title,description,content,imageId,tags},httpOptions);
+  updateBLog(id: number,title: string,description: string,content: string, imageId: number,tags: number[],username: string):Observable<any>{
+    return this.http.put(BLOG_API + '/update/' +id,{id,title,description,content,imageId,tags,username},httpOptions);
   }
 
   deleleBlog(id: number){

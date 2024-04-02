@@ -31,6 +31,10 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import { faBell } from '@fortawesome/free-solid-svg-icons';
 import { CategoryComponent } from './components/admin/category/category.component';
 import { ProductComponent } from './components/admin/product/product.component';
+import { OrderAdminComponent } from './components/admin/order-admin/order-admin.component';
+import { Order } from './components/client/checkout/order';
+import { TagComponent } from './components/admin/tag/tag.component';
+import { BlogAdminComponent } from './components/admin/blog-admin/blog-admin.component';
 
 library.add(faBell);
 
@@ -51,10 +55,14 @@ export const routes: Routes = [
     },
     { path:'login',component: LoginComponent},
     {path:'register',component: RegisterComponent},
+
     { path:'admin',component: DashboardComponent,canActivate: [RoleGuard],data: {expectedRole: "ROLE_ADMIN"},
     children:[
         { path:'category',component: CategoryComponent},
         { path:'product',component: ProductComponent},
+        { path:'order',component: OrderAdminComponent},
+        { path:'tag',component: TagComponent},
+        { path:'blog',component: BlogAdminComponent},
       ]
     },
 ];
@@ -74,7 +82,11 @@ export const routes: Routes = [
         DashboardComponent,
         CategoryComponent,
         ProductComponent,
-        CheckoutComponent
+        CheckoutComponent,
+        OrderComponent,
+        OrderAdminComponent,
+        TagComponent,
+        BlogAdminComponent
     ],
     imports: [
         HttpClientModule,

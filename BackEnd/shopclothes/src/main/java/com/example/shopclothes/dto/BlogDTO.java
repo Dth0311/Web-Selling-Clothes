@@ -28,7 +28,7 @@ public class BlogDTO {
 
     private String username;
 
-    private Set<Integer> tags = new HashSet<>();
+    private Set<Integer> tags;
 
     public static BlogDTO fromBlog(Blog blog){
         BlogDTO blogDTO = new BlogDTO();

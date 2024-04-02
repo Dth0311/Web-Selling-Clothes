@@ -46,7 +46,6 @@ export class LoginComponent {
         }
       },complete(){
           debugger
-          console.log("Đăng ksy 2")
       }
       ,error: err =>{
         if(err.status === 200 && err.error.text != null){
@@ -55,12 +54,17 @@ export class LoginComponent {
           this.userService.getUserByUsername(this.userName).subscribe({
             next: res =>{
               this.tokenService.saveUser(res);
+              alert("Đăng nhập thành công")
+              if(res.role.name == "ROLE_ADMIN"){
+                this.router.navigate(['/admin']);
+              }
+              else{
+                this.router.navigate(['']);
+              }
             },error: err=>{
               console.log(err);
             }
           });
-          alert("Đăng nhập thành công")
-          this.router.navigate(['']);
         }else{
           alert("Tài khoản hoặc mật khẩu không chính xác")
         }

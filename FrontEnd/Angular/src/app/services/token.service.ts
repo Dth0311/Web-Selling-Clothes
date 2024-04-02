@@ -14,6 +14,7 @@ export class TokenService {
   }
 
   saveUser(user : any){
+    localStorage.removeItem(USER);
    localStorage.setItem(USER, JSON.stringify(user));
   }
 
@@ -42,6 +43,7 @@ export class TokenService {
   removeToken():void{
     localStorage.removeItem(USER_KEY);
     localStorage.removeItem(USER_NAME);
+    localStorage.removeItem(USER);
   }
 
   getUser():any{

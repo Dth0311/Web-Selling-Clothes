@@ -1,0 +1,244 @@
+<!-- <p-toast></p-toast> -->
+<main class="app-content" *ngIf="!showForm">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="tile">
+        <div class="tile-body">
+          <div class="row element-button" style="margin-bottom: 20px">
+            <div class="col-sm-2">
+              <button
+                pButton
+                pRipple
+                label="+ Thêm blog"
+                icon="pi pi-plus"
+                class="p-button-success mr-2 button-action-insert"
+                (click)="openNew()"
+              ></button>
+            </div>
+          </div>
+          <table
+            class="table table-hover table-bordered table-data"
+            id="sampleTable"
+          >
+            <thead>
+              <tr>
+                <th>Image</th>
+                <th>Title</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let blog of listBlog">
+                <td>
+                  <img
+                    src="http://localhost:8088/api/v1/image/+ {{
+                      blog.imageId
+                    }}"
+                    alt=""
+                    width="70px;"
+                  />
+                </td>
+                <td>{{ blog.title }}</td>
+                <td>
+                  <button
+                    type="button"
+                    class="button-action-update p-button-rounded p-button-primary fa fa-pen"
+                    (click)="openUpdate(blog)"
+                  ></button>
+                  <button
+                    type="button"
+                    class="button-action-delete p-button-rounded p-button-danger ml-2 fas fa-trash"
+                    (click)="onDelete(blog.id, blog.title)"
+                  ></button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<div header="Xác nhận" *ngIf="showDelete">
+  <div>
+    <i class="pi pi pi-exclamation-triangle"></i>
+    <span class="ml-2"
+      >Bạn có chắc xóa <span>{{ blogForm.title }}</span> ?</span
+    >
+  </div>
+  <div class="flex justify-content-end mt-3">
+    <p-button
+      label="Yes"
+      icon="pi pi-check"
+      class="mr-2"
+      (click)="deleteBlog()"
+    ></p-button>
+    <p-button
+      label="No"
+      icon="pi pi-times"
+      (click)="showDelete = false"
+    ></p-button>
+  </div>
+</div>
+
+<main *ngIf="showForm" class="app-content">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="tile">
+        <h3 class="tile-title">Tạo mới Blog</h3>
+        <p-divider></p-divider>
+        <div class="tile-body" style="margin-top: 10px">
+          <form class="row">
+            <div class="form-group col-md-6">
+              <div class="form-group col-md-6">
+                <label class="control-label" id="title">Title</label>
+                <input
+                  class="form-control"
+                  type="text"
+                  [(ngModel)]="blogForm.title"
+                  [ngModelOptions]="{ standalone: true }"
+                  required
+                />
+              </div>
+              <div class="form-group col-md-6">
+                <label for="exampleSelect1" class="control-label">Tag</label>
+                <select
+                  class="form-control"
+                  [(ngModel)]="tag"
+                  name="tag"
+                >
+                  <option *ngFor="let tag of listTag" [value]="tag.id">
+                    {{ tag.name }}
+                  </option>
+                </select>
+              </div>
+              <div class="form-group col-md-6">
+                <label class="control-label">Content</label>
+                <input
+                  class="form-control"
+                  type="text"
+                  [(ngModel)]="blogForm.content"
+                  [ngModelOptions]="{ standalone: true }"
+                  required
+                />
+              </div>
+
+              <div class="form-group col-md-6">
+                <label class="control-label">Ảnh Blog</label>
+                <div id="myfileupload">
+                  <input
+                    type="button"
+                    value="Chọn ảnh"
+                    *ngIf="!showImage"
+                    (click)="showImage = true"
+                  />
+                </div>
+                <div id="thumbbox">
+                  <img
+                    height="450"
+                    width="400"
+                    alt="Thumb image"
+                    id="thumbimage"
+                    style="display: none"
+                  />
+                  <a class="removeimg" href="javascript:"></a>
+                </div>
+                <div id="boxchoice">
+                  <p style="clear: both"></p>
+                </div>
+                <div class="grid mt-1" *ngIf="listImageChoosen != null">
+                  <div
+                    class="product-image col-2 flex align-items-center"
+                    *ngFor="let image of listImageChoosen"
+                  >
+                    <img
+                      src="http://localhost:8088/api/v1/image/+{{image}}"
+                      alt=""
+                      class="w-full h-full"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div class="form-group col-md-10">
+                <label class="control-label">Nội dung chi tiết blog</label>
+                <textarea
+                  class="form-control"
+                  name="mota"
+                  id="mota"
+                  [ngModelOptions]="{ standalone: true }"
+                  [(ngModel)]="blogForm.description"
+                  required
+                  style="height: 200px"
+                ></textarea>
+              </div>
+            </div>
+
+            <div class="form-group col-md-6" *ngIf="showImage">
+              <div>
+                <div class="flex justify-content-between">
+                  <div>
+                    <button
+                      pButton
+                      (click)="chooseImage()"
+                      class="p-button-primary w-auto"
+                      label="Chọn ảnh"
+                      [disabled]="disabled"
+                    ></button>
+
+                    <input
+                      type="file"
+                      #file
+                      (change)="uploadFile($event)"
+                      hidden
+                    />
+                    <button
+                      pButton
+                      (click)="file.click()"
+                      label="Tải ảnh lên"
+                      icon="pi pi-plus"
+                      class="p-button-warning w-auto"
+                      style="float: right"
+                    ></button>
+                  </div>
+                </div>
+                <div class="grid">
+                  <div
+                    class="col-md-12 list-image flex align-items-center"
+                    style="display: inline"
+                    *ngFor="let image of listImage"
+                  >
+                    <img
+                      src="http://localhost:8088/api/v1/image/+{{ image.id }}"
+                      class="image-upload w-full h-full col-md-4"
+                      (click)="selectImage($event, image)"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+          <button
+            type="submit"
+            pButton
+            *ngIf="!onUpdate"
+            (click)="createBlog()"
+          >
+            Tạo mới
+          </button>
+          <button type="submit" pButton *ngIf="onUpdate" (click)="updateBlog()">
+            Cập nhật
+          </button>
+          <button
+            pButton
+            type="button"
+            class="p-button-danger ml-3"
+            (click)="showForm = false"
+          >
+            Hủy
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>

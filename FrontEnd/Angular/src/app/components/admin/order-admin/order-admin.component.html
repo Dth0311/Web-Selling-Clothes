@@ -1,0 +1,50 @@
+<main class="app-content">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="tile">
+          <div class="tile-body">
+            <div class="row element-button" style="margin-bottom: 20px">
+              <div class="col-sm-2">
+                <button
+                  pButton
+                  pRipple
+                  label="Danh sách đơn hàng"
+                  icon="pi pi-plus"
+                  class="p-button-success mr-2 button-action-insert"
+                ></button>
+              </div>
+            </div>
+            <table
+              class="table table-hover table-bordered table-data"
+              id="sampleTable"
+            >
+              <thead>
+                <tr>
+                  <th>Khách hàng</th>
+                  <th>Địa chỉ</th>
+                  <th>Số điện thoại</th>
+                  <th>Email</th>
+                  <th>Tổng tiền</th>
+                  <th>Tình trạng</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let order of listOrder">
+                  <td>{{order.firstName}} {{order.lastName}}</td>
+                  <td>{{order.address}}</td>
+                  <td>{{order.phone}}</td>
+                  <td>{{order.email}}</td>
+                  <td>{{order.totalPrice}}</td>
+                  <td>
+                      <button pButton type="button" label="Waiting For Delivery" class="btn btn-success"></button>
+                      <button pButton type="button" label="Waiting For Delivery" class="btn btn-danger"></button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+  

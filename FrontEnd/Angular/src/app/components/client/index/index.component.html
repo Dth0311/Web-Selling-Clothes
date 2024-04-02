@@ -51,16 +51,6 @@
             <li class="active">
               <a href="javascript:void(0)" routerLink="/">Home</a>
             </li>
-            <!-- <li><a href="./shop-grid.html">Shop</a></li>
-            <li>
-              <a href="#">Pages</a>
-              <ul class="header__menu__dropdown">
-                <li><a href="./shop-details.html">Shop Details</a></li>
-                <li><a href="./shoping-cart.html">Shoping Cart</a></li>
-                <li><a href="./checkout.html">Check Out</a></li>
-                <li><a href="./blog-details.html">Blog Details</a></li>
-              </ul>
-            </li> -->
             <li *ngFor="let category of listCategoryEnable">
               <a
                 href="javascript:void(0)"
@@ -139,9 +129,21 @@
               >
             </li>
             <li>
-              <a href="javascript:void(0)" routerLink="/user" *ngIf="!showLogin"
+              <a href="javascript:void(0)" (click)="profile.toggle($event); $event.stopPropagation()" *ngIf="!showLogin"
                 ><i class="fa fa-user"></i
               ></a>
+              <p-overlayPanel #profile>
+                <div class="drop-profile">
+                  <a class="dropdown-item" href="javascript:void(0)" routerLink="/user" (click)="profile.hide()">  
+                      <a class="fa fa-user"></a> 
+                      Profile
+                  </a>
+                  <a class="dropdown-item" href="javascript:void(0)" routerLink="/order" (click)="profile.hide()">
+                    <a class="fa fa-envelope"></a> 
+                    My Orders
+                  </a>
+                </div>
+              </p-overlayPanel>
             </li>
           </ul>
         </div>
@@ -157,13 +159,14 @@
     <div class="row">
       <div class="col-lg-3">
         <div class="hero__categories">
-          <div class="hero__categories__all" (click)="showDepartmentClick()">
+          <div class="hero__categories__all" (click)="showDepartmentClick(); $event.stopPropagation()">
             <i class="fa fa-bars"></i>
             <span> All departments</span>
           </div>
           <ul *ngIf="showDepartment">
             <li>
               <a
+              (click)="profile.hide()"
                 href="javascript:void(0)"
                 *ngFor="let category of listCategoryEnable"
                 routerLink="category/{{ category.id }}"
