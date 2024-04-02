@@ -39,6 +39,16 @@ import { WarehouseComponent } from './components/admin/warehouse/warehouse.compo
 import {CardModule} from 'primeng/card';
 import {DialogModule} from 'primeng/dialog';
 import {TableModule} from 'primeng/table';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {InputNumberModule} from 'primeng/inputnumber';
+import {ToolbarModule} from 'primeng/toolbar';
+import {FileUploadModule} from 'primeng/fileupload';
+import {ConfirmDialogModule} from 'primeng/confirmdialog';
+import {InputTextareaModule} from 'primeng/inputtextarea';
+import {InputTextModule} from 'primeng/inputtext';
+import {RadioButtonModule} from 'primeng/radiobutton';
+import {CarouselModule} from 'primeng/carousel';
 
 library.add(faBell);
 
@@ -92,7 +102,8 @@ export const routes: Routes = [
         OrderAdminComponent,
         TagComponent,
         BlogAdminComponent,
-        WarehouseComponent
+        WarehouseComponent,
+        
     ],
     imports: [
         HttpClientModule,
@@ -109,7 +120,17 @@ export const routes: Routes = [
         TableModule,
         DividerModule,
         DataViewModule,
-        SliderModule
+        SliderModule,
+        FontAwesomeModule,
+        BrowserAnimationsModule,
+        InputNumberModule,
+        ToolbarModule,
+        FileUploadModule,
+        ConfirmDialogModule,
+        InputTextareaModule,
+        InputTextModule,
+        CarouselModule,
+        RadioButtonModule
     ],
     exports: [RouterModule],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductService } from '../../../services/product.service';
-import { ImageService } from '../../../services/image.service';
 import { MessageService } from 'primeng/api';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-warehouse',
@@ -29,12 +29,14 @@ export class WarehouseComponent implements OnInit {
     quantity: null,
   };
   ngOnInit(): void {
+    this.productForm.quantity = null;
     this.getListProduct();
     this.getListProductQuantity();
   }
   constructor(
     private messageService : MessageService,
     private productService: ProductService,
+    private location:Location
   ){}
 
   getListProduct(){
@@ -71,6 +73,7 @@ export class WarehouseComponent implements OnInit {
         alert("Cập nhật thành công");
         this.displayForm = false;
         this.getListProduct();
+        this.ngOnInit();
       },error: err =>{
         alert(err.message);
       }

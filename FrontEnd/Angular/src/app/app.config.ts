@@ -15,7 +15,7 @@ export const appConfig: ApplicationConfig = {
       multi:true
     },
     provideHttpClient(withInterceptorsFromDi()),
-    ]
+    ],
 };
 
 

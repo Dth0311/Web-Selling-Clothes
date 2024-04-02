@@ -1,6 +1,7 @@
-<p-toast></p-toast>
-<p-card>
-  <p-dialog header="Sửa số lượng tồn" [(visible)]="displayForm" [style]="{width: '25vw'}" [modal]="true" [transitionOptions]="'.3s'" [styleClass]="'custom-dialog'">
+
+
+  <p-dialog header="Sửa số lượng tồn" [(visible)]="displayForm" [style]="{ 'width': '25vw', 'background-color': '#fff', 'border':'1px solid' ,'padding': '5px','border-radius': '8px'}" 
+  [modal]="true" [transitionOptions]="'.3s'" [styleClass]="'custom-dialog'">
     <form action="">
         <div class="p-field">
             <label for="username">Số lượng: </label>
@@ -12,7 +13,7 @@
         </div>
     </form>
   </p-dialog>
-</p-card>
+
 
 <main class="app-content" *ngIf="!showForm">
   <div class="row">
