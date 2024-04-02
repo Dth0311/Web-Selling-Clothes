@@ -1,0 +1,85 @@
+<p-toast></p-toast>
+<p-card>
+  <p-dialog header="Sửa số lượng tồn" [(visible)]="displayForm" [style]="{width: '25vw'}" [modal]="true" [transitionOptions]="'.3s'" [styleClass]="'custom-dialog'">
+    <form action="">
+        <div class="p-field">
+            <label for="username">Số lượng: </label>
+            <input type="text" pInputText class="w-full mt-2" [(ngModel)]="productForm.quantity" name="name">
+        </div>
+        <div class="p-field mt-3">
+            <button type="submit" pButton (click)="onUpdateQuantity()">Cập nhật</button>
+            <button pButton type="button" class="p-button-danger ml-3" (click)="displayForm=false">Hủy</button>
+        </div>
+    </form>
+  </p-dialog>
+</p-card>
+
+<main class="app-content" *ngIf="!showForm">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="tile">
+        <div class="tile-body">
+          <table
+            class="table table-hover table-bordered table-data"
+            id="sampleTable"
+          >
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Image</th>
+                <th>Price</th>
+                <th>Size</th>
+                <th>Quantity</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <ng-container *ngFor="let product of listProduct">
+                <tr *ngFor="let size of product.sizes">
+                    <td
+                    *ngIf="size === product.sizes[0]"
+                    [attr.rowspan]="product.sizes.length"
+                  >
+                    {{ product.name }}
+                  </td>
+                  <td
+                    *ngIf="size === product.sizes[0]"
+                    [attr.rowspan]="product.sizes.length"
+                  >
+                    <img
+                      src="http://localhost:8088/api/v1/image/+ {{
+                        product.images[0].id
+                      }}"
+                      alt=""
+                      width="70px;"
+                    />
+                  </td>
+                  <td
+                    *ngIf="size === product.sizes[0]"
+                    [attr.rowspan]="product.sizes.length"
+                  >
+                    {{ product.price }}
+                  </td>
+                  <td>{{ size.name }}</td>
+                    <ng-container *ngFor="let item of listQuantity">   
+                  <td *ngIf="size.id === item.sizeId && product.id === item.productId">
+                    {{ item.quantity }}
+                  </td>
+                  <td *ngIf="size.id === item.sizeId && product.id === item.productId">
+                    <button
+                      type="button"
+                      class="button-action-update p-button-rounded p-button-primary fa fa-pen"
+                      (click)="openUpdate(product.id,item.sizeId)"
+                    ></button>
+                    <!-- + {{item.productId}}  {{item.sizeId}} -->
+                  </td>
+                    </ng-container>
+                </tr>
+              </ng-container>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>

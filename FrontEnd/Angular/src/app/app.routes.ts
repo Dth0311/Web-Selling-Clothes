@@ -35,6 +35,10 @@ import { OrderAdminComponent } from './components/admin/order-admin/order-admin.
 import { Order } from './components/client/checkout/order';
 import { TagComponent } from './components/admin/tag/tag.component';
 import { BlogAdminComponent } from './components/admin/blog-admin/blog-admin.component';
+import { WarehouseComponent } from './components/admin/warehouse/warehouse.component';
+import {CardModule} from 'primeng/card';
+import {DialogModule} from 'primeng/dialog';
+import {TableModule} from 'primeng/table';
 
 library.add(faBell);
 
@@ -63,6 +67,7 @@ export const routes: Routes = [
         { path:'order',component: OrderAdminComponent},
         { path:'tag',component: TagComponent},
         { path:'blog',component: BlogAdminComponent},
+        { path:'warehouse',component: WarehouseComponent},
       ]
     },
 ];
@@ -86,7 +91,8 @@ export const routes: Routes = [
         OrderComponent,
         OrderAdminComponent,
         TagComponent,
-        BlogAdminComponent
+        BlogAdminComponent,
+        WarehouseComponent
     ],
     imports: [
         HttpClientModule,
@@ -98,6 +104,9 @@ export const routes: Routes = [
         OverlayPanelModule,
         ToastModule,
         ButtonModule,
+        CardModule,
+        DialogModule,
+        TableModule,
         DividerModule,
         DataViewModule,
         SliderModule

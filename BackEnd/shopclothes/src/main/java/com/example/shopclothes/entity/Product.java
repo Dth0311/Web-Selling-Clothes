@@ -21,15 +21,11 @@ public class Product {
     @Column(name="name")
     private String name;
 
-
     @Column(name = "description",columnDefinition = "TEXT")
     private String description;
 
     @Column(name="price")
     private long price;
-
-    @Column(name="quantity")
-    private int quantity;
 
     @ManyToOne
     @JoinColumn(name = "category_id")
@@ -38,4 +34,8 @@ public class Product {
     @ManyToMany
     @JoinTable(name = "product_image",joinColumns = @JoinColumn(name="product_id"),inverseJoinColumns = @JoinColumn(name="image_id"))
     private Set<Image> images = new HashSet<>();
+
+    @ManyToMany
+    @JoinTable(name = "product_size",joinColumns = @JoinColumn(name="product_id"),inverseJoinColumns = @JoinColumn(name="size_id"))
+    private Set<Size> sizes = new HashSet<>();
 }

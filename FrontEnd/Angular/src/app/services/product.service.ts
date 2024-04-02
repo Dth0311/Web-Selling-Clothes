@@ -52,15 +52,24 @@ export class ProductService {
     return this.http.get(PRODUCT_API + "/"+ id,httpOptions);
   }
 
-  createProduct(name:string,description: string,price: string,quantity:number,categoryId: number,imageIds: Array<string>):Observable<any>{
-    return this.http.post(PRODUCT_API,{name,description,price,quantity,categoryId,imageIds},httpOptions);
+  createProduct(name:string,description: string,price: string,categoryId: number,imageIds: Array<string>,sizeIds: Array<string>):Observable<any>{
+    return this.http.post(PRODUCT_API,{name,description,price,categoryId,imageIds,sizeIds},httpOptions);
   }
 
-  updateProduct(id: number,name:string,description: string,price: string,quantity:number,categoryId: number,imageIds: Array<string>):Observable<any>{
-    return this.http.put(PRODUCT_API + '/update/'+id,{name,description,price,quantity,categoryId,imageIds},httpOptions);
+  updateProduct(id: number,name:string,description: string,price: string,categoryId: number,imageIds: Array<string>,sizeIds: Array<string>):Observable<any>{
+    return this.http.put(PRODUCT_API + '/update/'+id,{name,description,price,categoryId,imageIds,sizeIds},httpOptions);
   }
 
   deleteProduct(id:number):Observable<any>{
     return this.http.delete(PRODUCT_API + '/delete/' + id,httpOptions);
   }
+
+  updateQuantity(productId: number,sizeId: number,quantity: number):Observable<any>{
+    return this.http.put(PRODUCT_API + '/quantity',{productId,sizeId,quantity},httpOptions);
+  }
+
+  getListQuantity():Observable<any>{
+    return this.http.get(PRODUCT_API + '/quantity',httpOptions);
+  }
+
 }

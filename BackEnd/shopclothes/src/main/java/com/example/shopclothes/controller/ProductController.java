@@ -1,9 +1,14 @@
 package com.example.shopclothes.controller;
 
 import com.example.shopclothes.dto.ProductDTO;
+import com.example.shopclothes.dto.ProductSizeDTO;
 import com.example.shopclothes.entity.Category;
 import com.example.shopclothes.entity.Image;
 import com.example.shopclothes.entity.Product;
+import com.example.shopclothes.entity.ProductSize;
+import com.example.shopclothes.exception.DataNotFoundException;
+import com.example.shopclothes.repository.ProductSizeRepository;
+import com.example.shopclothes.request.ProductSizeRequest;
 import com.example.shopclothes.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -23,6 +28,9 @@ public class ProductController {
 
     @Autowired
     ProductService productService;
+
+    @Autowired
+    ProductSizeRepository productSizeRepository;
 
     @GetMapping("")
     public ResponseEntity<?> getAllProduct(){
@@ -136,6 +144,28 @@ public class ProductController {
             productService.deleteProduct(id);
             return ResponseEntity.ok("Xóa sản phẩm thành công");
         }catch (Exception e){
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+    @PutMapping("/quantity")
+    public ResponseEntity<?> updateProductSizeQuantity(@RequestBody ProductSizeRequest productSizeRequest) {
+        try{
+            ProductSize productSize = productSizeRepository.getQuantity(productSizeRequest.getProductId(),productSizeRequest.getSizeId());
+            productSize.setQuantity(productSizeRequest.getQuantity());
+            productSizeRepository.save(productSize);
+            return ResponseEntity.ok(productSize);
+        }catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+    @GetMapping("/quantity")
+    public ResponseEntity<?> getQuantity(){
+        try{
+            List<ProductSize> productSize = productSizeRepository.findAll();
+            return ResponseEntity.ok(productSize);
+        }catch (Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }

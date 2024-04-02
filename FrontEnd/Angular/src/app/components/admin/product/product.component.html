@@ -25,7 +25,6 @@
                 <th>Name</th>
                 <th>Image</th>
                 <th>Price</th>
-                <th>Quantity</th>
                 <th>Category</th>
                 <th>Action</th>
               </tr>
@@ -43,7 +42,6 @@
                   />
                 </td>
                 <td>{{ product.price }}</td>
-                <td>{{ product.quantity }}</td>
                 <td>{{ product.category.name }}</td>
                 <td>
                   <button
@@ -105,16 +103,6 @@
                   [(ngModel)]="productForm.name"
                   [ngModelOptions]="{ standalone: true }"
                   required
-                />
-              </div>
-              <div class="form-group col-md-6">
-                <label class="control-label">Số lượng</label>
-                <input
-                  class="form-control"
-                  [(ngModel)]="productForm.quantity"
-                  [ngModelOptions]="{ standalone: true }"
-                  required
-                  type="number"
                 />
               </div>
               <div class="form-group col-md-6">

@@ -1,0 +1,9 @@
+.p-card-body .p-card-content .custom-dialog{
+    background-color: #f0f0f0; /* Màu nền của dialog */
+    border-radius: 8px; /* Đường viền cong cho dialog */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Hiệu ứng bóng cho dialog */
+}
+
+.ui-dialog .ui-dialog-content {
+    background-color: #000; /* Replace with your desired background color */
+  }

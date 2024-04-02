@@ -80,6 +80,8 @@ public class CustomFilterSecurity {
                                     String.format("%s/user/**", apiPrefix)).permitAll()
                             .requestMatchers(GET,
                                     String.format("%s/order/**", apiPrefix)).permitAll()
+                            .requestMatchers(GET,
+                                    String.format("%s/size/**", apiPrefix)).permitAll()
                             .anyRequest()
                             .authenticated();
                 })

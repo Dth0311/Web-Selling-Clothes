@@ -24,6 +24,7 @@ export class ProductComponent implements OnInit {
 
   listImageChoosen : any = [];
   imageChoosen : any;
+  sizeIds:any = [];
 
   onUpdate : boolean =false;
   showForm : boolean = false;
@@ -34,7 +35,6 @@ export class ProductComponent implements OnInit {
     name : null,
     description : null,
     price: null,
-    quantity: null,
     category: null,
     imageIds: []
   };
@@ -59,12 +59,12 @@ export class ProductComponent implements OnInit {
     this.onUpdate = false;
     this.showForm = true;
     this.listImageChoosen = [];
+    this.sizeIds = [];
     this.productForm ={
       id:null,
       name: null,
       description : null,
       price: null,
-      quantity: null,
       category: null,
       imageIds: []
     }
@@ -72,6 +72,7 @@ export class ProductComponent implements OnInit {
 
   openUpdate(data : any){
     this.listImageChoosen = [];
+    this.sizeIds = [];
     debugger
       this.onUpdate = true;
       this.showForm =true;
@@ -79,10 +80,12 @@ export class ProductComponent implements OnInit {
       this.productForm.name = data.name;
       this.productForm.description = data.description;
       this.productForm.price = data.price;  
-      this.productForm.quantity = data.quantity;
       this.productForm.category = data.category.id;
       data.images.forEach((res : any) =>{
         this.listImageChoosen.push(res.id);
+      })
+      data.sizes.forEach((res : any) =>{
+        this.sizeIds.push(res.id);
       })
   }
 
@@ -152,13 +155,12 @@ export class ProductComponent implements OnInit {
     data.forEach((res: any)=>{
       this.productForm.imageIds.push(res);
     })
-    const {name,description,price,quantity,category,imageIds} = this.productForm;
-    this.productService.createProduct(name,description,price,quantity,category,imageIds).subscribe({
+    const {name,description,price,category,imageIds} = this.productForm;
+    this.productService.createProduct(name,description,price,category,imageIds,this.sizeIds).subscribe({
       next: res =>{
         this.getListProduct();
         this.showForm = false;
         alert("Thêm mới thành công");
-
       },error: err =>{
         alert(err.message);
       }
@@ -171,8 +173,8 @@ export class ProductComponent implements OnInit {
     data.forEach((res: any)=>{
       this.productForm.imageIds.push(res);
     })
-    const {id,name,description,price,quantity,category,imageIds} = this.productForm;
-    this.productService.updateProduct(id,name,description,price,quantity,category,imageIds).subscribe({
+    const {id,name,description,price,category,imageIds} = this.productForm;
+    this.productService.updateProduct(id,name,description,price,category,imageIds,this.sizeIds).subscribe({
       next: res =>{
         alert("Cập nhật thành công");
         this.getListProduct();
