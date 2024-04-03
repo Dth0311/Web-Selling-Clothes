@@ -1,25 +1,23 @@
 package com.example.shopclothes.controller;
 
 import com.example.shopclothes.dto.ProductDTO;
-import com.example.shopclothes.dto.ProductSizeDTO;
-import com.example.shopclothes.entity.Category;
-import com.example.shopclothes.entity.Image;
 import com.example.shopclothes.entity.Product;
 import com.example.shopclothes.entity.ProductSize;
-import com.example.shopclothes.exception.DataNotFoundException;
 import com.example.shopclothes.repository.ProductSizeRepository;
+import com.example.shopclothes.response.ProductCategoryResponse;
+import com.example.shopclothes.response.ProductListResponse;
 import com.example.shopclothes.request.ProductSizeRequest;
 import com.example.shopclothes.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 @RestController
 @CrossOrigin(origins = "*",maxAge = 3600)
@@ -37,6 +35,48 @@ public class ProductController {
         List<Product> productList = productService.getList();
         return ResponseEntity.ok(productList);
     }
+
+    @GetMapping("/limit")
+    public ResponseEntity<?> getProducts(
+            @RequestParam("page")     int page,
+            @RequestParam("limit")    int limit
+    ) {
+        PageRequest pageRequest = PageRequest.of(
+                page, limit,
+                Sort.by("id").descending());
+        Page<Product> productPage = productService.getAllProducts(pageRequest);
+        // Lấy tổng số trang
+        int totalPages = productPage.getTotalPages();
+        List<Product> products = productPage.getContent();
+        return ResponseEntity.ok(ProductListResponse
+                .builder()
+                .products(products)
+                .totalPages(totalPages)
+                .build());
+    }
+
+    @GetMapping("/category")
+    public ResponseEntity<?> getProductByCategoryId(
+            @RequestParam("categoryId") int categoryId,
+            @RequestParam("page")     int page,
+            @RequestParam("limit")    int limit
+    ) {
+        PageRequest pageRequest = PageRequest.of(
+                page, limit,
+                Sort.by("id").descending());
+        Page<Product> productPage = productService.getProductByCategoryId(categoryId,pageRequest);
+        // Lấy tổng số trang
+        int totalPages = productPage.getTotalPages();
+        List<Product> products = productPage.getContent();
+        return ResponseEntity.ok(ProductCategoryResponse
+                .builder()
+                .categoryId(categoryId)
+                .products(products)
+                .totalPages(totalPages)
+                .build());
+    }
+
+
 
     @GetMapping("/{id}")
     public ResponseEntity<?> getProductById(@PathVariable int id){
@@ -149,6 +189,7 @@ public class ProductController {
     }
 
     @PutMapping("/quantity")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<?> updateProductSizeQuantity(@RequestBody ProductSizeRequest productSizeRequest) {
         try{
             ProductSize productSize = productSizeRepository.getQuantity(productSizeRequest.getProductId(),productSizeRequest.getSizeId());

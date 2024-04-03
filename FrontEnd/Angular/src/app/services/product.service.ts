@@ -48,6 +48,21 @@ export class ProductService {
     return this.http.get(PRODUCT_API + '/range',{params: params})
   }
 
+  getListBylimit(page: number, limit:number):Observable<any>{
+    let params = new HttpParams();
+    params = params.append('page',page);
+    params = params.append('limit',limit);
+    return this.http.get(PRODUCT_API + '/limit',{params: params})
+  }
+
+  getListBylimitCategory(categoryId: number,page: number, limit:number):Observable<any>{
+    let params = new HttpParams();
+    params = params.append('categoryId',categoryId);
+    params = params.append('page',page);
+    params = params.append('limit',limit);
+    return this.http.get(PRODUCT_API + '/category',{params: params})
+  }
+
   getProdct(id: number):Observable<any>{
     return this.http.get(PRODUCT_API + "/"+ id,httpOptions);
   }

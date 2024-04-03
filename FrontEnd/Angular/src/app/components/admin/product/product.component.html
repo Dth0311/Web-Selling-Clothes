@@ -92,7 +92,7 @@
       <div class="tile">
         <h3 class="tile-title">Tạo mới sản phẩm</h3>
         <p-divider></p-divider>
-        <div class="tile-body" style="margin-top: 10px;">
+        <div class="tile-body" style="margin-top: 10px">
           <form class="row">
             <div class="form-group col-md-6">
               <div class="form-group col-md-6">
@@ -135,7 +135,12 @@
               <div class="form-group col-md-6">
                 <label class="control-label">Ảnh sản phẩm</label>
                 <div id="myfileupload">
-                  <input type="button" value="Chọn ảnh" *ngIf="!showImage" (click)="showImage=true">
+                  <input
+                    type="button"
+                    value="Chọn ảnh"
+                    *ngIf="!showImage"
+                    (click)="showImage = true"
+                  />
                 </div>
                 <div id="thumbbox">
                   <img
@@ -156,7 +161,7 @@
                     *ngFor="let image of listImageChoosen"
                   >
                     <img
-                      src="http://localhost:8088/api/v1/image/+{{image}}"
+                      src="http://localhost:8088/api/v1/image/+{{ image }}"
                       alt=""
                       class="w-full h-full"
                     />
@@ -250,3 +255,32 @@
     </div>
   </div>
 </main>
+<div class="d-flex justify-content-center">
+<nav aria-label="Page navigation" *ngIf="!showForm">
+  <ul class="pagination">
+    <li class="page-item" *ngIf="currentPage > 1">
+      <a class="page-link" href="javascript:void(0)" (click)="onPageChange(1)">First</a>
+    </li>
+    <li class="page-item" *ngIf="currentPage > 1">
+      <a class="page-link" href="javascript:void(0)" (click)="onPageChange(currentPage - 1)"
+        >Previous</a
+      >
+    </li>
+    <ng-container *ngFor="let page of visiblePages">
+      <li class="page-item" [ngClass]="{'active': page - 1 === currentPage}">
+        <a class="page-link" href="javascript:void(0)" (click)="onPageChange(page - 1)">{{
+          page
+        }}</a>
+      </li>
+    </ng-container>
+    <li class="page-item" *ngIf="currentPage < totalPages">
+      <a class="page-link" href="javascript:void(0)" (click)="onPageChange(currentPage + 1)"
+        >Next</a
+      >
+    </li>
+    <li class="page-item" *ngIf="currentPage < totalPages">
+      <a class="page-link" href="javascript:void(0)" (click)="onPageChange(totalPages - 1)">Last</a>
+    </li>
+  </ul>
+</nav>
+</div>

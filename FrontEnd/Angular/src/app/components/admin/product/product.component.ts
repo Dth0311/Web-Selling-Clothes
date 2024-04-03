@@ -1,10 +1,8 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { ProductService } from '../../../services/product.service';
 import { CategoryService } from '../../../services/category.service';
 import { ImageService } from '../../../services/image.service';
-import { Table } from 'primeng/table';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-product',
@@ -16,6 +14,11 @@ export class ProductComponent implements OnInit {
   listProduct: any;
   listCategory: any;
   listImage: any;
+  totalPages:number = 0;
+  itemsPerPage: number = 5;
+  currentPage: number = 0;
+  visiblePages: number[] = [];
+  
 
   disabled : boolean = true;
 
@@ -44,13 +47,13 @@ export class ProductComponent implements OnInit {
     private productService: ProductService,
     private imageService: ImageService,
     private categoryService:CategoryService,
-    private router: Router,
     ){
 
   }
 
   ngOnInit(): void {
-    this.getListProduct();
+    // this.getListProduct();
+    this.getListProductByLimit(this.currentPage,this.itemsPerPage);
     this.getListCategoryEnabled();
     this.getListImage();
   }
@@ -110,6 +113,35 @@ export class ProductComponent implements OnInit {
     })
   }
 
+  getListProductByLimit(page:number,limit: number){
+    this.productService.getListBylimit(page,limit).subscribe({
+      next: res =>{
+        this.listProduct =res.products;
+        this.totalPages = res.totalPages;
+        this.visiblePages = this.generateVisiblePageArray(this.currentPage,this.totalPages);
+      },error: err=>{
+        console.log(err);
+      }
+    })
+  }
+
+  onPageChange (page: number) {
+    debugger;
+    this.currentPage = page;
+    this.getListProductByLimit(page, this.itemsPerPage);
+    }
+
+  generateVisiblePageArray(currentPage: number, totalPages: number): number[] {
+    const maxVisiblePages = 5;
+    const halfVisiblePages = Math.floor(maxVisiblePages / 2);
+    let startPage = Math.max(currentPage - halfVisiblePages, 1);
+    let endPage = Math.min(startPage + maxVisiblePages - 1, totalPages);
+    if (endPage - startPage + 1 < maxVisiblePages) {
+      startPage = Math.max(endPage - maxVisiblePages + 1, 1);
+    }
+    return new Array(endPage - startPage + 1).fill(0).map((_, index) => startPage + index);
+  }
+
   getListCategoryEnabled(){
     this.categoryService.getListCategoryEnabled().subscribe({
       next: res =>{
@@ -158,7 +190,7 @@ export class ProductComponent implements OnInit {
     const {name,description,price,category,imageIds} = this.productForm;
     this.productService.createProduct(name,description,price,category,imageIds,this.sizeIds).subscribe({
       next: res =>{
-        this.getListProduct();
+        this.getListProductByLimit(this.currentPage,this.itemsPerPage);
         this.showForm = false;
         alert("Thêm mới thành công");
       },error: err =>{
@@ -177,7 +209,7 @@ export class ProductComponent implements OnInit {
     this.productService.updateProduct(id,name,description,price,category,imageIds,this.sizeIds).subscribe({
       next: res =>{
         alert("Cập nhật thành công");
-        this.getListProduct();
+        this.getListProductByLimit(this.currentPage,this.itemsPerPage);
         this.showForm = false;
       },error: err =>{
         alert(err.message);

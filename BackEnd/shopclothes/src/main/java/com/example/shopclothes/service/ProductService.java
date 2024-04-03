@@ -10,9 +10,13 @@ import com.example.shopclothes.repository.CategoryRepository;
 import com.example.shopclothes.repository.ImageRepository;
 import com.example.shopclothes.repository.ProductRepository;
 import com.example.shopclothes.repository.SizeRepository;
+import com.example.shopclothes.response.ProductCategoryResponse;
 import com.example.shopclothes.service.Imp.IProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.crossstore.ChangeSetPersister;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -144,4 +148,18 @@ public class ProductService implements IProductService {
 //        }
         productRepository.delete(product);
     }
+
+    @Override
+    public Page<Product> getAllProducts(Pageable pageable) {
+        return productRepository.findAll(pageable);
+    }
+
+    @Override
+    public Page<Product> getProductByCategoryId(int categoryId, PageRequest pageRequest) {
+        Page<Product> productPage;
+        productPage = productRepository.getListProductByCategory(categoryId,pageRequest);
+        return productPage;
+    }
+
+
 }

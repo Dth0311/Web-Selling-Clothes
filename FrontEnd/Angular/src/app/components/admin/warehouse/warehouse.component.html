@@ -84,3 +84,33 @@
     </div>
   </div>
 </main>
+<div class="d-flex justify-content-center">
+  <nav aria-label="Page navigation" *ngIf="!showForm">
+    <ul class="pagination">
+      <li class="page-item" *ngIf="currentPage > 1">
+        <a class="page-link" href="javascript:void(0)" (click)="onPageChange(1)">First</a>
+      </li>
+      <li class="page-item" *ngIf="currentPage > 1">
+        <a class="page-link" href="javascript:void(0)" (click)="onPageChange(currentPage - 1)"
+          >Previous</a
+        >
+      </li>
+      <ng-container *ngFor="let page of visiblePages">
+        <li class="page-item" [ngClass]="{'active': page - 1 === currentPage}">
+          <a class="page-link" href="javascript:void(0)" (click)="onPageChange(page - 1)">{{
+            page
+          }}</a>
+        </li>
+      </ng-container>
+      <li class="page-item" *ngIf="currentPage < totalPages">
+        <a class="page-link" href="javascript:void(0)" (click)="onPageChange(currentPage + 1)"
+          >Next</a
+        >
+      </li>
+      <li class="page-item" *ngIf="currentPage < totalPages">
+        <a class="page-link" href="javascript:void(0)" (click)="onPageChange(totalPages - 1)">Last</a>
+      </li>
+    </ul>
+  </nav>
+  </div>
+  
