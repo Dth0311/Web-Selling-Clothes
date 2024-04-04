@@ -4,8 +4,7 @@
       <div class="">
         <div
           class="hero__item set-bg right"
-          style="background-image: url('assets/img/hero/banner.jpg')"
-        >
+          style="background-image: url('assets/img/hero/banner.jpg')">
           <div class="hero__text">
             <h2>FASHION HAS TO <br />REFLECT WHO YOU ARE</h2>
             <p>WHAT YOU FEEL AT THE MOMENT WHERE YOU COME HERE?</p>
@@ -15,6 +14,7 @@
     </div>
   </div>
 </section>
+
 
 <!-- Featured Section Begin -->
 <section class="featured spad">
@@ -46,7 +46,7 @@
             <h6>
               <a href="javascript:void(0)" class="text-uppercase"  routerLink="/product/{{product.id}}">{{ product.name }}</a>
             </h6>
-            <h5>{{ product.price }} VNĐ</h5>
+            <h5>{{ product.price | currency:'VND':'symbol':'1.0-0'}}</h5>
           </div>
         </div>
       </div>
@@ -132,7 +132,7 @@
             <h6>
               <a href="javascript:void(0)" class="text-uppercase"  routerLink="/product/{{product.id}}">{{ product.name }}</a>
             </h6>
-            <h5>{{ product.price }} VNĐ</h5>
+            <h5>{{ product.price | currency:'VND':'symbol':'1.0-0'}}</h5>
           </div>
         </div>
       </div>

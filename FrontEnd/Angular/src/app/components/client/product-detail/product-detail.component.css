@@ -1,0 +1,7 @@
+.dialog-image {
+    display: block;
+    margin: 0 auto; /* Căn giữa ảnh theo chiều ngang */
+    width: 700px; 
+    height: 100%; /* Đảm bảo ảnh không vượt quá kích thước của hộp thoại *//* Căn giữa ảnh theo chiều dọc */
+    transform: translateY(-10%); /* Dịch chuyển ảnh lên trên 50% để căn giữa hoàn toàn */
+  }

@@ -11,7 +11,14 @@ import { FavoriteService } from '../../../services/favorite.service';
   styleUrl: './product-detail.component.css'
 })
 export class ProductDetailComponent implements OnInit,PipeTransform {
+  displayDialog: boolean = false;
+  indexImg:number = 0;
 
+  showDialog(index:number) {
+    this.indexImg = index;
+    this.displayDialog = true;
+
+  }
   id: number = 0;
   listRelatedProduct: any[] =[];
   product : any;
@@ -39,8 +46,8 @@ export class ProductDetailComponent implements OnInit,PipeTransform {
     this.productService.getProdct(this.id).subscribe({
       next: res =>{
         this.product = res;
+        console.log(this.product);
         this.getListRelatedProduct();
-        console.log(this.listRelatedProduct)
       },error: err=>{
         console.log(err);
       }
@@ -86,16 +93,16 @@ export class ProductDetailComponent implements OnInit,PipeTransform {
     }
   }
 
+  previousImage(){
+
+  }
+
+  nextImage(){
+
+  }
+
   
 }
 
-// @Pipe({
-//   name: "replaceStr"
-// })
-// export class NewLineToBrPipe implements PipeTransform {
-//   transform(value: string): string {
-//     return value.replace(/\n/g, '<br>');
-//   }
-// }
 
 

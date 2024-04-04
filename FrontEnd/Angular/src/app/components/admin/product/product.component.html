@@ -41,7 +41,7 @@
                     width="70px;"
                   />
                 </td>
-                <td>{{ product.price }}</td>
+                <td>{{ product.price | currency:'VND':'symbol':'1.0-0'}}</td>
                 <td>{{ product.category.name }}</td>
                 <td>
                   <button

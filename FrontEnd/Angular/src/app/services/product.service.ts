@@ -55,11 +55,12 @@ export class ProductService {
     return this.http.get(PRODUCT_API + '/limit',{params: params})
   }
 
-  getListBylimitCategory(categoryId: number,page: number, limit:number):Observable<any>{
+  getListBylimitCategory(categoryId: number,page: number, limit:number,sort:string):Observable<any>{
     let params = new HttpParams();
     params = params.append('categoryId',categoryId);
     params = params.append('page',page);
     params = params.append('limit',limit);
+    params = params.append('sort',sort);
     return this.http.get(PRODUCT_API + '/category',{params: params})
   }
 
@@ -71,8 +72,8 @@ export class ProductService {
     return this.http.post(PRODUCT_API,{name,description,price,categoryId,imageIds,sizeIds},httpOptions);
   }
 
-  updateProduct(id: number,name:string,description: string,price: string,categoryId: number,imageIds: Array<string>,sizeIds: Array<string>):Observable<any>{
-    return this.http.put(PRODUCT_API + '/update/'+id,{name,description,price,categoryId,imageIds,sizeIds},httpOptions);
+  updateProduct(id: number,name:string,description: string,price: string,categoryId: number,imageIds: Array<string>):Observable<any>{
+    return this.http.put(PRODUCT_API + '/update/'+id,{name,description,price,categoryId,imageIds},httpOptions);
   }
 
   deleteProduct(id:number):Observable<any>{

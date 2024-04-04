@@ -17,7 +17,9 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @CrossOrigin(origins = "*",maxAge = 3600)
@@ -59,13 +61,26 @@ public class ProductController {
     public ResponseEntity<?> getProductByCategoryId(
             @RequestParam("categoryId") int categoryId,
             @RequestParam("page")     int page,
-            @RequestParam("limit")    int limit
+            @RequestParam("limit")    int limit,
+            @RequestParam("sort")    String sort
     ) {
-        PageRequest pageRequest = PageRequest.of(
-                page, limit,
-                Sort.by("id").descending());
+        PageRequest pageRequest;
+        if(sort.equals("priceHight")){
+            pageRequest = PageRequest.of(
+                    page, limit,
+                    Sort.by("price").ascending());
+        }
+        else if(sort.equals("idHight")){
+            pageRequest = PageRequest.of(
+                    page, limit,
+                    Sort.by("id").ascending());
+        }
+        else {
+            pageRequest = PageRequest.of(
+                    page, limit,
+                    Sort.by(sort).descending());
+        }
         Page<Product> productPage = productService.getProductByCategoryId(categoryId,pageRequest);
-        // Lấy tổng số trang
         int totalPages = productPage.getTotalPages();
         List<Product> products = productPage.getContent();
         return ResponseEntity.ok(ProductCategoryResponse
@@ -83,6 +98,13 @@ public class ProductController {
         try{
             Product product = productService.getProduct(id);
             ProductDTO productDTO = ProductDTO.fromProduct(product);
+            Set<Integer> sizeIds = new HashSet<>();
+            for (var item: productSizeRepository.findAll()) {
+                if(item.getProduct().getId() == productDTO.getId()){
+                    sizeIds.add(item.getSize().getId());
+                }
+            }
+            productDTO.setSizeIds(sizeIds);
             return ResponseEntity.ok(productDTO);
         }catch (Exception e){
             return ResponseEntity.badRequest().body(e.getMessage());

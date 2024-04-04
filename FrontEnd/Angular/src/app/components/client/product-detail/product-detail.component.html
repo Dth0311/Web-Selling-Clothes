@@ -1,3 +1,7 @@
+
+<p-dialog [(visible)]="displayDialog" [modal]="true" [style]="{'width': '100vw', 'height': '100vh', 'background-color':'rgba(255, 255, 255, 0.8)'}">
+  <img src="http://localhost:8088/api/v1/image/{{indexImg}}" alt="Image" class="dialog-image" >
+</p-dialog>
 <!-- Breadcrumb Section Begin -->
 <section
   class="breadcrumb-section set-bg"
@@ -24,56 +28,50 @@
 <!-- Product Details Section Begin -->
 <section class="product-details spad" *ngIf="product != null">
   <div class="container">
-    <div class="row">
-      <div class="col-lg-6 col-md-6">
-        <div class="product__details__pic">
-          <div class="product__details__pic__item">
-            <img
-              class="product__details__pic__item--large"
-              src="http://localhost:8088/api/v1/image/+ {{
-                product.imageIds[0]
-              }}"
-            />
-          </div>
-          <div class="product__details__pic__slider">
-            <img
-              src="http://localhost:8088/api/v1/image/+ {{ image }}"
-              alt=""
-              *ngFor="let image of product.imageIds"
-              class="col-3"
-            />
+    <div class="col-md-12 col-sm-12 col-xs-12">
+      <div class="row">
+        <div class="col-lg-6 col-md-6">
+          <div class="product-img">
+            <ul>
+              <li *ngFor="let image of product.imageIds" style="display: inline;">
+                  <img src="http://localhost:8088/api/v1/image/{{ image }}" alt=""  class="col-6" style="padding: 10px" (click)="showDialog(image)" />
+              </li>
+            </ul>
           </div>
         </div>
-      </div>
-      <div class="col-lg-6 col-md-6">
-        <div class="product__details__text">
-          <h3>{{ product.name }}</h3>
-          <!-- <div class="product__details__rating">
-            <a class="fa fa-heart"></a>
-            <a class="fa fa-heart"></a>
-            <a class="fa fa-heart"></a>
-            <a class="fa fa-heart"></a>
-            <span>(18 reviews)</span>
-          </div> -->
-          <div class="product__details__price">{{ product.price }} VNĐ</div>
-          <div class="product__details__quantity">
-            <div class="quantity">
-              <div class="pro-qty">
-                <span class="dec qtybtn" (click)="Quantity()">-</span>
-                <input type="text" [(ngModel)]="quantity" />
-                <span class="inc qtybtn" (click)="plusQuantity()">+</span>
+        <div class="col-lg-6 col-md-6">
+          <div class="product__details__text">
+            <h3>{{ product.name }}</h3>
+            <div class="product__details__price">{{ product.price | currency:'VND':'symbol':'1.0-0'}}</div>
+            <div class="product__details__quantity">
+              <div class="quantity">
+                <span style="margin-right: 40px;">Size</span>
+                <div class="pro-qty1">
+                  <button>S</button>
+                  <button>M</button>
+                  <button>L</button>
+                  <button>XL</button>
+                </div>
               </div>
+              <div class="quantity">
+                <span>Số lượng</span>
+                <div class="pro-qty">
+                  <span class="dec qtybtn" (click)="Quantity()">-</span>
+                  <input type="text" [(ngModel)]="quantity" />
+                  <span class="inc qtybtn" (click)="plusQuantity()">+</span>
+                </div>
+              </div>
+              <a
+              href="javascript:void(0)"
+              class="primary-btn"
+              (click)="addCart(product)"
+              >Thêm vào giỏi hàng</a>
             </div>
+           
+            <hr />
+            <h4>Chi tiết sản phẩm</h4>
+            <p [innerHTML]="transform(product.description)"></p>
           </div>
-          <a
-            href="javascript:void(0)"
-            class="primary-btn"
-            (click)="addCart(product)"
-            >ADD TO CARD</a
-          >
-          <hr />
-          <h4>Chi tiết sản phẩm</h4>
-          <p [innerHTML]="transform(product.description)"></p>
         </div>
       </div>
     </div>
@@ -132,7 +130,11 @@
           </div>
           <div class="featured__item__text">
             <h6>
-              <a href="javascript:void(0)" routerLink="/product/{{ product.id }}">{{ product.name }}</a>
+              <a
+                href="javascript:void(0)"
+                routerLink="/product/{{ product.id }}"
+                >{{ product.name }}</a
+              >
             </h6>
             <h5>{{ product.price }} VNĐ</h5>
           </div>

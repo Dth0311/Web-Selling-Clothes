@@ -37,11 +37,11 @@ public class ProductDTO {
                     .map(Image::getId)
                     .collect(Collectors.toSet()));
         }
-        if(!product.getSizes().isEmpty()){
-            productDTO.setSizeIds(product.getSizes().stream()
-                    .map(Size::getId)
-                    .collect(Collectors.toSet()));
-        }
+//        if(!product.getSizes().isEmpty()){
+//            productDTO.setSizeIds(product.getSizes().stream()
+//                    .map(Size::getId)
+//                    .collect(Collectors.toSet()));
+//        }
         return productDTO;
     }
 }

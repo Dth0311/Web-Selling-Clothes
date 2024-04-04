@@ -16,11 +16,13 @@ public class ProductSize {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name = "product_id")
-    private int productId;
+    @ManyToOne
+    @JoinColumn(name = "product_id")
+    private Product product;
 
-    @Column(name = "size_id")
-    private int sizeId;
+    @ManyToOne
+    @JoinColumn(name = "size_id")
+    private Size size;
 
     @Column(name = "quantity")
     private Integer quantity;

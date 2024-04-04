@@ -34,7 +34,7 @@
                   <td>{{order.address}}</td>
                   <td>{{order.phone}}</td>
                   <td>{{order.email}}</td>
-                  <td>{{order.totalPrice}}</td>
+                  <td>{{order.totalPrice | currency:'VND':'symbol':'1.0-0'}}</td>
                   <td>
                       <button pButton type="button" label="Waiting For Delivery" class="btn btn-success"></button>
                       <button pButton type="button" label="Waiting For Delivery" class="btn btn-danger"></button>

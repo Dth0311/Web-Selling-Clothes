@@ -35,5 +35,5 @@ public interface IProductService {
 
     Page<Product> getAllProducts(Pageable pageable);
 
-    Page<Product> getProductByCategoryId(int categoryId, PageRequest pageRequest);
+    Page<Product> getProductByCategoryId(int categoryId,PageRequest pageRequest);
 }

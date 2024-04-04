@@ -206,7 +206,7 @@ export class ProductComponent implements OnInit {
       this.productForm.imageIds.push(res);
     })
     const {id,name,description,price,category,imageIds} = this.productForm;
-    this.productService.updateProduct(id,name,description,price,category,imageIds,this.sizeIds).subscribe({
+    this.productService.updateProduct(id,name,description,price,category,imageIds).subscribe({
       next: res =>{
         alert("Cập nhật thành công");
         this.getListProductByLimit(this.currentPage,this.itemsPerPage);

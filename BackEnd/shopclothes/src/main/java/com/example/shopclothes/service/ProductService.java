@@ -1,15 +1,9 @@
 package com.example.shopclothes.service;
 
 import com.example.shopclothes.dto.ProductDTO;
-import com.example.shopclothes.entity.Category;
-import com.example.shopclothes.entity.Image;
-import com.example.shopclothes.entity.Product;
-import com.example.shopclothes.entity.Size;
+import com.example.shopclothes.entity.*;
 import com.example.shopclothes.exception.DataNotFoundException;
-import com.example.shopclothes.repository.CategoryRepository;
-import com.example.shopclothes.repository.ImageRepository;
-import com.example.shopclothes.repository.ProductRepository;
-import com.example.shopclothes.repository.SizeRepository;
+import com.example.shopclothes.repository.*;
 import com.example.shopclothes.response.ProductCategoryResponse;
 import com.example.shopclothes.service.Imp.IProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,6 +33,9 @@ public class ProductService implements IProductService {
 
     @Autowired
     SizeRepository sizeRepository;
+
+    @Autowired
+    ProductSizeRepository productSizeRepository;
 
     @Override
     public List<Product> getList() {
@@ -97,15 +94,6 @@ public class ProductService implements IProductService {
             }
                 product.setImages(images);
         }
-
-        if(!productDTO.getSizeIds().isEmpty()){
-            Set<Size> sizes = new HashSet<>();
-            for(int sizeId: productDTO.getSizeIds()){
-                Size size = sizeRepository.findById(sizeId).orElseThrow(() -> new DataNotFoundException("Không tìm thấy size id: " + sizeId));
-                sizes.add(size);
-            }
-            product.setSizes(sizes);
-        }
         productRepository.save(product);
         return product;
     }
@@ -128,14 +116,15 @@ public class ProductService implements IProductService {
             product.setImages(images);
         }
 
-        if(!productDTO.getSizeIds().isEmpty()){
-            Set<Size> sizes = new HashSet<>();
-            for(int sizeId: productDTO.getSizeIds()){
-                Size size = sizeRepository.findById(sizeId).orElseThrow(() -> new DataNotFoundException("Không tìm thấy size id: " + sizeId));
-                sizes.add(size);
-            }
-            product.setSizes(sizes);
-        }
+//        if(!productDTO.getSizeIds().isEmpty()){
+//            Set<Size> sizes = new HashSet<>();
+//            for(int sizeId: productDTO.getSizeIds()){
+//                Size size = sizeRepository.findById(sizeId).orElseThrow(() -> new DataNotFoundException("Không tìm thấy size id: " + sizeId));
+//                sizes.add(size);
+//            }
+//            product.setSizes(sizes);
+//        }
+
         productRepository.save(product);
         return product;
     }
@@ -155,7 +144,7 @@ public class ProductService implements IProductService {
     }
 
     @Override
-    public Page<Product> getProductByCategoryId(int categoryId, PageRequest pageRequest) {
+    public Page<Product> getProductByCategoryId(int categoryId ,PageRequest pageRequest) {
         Page<Product> productPage;
         productPage = productRepository.getListProductByCategory(categoryId,pageRequest);
         return productPage;

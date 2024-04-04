@@ -45,7 +45,7 @@
                                             </div>
                                             <div class="latest-product__item__text">
                                                 <h6 class="text-uppercase">{{product.name}}</h6>
-                                                <span>{{product.price}} VNĐ</span>
+                                                <span>{{product.price | currency:'VND':'symbol':'1.0-0'}}</span>
                                             </div>
                                         </a>
                                     </div>
@@ -55,6 +55,17 @@
                     </div>
                 </div>
                 <div class="col-lg-9">
+                  <fieldset class="sort-bar">
+                    <div>Sắp xếp theo:</div>
+                    <div class="sort-by-options">
+                      <section>
+                        <button [ngClass]="{'red-button': isClicked0}" (click)="sortByIdHight()">Liên quan</button>
+                        <button style="width: 80px;" [ngClass]="{'red-button': isClicked1}" (click)="sortById()">Mới nhất</button>
+                        <button [ngClass]="{'red-button': isClicked2}" (click)="sortByPrice()">Giá: Cao đến Thấp</button>
+                        <button [ngClass]="{'red-button': isClicked3}" (click)="sortByPriceHight()">Giá: Thấp đến Cao</button>
+                      </section>
+                    </div>
+                  </fieldset>
                     <div class="row shop-grid-item">
                         <div class="col-lg-3 col-md-4 col-sm-6" *ngFor="let product of listProduct">
                             <div class="featured__item">
@@ -75,7 +86,7 @@
                                 <h6>
                                   <a href="javascript:void(0)" class="text-uppercase"  routerLink="/product/{{product.id}}">{{ product.name }}</a>
                                 </h6>
-                                <h5>{{ product.price }} VNĐ</h5>
+                                <h5>{{ product.price | currency:'VND':'symbol':'1.0-0'}}</h5>
                               </div>
                             </div>
                           </div>

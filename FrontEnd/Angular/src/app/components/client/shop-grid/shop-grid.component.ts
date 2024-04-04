@@ -21,6 +21,11 @@ export class ShopGridComponent implements OnInit {
   itemsPerPage: number = 5;
   currentPage: number = 0;
   visiblePages: number[] = [];
+  sort:string = "idHight";
+  isClicked0: boolean = true;
+  isClicked1: boolean = false;
+  isClicked2: boolean = false;
+  isClicked3: boolean = false;
   constructor(
     private categoryService:CategoryService,
     private productService: ProductService,
@@ -32,17 +37,15 @@ export class ShopGridComponent implements OnInit {
   }
   ngOnInit(): void {
     this.id = this.route.snapshot.params['id'];
-    // this.getListProductByCategory();
     this.getListProductByLimit(this.id,this.currentPage,this.itemsPerPage);
     this.getListCategoryEnabled();
     this.getNewestProduct();
   }
 
   getListProductByLimit(categoryId:number,page:number,limit: number){
-    this.productService.getListBylimitCategory(categoryId,page,limit).subscribe({
+    this.productService.getListBylimitCategory(categoryId,page,limit,this.sort).subscribe({
       next: res =>{
         this.listProduct =res.products;
-        // console.log(this.listProduct);
         this.totalPages = res.totalPages;
         this.visiblePages = this.generateVisiblePageArray(this.currentPage,this.totalPages);
       },error: err=>{
@@ -118,5 +121,41 @@ export class ShopGridComponent implements OnInit {
     if(!this.favoriteService.productInWishList(item)){
       this.favoriteService.addToWishList(item);
     }
+  }
+
+  sortById(){
+    this.isClicked1 = !this.isClicked1;
+    this.isClicked2 = false;
+    this.isClicked3 = false;
+    this.isClicked0 = false;
+    this.sort = "id";
+    this.ngOnInit();
+  }
+
+  sortByIdHight(){
+    this.isClicked0 = true;
+    this.isClicked2 = false;
+    this.isClicked3 = false;
+    this.isClicked1 = false;
+    this.sort = "idHight";
+    this.ngOnInit();
+  }
+
+  sortByPrice(){
+    this.isClicked2 = !this.isClicked2;
+    this.isClicked1 = false;
+    this.isClicked3 = false;
+    this.isClicked0 = false;
+    this.sort = "price";
+    this.ngOnInit();
+  }
+
+  sortByPriceHight(){
+    this.isClicked3 = !this.isClicked3;
+    this.isClicked2 = false;
+    this.isClicked1 = false;
+    this.isClicked0 = false;
+    this.sort = "priceHight";
+    this.ngOnInit();
   }
 }

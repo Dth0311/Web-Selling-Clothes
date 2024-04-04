@@ -17,6 +17,7 @@ export class WarehouseComponent implements OnInit {
   itemsPerPage: number = 4;
   currentPage: number = 0;
   visiblePages: number[] = [];
+  productCountWithID1: number = 0;
 
 
   onUpdate : boolean =false;
@@ -39,20 +40,11 @@ export class WarehouseComponent implements OnInit {
     private location:Location
   ){}
 
-  getListProduct(){
-    this.productService.getListProduct().subscribe({
-      next: res =>{
-        this.listProduct =res;
-      },error: err=>{
-        console.log(err);
-      }
-    })
-  }
-
   getListProductQuantity(){
     this.productService.getListQuantity().subscribe({
       next: res =>{
         this.listQuantity =res;
+        console.log(this.listQuantity)
       },error: err=>{
         console.log(err);
       }
@@ -72,7 +64,7 @@ export class WarehouseComponent implements OnInit {
       next: res =>{
         alert("Cập nhật thành công");
         this.displayForm = false;
-        this.getListProduct();
+        this.getListProductByLimit(this.currentPage,this.itemsPerPage);
         this.ngOnInit();
       },error: err =>{
         alert(err.message);
@@ -107,6 +99,20 @@ export class WarehouseComponent implements OnInit {
       startPage = Math.max(endPage - maxVisiblePages + 1, 1);
     }
     return new Array(endPage - startPage + 1).fill(0).map((_, index) => startPage + index);
+  }
+
+  countProducts(index:number) : number {
+    this.productCountWithID1 = 0; // Đặt biến đếm về 0 trước khi kiểm tra
+    for (let item of this.listQuantity) {
+      if (item.product.id === index) {
+        this.productCountWithID1++; // Tăng biến đếm nếu sản phẩm có ID là 1
+      }
+    }
+    return this.productCountWithID1;
+  }
+
+  idProduct(index:number):number{
+    return index;
   }
 
 }

@@ -35,7 +35,7 @@ public class Product {
     @JoinTable(name = "product_image",joinColumns = @JoinColumn(name="product_id"),inverseJoinColumns = @JoinColumn(name="image_id"))
     private Set<Image> images = new HashSet<>();
 
-    @ManyToMany
-    @JoinTable(name = "product_size",joinColumns = @JoinColumn(name="product_id"),inverseJoinColumns = @JoinColumn(name="size_id"))
-    private Set<Size> sizes = new HashSet<>();
+//    @ManyToMany
+//    @JoinTable(name = "product_size",joinColumns = @JoinColumn(name="product_id"),inverseJoinColumns = @JoinColumn(name="size_id"))
+//    private Set<Size> sizes = new HashSet<>();
 }
