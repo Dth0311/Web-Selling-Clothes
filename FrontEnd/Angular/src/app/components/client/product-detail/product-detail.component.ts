@@ -12,7 +12,7 @@ import { FavoriteService } from '../../../services/favorite.service';
 })
 export class ProductDetailComponent implements OnInit,PipeTransform {
   displayDialog: boolean = false;
-  indexImg:number = 0;
+  indexImg:number = 1;
 
   showDialog(index:number) {
     this.indexImg = index;
@@ -23,6 +23,11 @@ export class ProductDetailComponent implements OnInit,PipeTransform {
   listRelatedProduct: any[] =[];
   product : any;
   quantity: number = 1;
+  sizeId: number = 1;
+  isClicked0: boolean = true;
+  isClicked1: boolean = false;
+  isClicked2: boolean = false;
+  isClicked3: boolean = false;
   constructor(
     private router: Router, 
     private productService: ProductService,
@@ -75,15 +80,19 @@ export class ProductDetailComponent implements OnInit,PipeTransform {
   }
 
   addCart(item:any){
+    this.ngOnInit();
     this.cartService.getItems();
-    this.cartService.addToCart(item,this.quantity);
+    this.cartService.addToCart(item,this.quantity,this.sizeId);
     alert("Add To Cart Successfully!");
+   
   }
 
   addToCart(item: any){
+    this.ngOnInit();
     this.cartService.getItems();
-    this.cartService.addToCart(item,1);
+    this.cartService.addToCart(item,1,1);
     alert("Add To Cart Successfully!")
+    this.ngOnInit();
   }
 
   addToWishList(item: any){
@@ -93,14 +102,37 @@ export class ProductDetailComponent implements OnInit,PipeTransform {
     }
   }
 
-  previousImage(){
-
+  selectSize(sizeId:number){
+    this.sizeId = sizeId;
+    if(sizeId == 1){
+      this.isClicked0 = !this.isClicked0;
+      this.isClicked2 = false;
+      this.isClicked3 = false;
+      this.isClicked1 = false;
+      this.ngOnInit();
+    }
+    if(sizeId == 2){
+      this.isClicked1 = true;
+      this.isClicked2 = false;
+      this.isClicked3 = false;
+      this.isClicked0 = false;
+      this.ngOnInit();
+    }
+    if(sizeId == 3){
+      this.isClicked2 = true;
+      this.isClicked1 = false;
+      this.isClicked3 = false;
+      this.isClicked0 = false;
+      this.ngOnInit();
+    }
+    if(sizeId == 4){
+      this.isClicked3 = !this.isClicked3;
+      this.isClicked2 = false;
+      this.isClicked1 = false;
+      this.isClicked0 = false;
+      this.ngOnInit();
+    }
   }
-
-  nextImage(){
-
-  }
-
   
 }
 

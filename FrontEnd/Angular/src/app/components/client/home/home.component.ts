@@ -74,6 +74,6 @@ export class HomeComponent implements OnInit {
   addToCart(item: any){
     this.cartService.getItems();
     alert("Add To Cart Successfully!")
-    this.cartService.addToCart(item,1);
+    this.cartService.addToCart(item,1,1);
   }
 }

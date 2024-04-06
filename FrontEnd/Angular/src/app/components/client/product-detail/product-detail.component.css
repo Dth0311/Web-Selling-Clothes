@@ -5,3 +5,7 @@
     height: 100%; /* Đảm bảo ảnh không vượt quá kích thước của hộp thoại *//* Căn giữa ảnh theo chiều dọc */
     transform: translateY(-10%); /* Dịch chuyển ảnh lên trên 50% để căn giữa hoàn toàn */
   }
+  .red-button {
+    background-color: rgb(238, 77, 45);
+    color: white;
+}

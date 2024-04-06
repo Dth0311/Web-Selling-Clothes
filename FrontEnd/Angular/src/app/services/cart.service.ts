@@ -13,6 +13,7 @@ export class CartService {
   totalPrice =0;
 
   total = 0;
+  item1:any = [];
 
   constructor() { }
 
@@ -20,24 +21,37 @@ export class CartService {
     localStorage.setItem('cart_items',JSON.stringify(this.items));
   }
 
-  addToCart(item: any,quantity: number){
+  addToCart(item: any,quantity: number,sizeId: number){
+    this.item1 = item;
     this.loadCart();
-    if(!this.productInCart(item)){
-      item.quantity = quantity;
-      item.subTotal = item.quantity * item.price;
-      this.items.push(item)
-    }else{
+    if(!this.productInCart(this.item1)){
+      debugger
+      this.item1.quantity = quantity;
+      this.item1.subTotal = this.item1.quantity * this.item1.price;
+      this.item1.sizeIds.push(sizeId);
+      this.items.push(this.item1)
+    }
+    else{
+      let found = false;
       this.items.forEach(res => {
-        if(res.id == item.id){
+        debugger
+        if(!found && res.id === this.item1.id && res.sizeIds[res.sizeIds.length - 1] === sizeId){
           res.quantity += quantity;
           res.subTotal = res.quantity * res.price;
+          found = true;
+          return;
         }
       });
+      if(!found){
+        this.item1.quantity = quantity;
+          this.item1.subTotal = this.item1.quantity * this.item1.price;
+          this.item1.sizeIds[this.item1.sizeIds.length - 1] = sizeId;
+          this.items.push(this.item1);
+      }
     }
-    item.quantity = quantity;
+    this.item1.quantity = quantity;
     this.saveCart();
     this.getTotalPrice();
-
   }
 
 

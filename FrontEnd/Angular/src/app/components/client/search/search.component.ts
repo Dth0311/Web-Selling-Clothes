@@ -71,7 +71,7 @@ export class SearchComponent implements OnInit {
 
   addToCart(item: any){
     this.cartService.getItems();
-    this.cartService.addToCart(item,1);
+    this.cartService.addToCart(item,1,1);
   }
   
   addToWishList(item: any){

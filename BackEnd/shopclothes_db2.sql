@@ -7,6 +7,12 @@ CREATE TABLE role (
 	primary key(id)
 );
 
+CREATE TABLE size (
+    id INT AUTO_INCREMENT,
+	name VARCHAR(20),
+	primary key(id)
+);
+
 CREATE TABLE user (
     id int PRIMARY KEY AUTO_INCREMENT,
     first_Name NVARCHAR(255),
@@ -46,8 +52,10 @@ CREATE TABLE order_detail (
     price BIGINT,
     quantity INT,
     sub_total BIGINT,
-    order_id int,
-    FOREIGN KEY (order_id) REFERENCES orders(id)
+    order_id INT,
+    product_size_id INT,
+    FOREIGN KEY (order_id) REFERENCES orders(id),
+    FOREIGN KEY (product_size_id) REFERENCES product_size(id)
 );
 
 CREATE TABLE image (
@@ -69,12 +77,21 @@ CREATE TABLE category (
 CREATE TABLE product (
     id INT PRIMARY KEY AUTO_INCREMENT,
     Name VARCHAR(255),
-    Description VARCHAR(255),
+    Description text,
     Price BIGINT,
-    Quantity INT,
     Category_id INT,
     FOREIGN KEY (Category_id) REFERENCES category(id)
 );
+
+CREATE TABLE product_size (
+	id INT PRIMARY KEY AUTO_INCREMENT,
+    size_id INT,
+    product_id INT,
+    quantity INT,
+    FOREIGN KEY (product_id) REFERENCES product(id),
+    FOREIGN KEY (size_id) REFERENCES size(id)
+);
+
 
 CREATE TABLE product_image (
 	product_id int,
@@ -112,5 +129,7 @@ CREATE TABLE blog_tag (
 ALTER TABLE order_detail
 ADD COLUMN product_id INT,
 ADD FOREIGN KEY (product_id) REFERENCES product(id);
+
+    
 
 

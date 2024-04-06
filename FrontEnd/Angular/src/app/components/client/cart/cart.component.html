@@ -26,10 +26,11 @@
                         <table>
                             <thead>
                                 <tr>
-                                    <th class="shoping__product">Products</th>
-                                    <th>Price</th>
-                                    <th>Quantity</th>
-                                    <th>Total</th>
+                                    <th class="shoping__product">Sản phẩm</th>
+                                    <th>Giá</th>
+                                    <th>Size</th>
+                                    <th>Số lượng</th>
+                                    <th>Thành tiền</th>
                                     <th></th>
                                 </tr>
                             </thead>
@@ -40,19 +41,31 @@
                                         <h5>{{product.name}}</h5>
                                     </td>
                                     <td class="shoping__cart__price">
-                                        {{product.price}} VNĐ
+                                        {{product.price | currency:'VND':'symbol':'1.0-0'}}
+                                    </td>
+                                    <td *ngIf="product.sizeIds[product.sizeIds.length-1] == 1" class="shoping__cart__price">
+                                        S
+                                    </td>
+                                    <td *ngIf="product.sizeIds[product.sizeIds.length-1] == 2" class="shoping__cart__price">
+                                        M
+                                    </td>
+                                    <td *ngIf="product.sizeIds[product.sizeIds.length-1] == 3" class="shoping__cart__price">
+                                        L
+                                    </td>
+                                    <td *ngIf="product.sizeIds[product.sizeIds.length-1] == 4" class="shoping__cart__price">
+                                        XL
                                     </td>
                                     <td class="shoping__cart__quantity">
-                                        <div class="quantity">
-                                            <div class="pro-qty">
+                                        <div class="quantity"  style="height: 40px;">
+                                            <div class="pro-qty" style="height: 30px;">
                                                 <span class="dec qtybtn" (click)="subtractQuantity(product)">-</span>
-                                                <input type="text" [ngModel]="product.quantity" (change)="updateQuantity(product,$event)" min="1">
+                                                <input style="margin: 0px 8px;" type="text" [ngModel]="product.quantity" (change)="updateQuantity(product,$event)" min="1">
                                                 <span class="inc qtybtn" (click)="plusQuantity(product)">+</span>
                                             </div>
                                         </div>
                                     </td>
                                     <td class="shoping__cart__total">
-                                        {{product.subTotal}} VNĐ
+                                        {{product.subTotal | currency:'VND':'symbol':'1.0-0'}}
                                     </td>
                                     <td class="shoping__cart__item__close">
                                         <button pButton pRipple type="button" icon="pi pi-times" class="p-button-rounded p-button-danger p-button-text" (click)="removeFromCart(product)">
@@ -85,9 +98,9 @@
                     <div class="shoping__checkout">
                         <h5>Cart Total</h5>
                         <ul>
-                            <li>Subtotal <span>{{cartService.totalPrice}}VNĐ</span></li>
+                            <li>Subtotal <span>{{cartService.totalPrice | currency:'VND':'symbol':'1.0-0'}}</span></li>
                             <li>Sale <span>- 0%</span></li>
-                            <li>Total <span>{{cartService.total}}VNĐ</span></li>
+                            <li>Total <span>{{cartService.total | currency:'VND':'symbol':'1.0-0'}}</span></li>
                         </ul>
                         <a href="javascript:void(0)" routerLink="/checkout" class="primary-btn">PROCEED TO CHECKOUT</a>
                     </div>

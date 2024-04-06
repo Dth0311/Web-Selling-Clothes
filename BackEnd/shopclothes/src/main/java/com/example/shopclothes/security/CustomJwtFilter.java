@@ -44,11 +44,6 @@ public class CustomJwtFilter extends OncePerRequestFilter {
             }
             String token = getTokenFromHeader(request);
             if (token != null){
-//                if(jwtUtilsHelper.verifyToken(token)){
-//                    UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken("","",new ArrayList<>());
-//                    SecurityContext securityContext = SecurityContextHolder.getContext();
-//                    securityContext.setAuthentication(usernamePasswordAuthenticationToken);
-//                }
                 final String username = jwtUtilsHelper.extractPhoneNumber(token);
                 if(username != null && SecurityContextHolder.getContext().getAuthentication() == null){
                     User userDetails = (User) userDetailsService.loadUserByUsername(username);

@@ -114,12 +114,14 @@ export class ShopGridComponent implements OnInit {
 
   addToCart(item: any){
     this.cartService.getItems();
-    this.cartService.addToCart(item,1);
+    this.cartService.addToCart(item,1,1);
+    alert("Add To Cart Successfully!")
   }
   
   addToWishList(item: any){
     if(!this.favoriteService.productInWishList(item)){
       this.favoriteService.addToWishList(item);
+      alert("Add To Cart Successfully!")
     }
   }
 
