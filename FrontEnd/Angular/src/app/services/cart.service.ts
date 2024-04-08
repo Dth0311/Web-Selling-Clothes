@@ -21,7 +21,7 @@ export class CartService {
     localStorage.setItem('cart_items',JSON.stringify(this.items));
   }
 
-  addToCart(item: any,quantity: number,sizeId: number){
+  addToCart(item: any,quantity: number,sizeId: number = 1){
     this.item1 = item;
     this.loadCart();
     if(!this.productInCart(this.item1)){

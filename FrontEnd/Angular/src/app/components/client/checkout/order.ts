@@ -6,7 +6,7 @@ export class Order {
     address!:string;
     town!:string;
     state!:string;
-    postCode !: number
+    postCode !: number;
     email!:string;
     note!:string;
     phone!:string;

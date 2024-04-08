@@ -117,6 +117,13 @@ public class ProductController {
         List<ProductDTO> productDTOList = new ArrayList<>();
         for (var item:list) {
             ProductDTO productDTO = ProductDTO.fromProduct(item);
+            Set<Integer> sizeIds = new HashSet<>();
+            for (var item1: productSizeRepository.findAll()) {
+                if(item1.getProduct().getId() == productDTO.getId()){
+                    sizeIds.add(item1.getSize().getId());
+                }
+            }
+            productDTO.setSizeIds(sizeIds);
             productDTOList.add(productDTO);
         }
         return ResponseEntity.ok(productDTOList);
@@ -128,6 +135,13 @@ public class ProductController {
         List<ProductDTO> productDTOList = new ArrayList<>();
         for (var item:list) {
             ProductDTO productDTO = ProductDTO.fromProduct(item);
+            Set<Integer> sizeIds = new HashSet<>();
+            for (var item1: productSizeRepository.findAll()) {
+                if(item1.getProduct().getId() == productDTO.getId()){
+                    sizeIds.add(item1.getSize().getId());
+                }
+            }
+            productDTO.setSizeIds(sizeIds);
             productDTOList.add(productDTO);
         }
         return ResponseEntity.ok(productDTOList);

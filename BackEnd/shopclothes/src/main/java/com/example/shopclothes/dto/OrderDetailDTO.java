@@ -16,4 +16,6 @@ public class OrderDetailDTO {
     private int quantity;
 
     private long subTotal;
+
+    private int sizeId;
 }

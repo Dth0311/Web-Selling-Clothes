@@ -59,6 +59,7 @@ public class OrderDTO {
             for (var item:order.getOrderdetails()) {
                 OrderDetailDTO orderDetailDTO = new OrderDetailDTO();
                 orderDetailDTO.setProductId(item.getProduct().getId());
+                orderDetailDTO.setSizeId(item.getProductSize().getSize().getId());
                 orderDetailDTO.setQuantity(item.getQuantity());
                 orderDetailDTO.setPrice(item.getPrice());
                 orderDetailDTO.setSubTotal(item.getSubTotal());

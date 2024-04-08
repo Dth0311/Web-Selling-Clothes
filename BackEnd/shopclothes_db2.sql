@@ -44,6 +44,7 @@ CREATE TABLE orders (
     post_code BIGINT,
     note NVARCHAR(255),
     total_price long,
+	created_At DATETIME default current_timestamp,
 	FOREIGN KEY (user_id) REFERENCES user(id)
 );
 

@@ -54,12 +54,13 @@ export class CheckoutComponent implements OnInit {
       orderDetail.price = res.price;
       orderDetail.quantity = res.quantity;
       orderDetail.subTotal = res.subTotal;
+      orderDetail.sizeId = res.sizeIds[res.sizeIds.length-1];
       this.listOrderDetail.push(orderDetail);
     })
     console.log(this.listOrderDetail)
 
-    const {firstname,lastname,country,address,town,state,postCcode,phone,email,note} = this.orderForm;
-    this.orderService.placeOrder(firstname,lastname,country,address,town,state,postCcode,phone,email,note,this.listOrderDetail,this.username).subscribe({
+    const {firstname,lastname,country,address,town,state,postCode,phone,email,note} = this.orderForm;
+    this.orderService.placeOrder(firstname,lastname,country,address,town,state,postCode,phone,email,note,this.listOrderDetail,this.username).subscribe({
       next: res =>{
         debugger
         this.cartService.clearCart();

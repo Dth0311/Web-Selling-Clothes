@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Date;
 import java.util.Set;
 
 @Data
@@ -16,7 +17,7 @@ import java.util.Set;
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private int id;
 
     @Column(name="first_name")
     private String firstName;
@@ -50,6 +51,9 @@ public class Order {
 
     @Column(name="total_price")
     private long totalPrice;
+
+    @Column(name = "created_At")
+    private Date createAt;
 
     @ManyToOne
     @JoinColumn(name="user_id")
