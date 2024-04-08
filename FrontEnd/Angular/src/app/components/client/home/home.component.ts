@@ -4,6 +4,10 @@ import { ProductService } from '../../../services/product.service';
 import { FavoriteService } from '../../../services/favorite.service';
 import { CartService } from '../../../services/cart.service';
 import { BlogService } from '../../../services/blog.service';
+import {register} from 'swiper/element/bundle';
+register(
+  
+);
 
 @Component({
   selector: 'app-home',
@@ -22,7 +26,8 @@ export class HomeComponent implements OnInit {
     private favoriteService: FavoriteService,
     private cartService: CartService,
     private blogService: BlogService
-    ) {}
+    ) {
+    }
   ngOnInit(): void {
     this.getListProduct();
     this.getListBlog();

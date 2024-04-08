@@ -127,6 +127,11 @@ CREATE TABLE blog_tag (
     FOREIGN KEY (tag_id) REFERENCES tag(id)
 );
 
+CREATE TABLE banner (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    image_data BLOB NOT NULL
+);
+
 ALTER TABLE order_detail
 ADD COLUMN product_id INT,
 ADD FOREIGN KEY (product_id) REFERENCES product(id);

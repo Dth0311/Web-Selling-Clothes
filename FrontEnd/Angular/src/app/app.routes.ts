@@ -49,6 +49,7 @@ import {InputTextareaModule} from 'primeng/inputtextarea';
 import {InputTextModule} from 'primeng/inputtext';
 import {RadioButtonModule} from 'primeng/radiobutton';
 import {CarouselModule} from 'primeng/carousel';
+import { SwiperModule } from 'swiper/types/shared';
 
 library.add(faBell);
 
@@ -103,7 +104,6 @@ export const routes: Routes = [
         TagComponent,
         BlogAdminComponent,
         WarehouseComponent,
-        
     ],
     imports: [
         HttpClientModule,

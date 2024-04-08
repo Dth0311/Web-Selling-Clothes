@@ -5,6 +5,7 @@ import { OrderService } from '../../../services/order.service';
 import { TokenService } from '../../../services/token.service';
 import { OrderDetail } from './order-detail';
 import { Router } from '@angular/router';
+import { UserService } from '../../../services/user.service';
 
 @Component({
   selector: 'app-checkout',
@@ -16,12 +17,13 @@ export class CheckoutComponent implements OnInit {
   order = new Order();
   listOrderDetail: any[] =[];
   username !: string;
+  user:any;
 
   orderForm :any ={
     firstname: null,
     lastname : null,
     country : null,
-    addrest : null,
+    address : null,
     town : null,
     state : null,
     postCode: null,
@@ -34,12 +36,27 @@ export class CheckoutComponent implements OnInit {
     public cartService: CartService,
     private orderService:OrderService,
     private tokenService: TokenService,
+    private userService: UserService,
     private router: Router,
-    ){}
+    ){
+      
+    }
 
   ngOnInit(): void {
     this.username = this.tokenService.getUser();
     this.cartService.getItems();
+    this.showUserDetail();
+  }
+
+  showUserDetail(){
+    this.user = this.tokenService.getUserByLocal();
+    this.orderForm.firstname = this.user.firstName;
+    this.orderForm.lastname = this.user.lastName;
+    this.orderForm.country = this.user.country;
+    this.orderForm.address = this.user.address;
+    this.orderForm.state = this.user.state;
+    this.orderForm.email = this.user.email;
+    this.orderForm.phone = this.user.phone;
   }
 
   showDepartmentClick(){
