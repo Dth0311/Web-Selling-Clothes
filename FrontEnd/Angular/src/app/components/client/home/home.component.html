@@ -18,32 +18,18 @@
     <img class="swiperImage" src='assets/img/hero/banner.jpg' height="800px" width="100%" alt="">
   </swiper-slide> -->
 <swiper-container  navigation="true" pagination="true">
-  <swiper-slide>
-    <div
+  <swiper-slide *ngFor="let banner of listBanner; let i = index; let count = count">
+       <div *ngIf="i == 0"
           class="hero__item set-bg right"
-          style="background-image: url('assets/img/hero/banner.jpg')">
+          [ngStyle]="{'background-image':'url(http://localhost:8088/api/v1/banner/' + banner.id +')'}">
           <div class="hero__text">
             <h2>FASHION HAS TO <br />REFLECT WHO YOU ARE</h2>
             <p>WHAT YOU FEEL AT THE MOMENT WHERE YOU COME HERE?</p>
           </div>
         </div>
-  </swiper-slide>
-  <swiper-slide>
-    <div
+        <div *ngIf="i > 0"
           class="hero__item set-bg right"
-          style="background-image: url('assets/img/hero/banner1.jpg')">
-        </div>
-  </swiper-slide>
-  <swiper-slide>
-    <div
-          class="hero__item set-bg right"
-          style="background-image: url('assets/img/hero/banner2.jpg')">
-        </div>
-  </swiper-slide>
-  <swiper-slide>
-    <div
-          class="hero__item set-bg right"
-          style="background-image: url('assets/img/hero/banner3.jpg')">
+          [ngStyle]="{'background-image':'url(http://localhost:8088/api/v1/banner/' + banner.id +')'}">
         </div>
   </swiper-slide>
 </swiper-container>
@@ -95,7 +81,7 @@
       <div class="col-lg-6 col-md-6 col-sm-6">
         <div class="banner__pic">
           <img
-            src="assets/img/banner/banner-1.png"
+            src="http://localhost:8088/api/v1/banner/+ {{listBannerBody[listBannerBody.length - 2].id}}"
             style="height: 350px"
             alt=""
           />
@@ -104,7 +90,7 @@
       <div class="col-lg-6 col-md-6 col-sm-6">
         <div class="banner__pic">
           <img
-            src="assets/img/banner/banner-2.png"
+          src="http://localhost:8088/api/v1/banner/+ {{listBannerBody[listBannerBody.length - 1].id}}"
             style="height: 350px"
             alt=""
           />

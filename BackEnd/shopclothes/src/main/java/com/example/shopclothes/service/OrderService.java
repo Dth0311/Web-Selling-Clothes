@@ -9,9 +9,11 @@ import com.example.shopclothes.service.Imp.IOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class OrderService implements IOrderService {
@@ -80,5 +82,10 @@ public class OrderService implements IOrderService {
         }
         List<Order> orders = orderRepository.getOrderByUserId(user.getId());
         return orders;
+    }
+
+    @Override
+    public Map<String, Long> getRevenueByDate(String startDate,String endDate) {
+        return orderRepository.getRevenueByDateRange(startDate, endDate);
     }
 }

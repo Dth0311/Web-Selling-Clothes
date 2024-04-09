@@ -19,6 +19,14 @@ export class OrderService {
     return this.http.get(ORDER_API,httpOptions);
   }
 
+  getListOrderDetail():Observable<any>{
+    return this.http.get(ORDER_API+'/detail',httpOptions);
+  }
+
+  getRevenue(startDate: string, endDate: string):Observable<any>{
+    return this.http.get(ORDER_API+`/revenue?startDate=${startDate}&endDate=${endDate}`,httpOptions);
+  }
+
 
   getListOrderByUser(username: string):Observable<any>{
     let params = new HttpParams();

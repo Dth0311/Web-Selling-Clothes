@@ -5,6 +5,7 @@ import { FavoriteService } from '../../../services/favorite.service';
 import { CartService } from '../../../services/cart.service';
 import { BlogService } from '../../../services/blog.service';
 import {register} from 'swiper/element/bundle';
+import { BannerService } from '../../../services/banner.service';
 register(
   
 );
@@ -20,17 +21,35 @@ export class HomeComponent implements OnInit {
   listProductNewest : any;
   listProductPrice: any;
   listBlogNewest: any;
+  listBanner:any;
+  listBannerBody :any;
   constructor(
     private router: Router,
     private productService: ProductService,
     private favoriteService: FavoriteService,
     private cartService: CartService,
-    private blogService: BlogService
+    private blogService: BlogService,
+    private bannerService: BannerService
     ) {
     }
   ngOnInit(): void {
     this.getListProduct();
     this.getListBlog();
+    this.getListBanner();
+  }
+
+  getListBanner(){
+    this.bannerService.getList().subscribe({
+      next:res =>{
+        this.listBanner = res;
+        this.listBannerBody = res;
+        if (this.listBanner.length > 4) {
+          this.listBanner = this.listBanner.slice(0, 4);
+        }
+      },error:err =>{
+        console.log(err);
+      }
+    });
   }
 
   goToProductDetail() {

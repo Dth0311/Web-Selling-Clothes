@@ -1,0 +1,70 @@
+.revenue-order {
+    display: flex;
+    /* Đặt khoảng cách giữa các phần tử là không gian đều nhau */
+    margin-bottom: 50px;
+}
+.revenue-box{
+    display: inline-block;
+    width: 16%;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 1px 1px 1px 1px rgb(164, 164, 164);
+    margin: 0 auto;
+}
+
+.revenue-box a{
+    padding: 10px 15px;
+    background-color: rgb(180, 237, 90);
+    color: rgb(19, 173, 6);
+    border-radius: 5px;
+    text-align: center;
+    margin-top: 10px;
+    margin-left: 10px;
+    margin-right: 20px;
+}
+
+.revenue-box h4{
+    color: rgb(150, 6, 6);
+    font-weight: 600;
+    font-size: 20px;
+}
+
+.revenue-box p{
+    color: #000;
+    font-weight: 500;
+}
+
+.revenue-box .revenue-item{
+    background-color: rgb(136, 183, 214);
+    color: rgb(64, 68, 195);
+}
+
+.revenue-box p{
+    font-size: 18px;
+}
+
+.filter-container {
+    text-align: center; /* Căn giữa nội dung */
+    margin-bottom: 20px; /* Khoảng cách dưới phần tử */
+}
+
+.filter-container label {
+    margin-right: 10px; /* Khoảng cách phía bên phải giữa các nhãn và input */
+}
+
+.filter-container input {
+    margin-right: 10px; /* Khoảng cách phía bên phải giữa các input */
+}
+
+.filter-container button {
+    padding: 5px 10px; /* Điều chỉnh độ lớn của nút */
+    border: none; /* Loại bỏ đường viền */
+    background-color: #b81f1f; /* Màu nền */
+    color: #fff; /* Màu chữ */
+    cursor: pointer; 
+    border-radius: 5px;/* Biểu tượng chuột khi rê chuột vào */
+}
+
+.filter-container button:hover {
+    background-color: #de3737; /* Màu nền khi rê chuột vào */
+}

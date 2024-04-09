@@ -54,8 +54,10 @@ CREATE TABLE order_detail (
     quantity INT,
     sub_total BIGINT,
     order_id INT,
+    product_id INT,
     product_size_id INT,
     FOREIGN KEY (order_id) REFERENCES orders(id),
+     FOREIGN KEY (product_id) REFERENCES product(id),
     FOREIGN KEY (product_size_id) REFERENCES product_size(id)
 );
 
@@ -129,12 +131,9 @@ CREATE TABLE blog_tag (
 
 CREATE TABLE banner (
     id INT PRIMARY KEY AUTO_INCREMENT,
-    image_data BLOB NOT NULL
+    image_data LONGBLOB NOT NULL
 );
 
-ALTER TABLE order_detail
-ADD COLUMN product_id INT,
-ADD FOREIGN KEY (product_id) REFERENCES product(id);
 
     
 

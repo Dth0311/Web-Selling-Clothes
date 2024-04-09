@@ -29,6 +29,20 @@
     <li class="nav-item">
       <a
         class="nav-link collapsed"
+        routerLink="/admin/banner"
+        data-toggle="collapse"
+        data-target="#collapseTwo"
+        aria-expanded="true"
+        aria-controls="collapseTwo"
+      >
+        <fa-icon [icon]="bookmark"></fa-icon>
+        <span>Quản lý banner</span>
+      </a>
+    </li>
+
+    <li class="nav-item">
+      <a
+        class="nav-link collapsed"
         routerLink="/admin/category"
         data-toggle="collapse"
         data-target="#collapseTwo"
@@ -36,7 +50,7 @@
         aria-controls="collapseTwo"
       >
         <fa-icon [icon]="bookmark"></fa-icon>
-        <span>Category</span>
+        <span>Quản lý danh mục</span>
       </a>
     </li>
     <!-- Nav Item - Utilities Collapse Menu -->
@@ -49,8 +63,8 @@
         aria-expanded="true"
         aria-controls="collapseUtilities"
       >
-        <fa-icon [icon]="receipt"></fa-icon>
-        <span>Product</span>
+        <fa-icon [icon]="bookmark"></fa-icon>
+        <span>Quản lý sản phẩm</span>
       </a>
     </li>
     <!-- Nav Item - Pages Collapse Menu -->
@@ -63,27 +77,33 @@
         aria-expanded="true"
         aria-controls="collapsePages"
       >
-        <fa-icon [icon]="cart"></fa-icon>
-        <span>Order</span>
+      <fa-icon [icon]="bookmark"></fa-icon>
+        <span>Danh sách order</span>
       </a>
     </li>
     <!-- Nav Item - Charts -->
     <li class="nav-item">
       <a class="nav-link" routerLink="/admin/tag">
-        <fa-icon [icon]="tag"></fa-icon>
-        <span>Tag</span></a
+        <fa-icon [icon]="bookmark"></fa-icon>
+        <span>Quản lý tag</span></a
       >
     </li>
     <li class="nav-item">
       <a class="nav-link" routerLink="/admin/blog">
-        <fa-icon [icon]="rocket"></fa-icon>
-        <span>Blog</span></a
+        <fa-icon [icon]="bookmark"></fa-icon>
+        <span>Quản lý blog</span></a
       >
     </li>
     <li class="nav-item">
       <a class="nav-link" routerLink="/admin/warehouse">
-        <fa-icon [icon]="rocket"></fa-icon>
+        <fa-icon [icon]="bookmark"></fa-icon>
         <span>Quản lý tồn kho</span></a
+      >
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" routerLink="/admin/revenue">
+        <fa-icon [icon]="bookmark"></fa-icon>
+        <span>Quản lý doanh thu</span></a
       >
     </li>
     <hr class="sidebar-divider d-none d-md-block" />

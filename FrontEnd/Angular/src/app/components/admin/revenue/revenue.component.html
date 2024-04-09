@@ -1,0 +1,65 @@
+<div class="row">
+    <div class="col-md-12">
+        <div>
+            <div>
+                <h3 class="tile-title">TỔNG QUAN DOANH THU</h3>
+            </div>
+            <div class="filter-container" style="text-align: center;">
+                <label for="start">Từ ngày:</label>
+                <input type="date" id="start" name="start" [(ngModel)]="startDate" style="margin-right: 20px;">
+              
+                <label for="end">Đến ngày:</label>
+                <input type="date" id="end" name="end" [(ngModel)]="endDate" style="margin-right: 10px;">
+              
+                <button (click)="getRevenue()">Lọc doanh thu</button>
+              </div>
+            </div>
+            <div class="revenue-order">
+                <div class="revenue-box">
+                    <a class='fa fa-user fa-3x revenue-item'></a>
+                    <div class="info" style="display: inline-block;">
+                        <h4 style="display: inline-block;">Đơn đặt hàng</h4>
+                        <p><strong>{{ countOrder}} đơn hàng</strong></p>
+                    </div>
+                </div>
+                <div class="revenue-box">
+                    <a class='fa fa-shopping-bag fa-3x'></a>
+                    <div class="info" style="display: inline-block;">
+                        <h4 style="display: inline-block;">Doanh thu</h4>
+                        <p><strong>{{ revenue | currency:'VND':'symbol':'1.0-0'}}</strong></p>
+                    </div>
+                </div>
+              </div>
+            </div>
+        <div class="tile">
+            <div>
+                <h3 class="tile-title">SẢN PHẨM BÁN CHẠY</h3>
+            </div>
+            <div class="tile-body">
+                <table class="table table-hover table-bordered" id="sampleTable">
+                    <thead>
+                        <tr>
+                            <th>Tên sản phẩm</th>
+                            <th>Danh mục</th>
+                            <th>Giá tiền</th>
+                            <th>Số lượng</th>
+                            <th>Doanh thu</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <ng-container *ngFor="let orderDetail of listOrderDetail; let i = index">
+                            <ng-container>
+                              <tr>
+                                <td>{{ orderDetail.product.name }}</td>
+                                <td>{{ orderDetail.product.category.name }}</td>
+                                <td>{{ orderDetail.product.price | currency:'VND':'symbol':'1.0-0' }}</td>
+                                <td>{{ orderDetail.quantity}}</td>
+                                <td style="color: red;">{{ orderDetail.quantity * orderDetail.product.price | currency:'VND':'symbol':'1.0-0'}}</td>
+                              </tr>
+                            </ng-container>
+                          </ng-container>
+                    </tbody>
+                </table>
+            </div>
+    </div>
+</div>

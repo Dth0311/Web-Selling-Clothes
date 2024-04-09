@@ -1,25 +1,30 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
-
-const IMAGE_API = "http://localhost:8088/api/v1/image";
+const BANNER_API = "http://localhost:8088/api/v1/banner";
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
 @Injectable({
   providedIn: 'root'
 })
-export class ImageService {
-
+export class BannerService {
   constructor(private http:HttpClient) { }
 
   getList(){
-    return this.http.get(IMAGE_API,httpOptions);
+    return this.http.get(BANNER_API,httpOptions);
+  }
+
+  update(id:number,file:File){
+    const formData: FormData = new FormData();
+    formData.append('file',file);
+    return this.http.put(BANNER_API+'/' + id,formData); 
   }
 
   upload(file:File){
     const formData: FormData = new FormData();
     formData.append('file',file);
-    return this.http.post<any>(IMAGE_API+'/upload',formData); 
+    return this.http.post<any>(BANNER_API+'',formData); 
   }
+
 }

@@ -50,6 +50,8 @@ import {InputTextModule} from 'primeng/inputtext';
 import {RadioButtonModule} from 'primeng/radiobutton';
 import {CarouselModule} from 'primeng/carousel';
 import { SwiperModule } from 'swiper/types/shared';
+import { BannerAdminComponent } from './components/admin/banner-admin/banner-admin.component';
+import { RevenueComponent } from './components/admin/revenue/revenue.component';
 
 library.add(faBell);
 
@@ -79,6 +81,8 @@ export const routes: Routes = [
         { path:'tag',component: TagComponent},
         { path:'blog',component: BlogAdminComponent},
         { path:'warehouse',component: WarehouseComponent},
+        { path:'banner',component: BannerAdminComponent},
+        { path:'revenue',component: RevenueComponent},
       ]
     },
 ];
@@ -104,6 +108,8 @@ export const routes: Routes = [
         TagComponent,
         BlogAdminComponent,
         WarehouseComponent,
+        BannerAdminComponent,
+        RevenueComponent
     ],
     imports: [
         HttpClientModule,
@@ -130,7 +136,7 @@ export const routes: Routes = [
         InputTextareaModule,
         InputTextModule,
         CarouselModule,
-        RadioButtonModule
+        RadioButtonModule,
     ],
     exports: [RouterModule],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]

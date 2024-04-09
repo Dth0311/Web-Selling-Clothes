@@ -1,0 +1,88 @@
+<main class="app-content" *ngIf="!showForm">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="tile">
+          <div class="tile-body">
+            <table
+              class="table table-hover table-bordered table-data mx-auto"
+              id="sampleTable"
+              style="width: 1400px;"
+            >
+              <thead>
+                <tr>
+                  <th>Image</th>
+                  <th>Vị trí banner</th>
+                  <th>Thao tác</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let banner of listBanner;let i = index">
+                  <td>
+                    <img
+                      src="http://localhost:8088/api/v1/banner/{{
+                        banner.id
+                      }}"
+                      alt=""
+                      width="800px;"
+                      height="200px"
+                    />
+                  </td>
+                  <td *ngIf="i<listBanner.length - 2">Banner home</td>
+                  <td *ngIf="i>=listBanner.length - 2">Banner sale</td>
+                  <td>
+                    <button
+                      type="button"
+                      class="button-action-update p-button-rounded p-button-primary fa fa-pen"
+                      (click)="openUpdate(banner)"
+                    ></button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <main *ngIf="showForm" class="app-content">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="tile">
+          <div class="tile-body" style="margin-top: 10px">
+            <form class="row">
+              <div class="form-group col-md-6">
+                      <img
+                        src="http://localhost:8088/api/v1/banner/+{{imageId}}"
+                        alt=""
+                        width="600px"
+                        height="200px"
+                      />
+              </div>
+            </form>
+            <input
+            type="file"
+            #file
+            (change)="uploadFile($event)"
+            hidden
+          />
+          <button
+            pButton
+            (click)="file.click()"
+            label="Tải ảnh lên"
+            icon="pi pi-plus"
+            class="p-button-warning w-auto"
+          ></button>
+            <button
+              pButton
+              type="button"
+              class="p-button-danger ml-3"
+              (click)="showForm = false"
+            >
+              Hủy
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
