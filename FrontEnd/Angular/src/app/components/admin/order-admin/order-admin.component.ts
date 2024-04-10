@@ -27,4 +27,22 @@ export class OrderAdminComponent implements OnInit {
       }
     })
   }
+
+  enableOrder(id : number){
+    this.orderService.enableOrder(id).subscribe({
+      next: res =>{
+        debugger
+        this.getListOrder();
+        alert("Cập nhật thành công!!");
+      },error: err=>{
+        if(err.status === 200){
+          this.getListOrder();
+          alert("Cập nhật thành công!!");
+        }
+        else{
+          alert(err.message);
+        }
+      }
+    })
+  }
 }

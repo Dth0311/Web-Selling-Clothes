@@ -216,7 +216,7 @@ public class ProductController {
     }
 
     @PostMapping("")
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_EMPLOYEE')")
     public ResponseEntity<?> createProduct(@RequestBody ProductDTO productDTO){
         try{
             Product product = productService.createProduct(productDTO);
@@ -227,7 +227,7 @@ public class ProductController {
     }
 
     @PutMapping("/update/{id}")
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_EMPLOYEE')")
     public ResponseEntity<?> updateProduct(@PathVariable int id,@RequestBody ProductDTO productDTO){
         try{
             Product product = productService.updateProduct(id,productDTO);
@@ -249,7 +249,7 @@ public class ProductController {
     }
 
     @PutMapping("/quantity")
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_EMPLOYEE')")
     public ResponseEntity<?> updateProductSizeQuantity(@RequestBody ProductSizeRequest productSizeRequest) {
         try{
             ProductSize productSize = productSizeRepository.getQuantity(productSizeRequest.getProductId(),productSizeRequest.getSizeId());
@@ -266,6 +266,19 @@ public class ProductController {
         try{
             List<ProductSize> productSize = productSizeRepository.findAll();
             return ResponseEntity.ok(productSize);
+        }catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+    @GetMapping("/numPorduct")
+    public ResponseEntity<?> getQuantity(
+            @RequestParam("productId") int productId,
+            @RequestParam("sizeId") int sizeId
+    ){
+        try{
+            int quantity = productSizeRepository.getQuantity(productId,sizeId).getQuantity();
+            return ResponseEntity.ok(quantity);
         }catch (Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }

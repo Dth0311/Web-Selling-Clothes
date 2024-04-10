@@ -45,6 +45,7 @@ CREATE TABLE orders (
     note NVARCHAR(255),
     total_price long,
 	created_At DATETIME default current_timestamp,
+    enable boolean default false,
 	FOREIGN KEY (user_id) REFERENCES user(id)
 );
 

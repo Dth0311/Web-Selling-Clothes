@@ -53,19 +53,21 @@
                     <button [ngClass]="{'red-button': isClicked3}" (click)="selectSize(product.sizeIds[3])" *ngIf="product.sizeIds[3] == 4">XL</button>
                 </div>
               </div>
-              <div class="quantity">
+              <div class="quantity" style="margin-bottom: 10px;">
                 <span>Số lượng</span>
                 <div class="pro-qty">
                   <span class="dec qtybtn" (click)="Quantity()">-</span>
                   <input type="text" [(ngModel)]="quantity" />
                   <span class="inc qtybtn" (click)="plusQuantity()">+</span>
                 </div>
+                <br>
+                <i style="color: gray;">Số lượng sản phẩm trong kho: {{this.quantityProduct}}</i>
               </div>
               <a
               href="javascript:void(0)"
               class="primary-btn"
               (click)="addCart(product)"
-              >Thêm vào giỏi hàng</a>
+              >Thêm vào giỏ hàng</a>
             </div>
            
             <hr />

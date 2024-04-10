@@ -17,6 +17,7 @@
             <table
               class="table table-hover table-bordered table-data"
               id="sampleTable"
+              style="box-shadow: 1px 1px 5px 1px rgb(188, 185, 185);"
             >
               <thead>
                 <tr>
@@ -36,8 +37,8 @@
                   <td>{{order.email}}</td>
                   <td style="color: red;">{{order.totalPrice | currency:'VND':'symbol':'1.0-0'}}</td>
                   <td>
-                      <button pButton type="button" label="Waiting For Delivery" class="btn btn-success"></button>
-                      <button pButton type="button" label="Waiting For Delivery" class="btn btn-danger"></button>
+                      <button *ngIf="order.enable" pButton type="button" label="Đã nhận hàng" class="btn btn-success"></button>
+                      <button *ngIf="!order.enable" (click)="enableOrder(order.id)" pButton type="button" label="Đang giao hàng" class="btn btn-danger"></button>
                   </td>
                 </tr>
               </tbody>

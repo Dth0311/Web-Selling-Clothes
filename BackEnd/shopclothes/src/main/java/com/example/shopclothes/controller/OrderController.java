@@ -93,7 +93,7 @@ public class OrderController {
     }
 
     @PostMapping("/create")
-    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')")
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_EMPLOYEE')")
     public ResponseEntity<?> placeOrder(@RequestBody OrderDTO orderDTO){
         try {
             orderService.placeOrder(orderDTO);
@@ -102,5 +102,16 @@ public class OrderController {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
 
+    }
+
+    @PutMapping("/{id}")
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_EMPLOYEE')")
+    public ResponseEntity<?> enableOrderById(@PathVariable int id){
+        try {
+            orderService.enableOrder(id);
+            return ResponseEntity.ok("Cập nhật thành công");
+        }catch (Exception e){
+            return ResponseEntity.badRequest().body("Cập nhật không thành công:" + e.getMessage());
+        }
     }
 }

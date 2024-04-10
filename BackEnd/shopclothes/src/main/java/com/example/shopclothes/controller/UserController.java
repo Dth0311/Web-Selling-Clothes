@@ -12,6 +12,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.crypto.SecretKey;
+import java.util.List;
 
 @RestController
 @RequestMapping("${api.prefix}/user")
@@ -31,11 +32,47 @@ public class UserController {
         }
     }
 
+    @GetMapping("/employee")
+    public ResponseEntity<?> getListEmployee(){
+        List<User> users = null;
+        try {
+            users = userService.getListEmployee();
+            return ResponseEntity.ok(users);
+        } catch (DataNotFoundException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
     @PutMapping("/update")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<?> updateProfile(@RequestBody UserDTO userDTO){
         User user = null;
         try {
             user = userService.updateUser(userDTO);
+            return ResponseEntity.ok(UserDTO.fromUser(user));
+        } catch (DataNotFoundException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+    @PutMapping("/updateRole")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    public ResponseEntity<?> updateRole(@RequestParam String username){
+        User user = null;
+        try {
+            user = userService.updateUserRole(username);
+            return ResponseEntity.ok(UserDTO.fromUser(user));
+        } catch (DataNotFoundException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+    @PutMapping("/enable")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    public ResponseEntity<?> enableEmployee(@RequestParam String username){
+        User user = null;
+        try {
+            user = userService.enableUser(username);
             return ResponseEntity.ok(UserDTO.fromUser(user));
         } catch (DataNotFoundException e) {
             return ResponseEntity.badRequest().body(e.getMessage());

@@ -91,4 +91,8 @@ export class ProductService {
     return this.http.get(PRODUCT_API + '/quantity',httpOptions);
   }
 
+  getQuantity(productId: number,sizeId: number):Observable<any>{
+    return this.http.get(PRODUCT_API + '/numPorduct?productId=' + productId + '&sizeId=' + sizeId,httpOptions);
+  }
+
 }

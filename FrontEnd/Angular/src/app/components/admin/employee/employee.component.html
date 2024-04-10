@@ -1,0 +1,51 @@
+<main class="app-content">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="tile">
+          <div class="tile-body">
+            <button
+            pButton
+            pRipple
+            label="Danh sách nhân viên"
+            icon="pi pi-plus"
+            class="p-button-success mr-2 button-action-insert"
+          ></button>
+            <div class="search-employee">
+                <label for="">Username: </label>
+                <input type="text" [(ngModel)]="employeeName">
+                <button (click)="updateEmployee(employeeName)">Phân quyền</button>
+            </div>
+            <table
+              class="table table-hover table-bordered table-data"
+              id="sampleTable"
+            >
+              <thead>
+                <tr>
+                  <th>Họ tên</th>
+                  <th>Chức vụ</th>
+                  <th>Địa chỉ</th>
+                  <th>Số điện thoại</th>
+                  <th>Email</th>
+                  <th>Tình trạng</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let employee of listEmployee">
+                  <td>{{employee.lastName}} {{employee.firstName}}</td>
+                  <td>Nhân viên bán hàng</td>
+                  <td>{{employee.address}}</td>
+                  <td>{{employee.phone}}</td>
+                  <td>{{employee.email}}</td>
+                  <td>
+                      <button *ngIf="employee.enable" (click)="enableEmployee(employee.username)" pButton type="button" label="Đang hoạt động" class="btn btn-success"></button>
+                      <button *ngIf="!employee.enable" (click)="enableEmployee(employee.username)" pButton type="button" label="Khóa tài khoản" class="btn btn-danger"></button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+  

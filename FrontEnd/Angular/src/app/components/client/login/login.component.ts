@@ -54,11 +54,21 @@ export class LoginComponent {
           this.userService.getUserByUsername(this.userName).subscribe({
             next: res =>{
               this.tokenService.saveUser(res);
-              alert("Đăng nhập thành công")
               if(res.role.name == "ROLE_ADMIN"){
+                alert("Đăng nhập thành công")
                 this.router.navigate(['/admin']);
               }
+              else if(res.role.name == "ROLE_EMPLOYEE"){
+                if(res.enable == false){
+                  alert("Tài khoản đã bị khóa")
+                  this.router.navigate(['/login']);
+                }else{
+                  alert("Đăng nhập thành công")
+                  this.router.navigate(['/employee']);
+                }
+              }
               else{
+                alert("Đăng nhập thành công")
                 this.router.navigate(['']);
               }
             },error: err=>{

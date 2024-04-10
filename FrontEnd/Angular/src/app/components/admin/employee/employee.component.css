@@ -1,0 +1,37 @@
+table{
+    box-shadow: 1px 1px 2px 1px rgb(188, 185, 185);
+}
+
+.search-employee{
+    display: inline-block;
+    border: 1px solid gray;
+    padding: 6px;
+    border-radius: 5px;
+    float: right;
+    margin-right: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.search-employee label,input,button{
+    margin-top: 4px;
+}
+
+.search-employee input{
+    margin-right: 4px;
+    padding: 2px;
+    flex: 1;
+}
+
+.search-employee button{
+    padding: 5px 10px;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    cursor: pointer; 
+}
+
+.search-employee button:hover {
+    background-color: #0056b3; 
+}

@@ -52,6 +52,8 @@ import {CarouselModule} from 'primeng/carousel';
 import { SwiperModule } from 'swiper/types/shared';
 import { BannerAdminComponent } from './components/admin/banner-admin/banner-admin.component';
 import { RevenueComponent } from './components/admin/revenue/revenue.component';
+import { DashboardEmpComponent } from './components/client/dashboard-emp/dashboard-emp.component';
+import { EmployeeComponent } from './components/admin/employee/employee.component';
 
 library.add(faBell);
 
@@ -74,6 +76,19 @@ export const routes: Routes = [
     {path:'register',component: RegisterComponent},
 
     { path:'admin',component: DashboardComponent,canActivate: [RoleGuard],data: {expectedRole: "ROLE_ADMIN"},
+    children:[
+        { path:'category',component: CategoryComponent},
+        { path:'product',component: ProductComponent},
+        { path:'order',component: OrderAdminComponent},
+        { path:'tag',component: TagComponent},
+        { path:'blog',component: BlogAdminComponent},
+        { path:'warehouse',component: WarehouseComponent},
+        { path:'banner',component: BannerAdminComponent},
+        { path:'revenue',component: RevenueComponent},
+        { path:'employeeMn',component: EmployeeComponent},
+      ]
+    },
+    { path:'employee',component: DashboardEmpComponent,canActivate: [RoleGuard],data: {expectedRole: "ROLE_EMPLOYEE"},
     children:[
         { path:'category',component: CategoryComponent},
         { path:'product',component: ProductComponent},
@@ -109,7 +124,9 @@ export const routes: Routes = [
         BlogAdminComponent,
         WarehouseComponent,
         BannerAdminComponent,
-        RevenueComponent
+        RevenueComponent,
+        DashboardEmpComponent,
+        EmployeeComponent
     ],
     imports: [
         HttpClientModule,

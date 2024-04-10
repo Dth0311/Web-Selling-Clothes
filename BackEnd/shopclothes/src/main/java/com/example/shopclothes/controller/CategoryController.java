@@ -42,7 +42,7 @@ public class CategoryController {
     }
 
     @PutMapping("/enable/{id}")
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_EMPLOYEE')")
     public ResponseEntity<?> enableById(@PathVariable int id){
         categoryService.enableCategory(id);
         return ResponseEntity.ok("Cập nhật thành công");

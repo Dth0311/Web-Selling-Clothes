@@ -20,10 +20,25 @@ export class UserService {
     return this.http.get(USER_API,{params: params})
   }
 
+  getEmployee():Observable<any>{
+    return this.http.get(USER_API + '/employee',httpOptions)
+  }
+
   
   getUserByUsername(username: string):Observable<any>{
     return this.http.get(USER_API + "?username=" + username,httpOptions)
   }
+
+  updateRole(username: string):Observable<any>{
+    let params = new HttpParams();
+    params = params.append('username',username);
+    return this.http.put(USER_API + '/updateRole?username=' + username,httpOptions)
+  }
+
+  enableUser(username: string):Observable<any>{
+    return this.http.put(USER_API + '/enable?username=' + username,httpOptions)
+  }
+
 
 
   updateProfile(userName: string,firstName: string,lastName:string,email:string,country:string,state:string,address: string,phone: string):Observable<any>{

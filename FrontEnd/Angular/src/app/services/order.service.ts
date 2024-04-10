@@ -38,4 +38,8 @@ export class OrderService {
   placeOrder(firstName: string,lastName:string,country:string,address: string,town: string,state:string,postCode: string,phone:string,email:string,note:string,orderDetailDTOS: OrderDetail[],username: string):Observable<any>{
     return this.http.post(ORDER_API +'/create',{firstName,lastName,country,address,town,state,postCode,phone,email,note,orderDetailDTOS,username},httpOptions);
   }
+
+  enableOrder(id: number){
+    return this.http.put(ORDER_API + '/'+ id,httpOptions);
+  }
 }

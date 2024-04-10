@@ -106,6 +106,12 @@
         <span>Quản lý doanh thu</span></a
       >
     </li>
+    <li class="nav-item">
+      <a class="nav-link" routerLink="/admin/employeeMn">
+        <fa-icon [icon]="bookmark"></fa-icon>
+        <span>Quản lý nhân viên</span></a
+      >
+    </li>
     <hr class="sidebar-divider d-none d-md-block" />
   </ul>
   <div id="content-wrapper" class="d-flex flex-column">
@@ -177,68 +183,13 @@
               </form>
             </div>
           </li>
-          <!-- Nav Item - Alerts -->
-          <li class="nav-item dropdown no-arrow mx-1">
-            <a
-              class="nav-link dropdown-toggle"
-              href="#"
-              id="alertsDropdown"
-              role="button"
-              data-toggle="dropdown"
-              aria-haspopup="true"
-              aria-expanded="false"
-            >
-              <fa-icon [icon]="bell"></fa-icon>
-              <!-- Counter - Alerts -->
-              <span class="badge badge-danger badge-counter">3+</span>
-            </a>
-          </li>
-          <!-- Nav Item - Messages -->
-          <li class="nav-item dropdown no-arrow mx-1">
-            <a
-              class="nav-link dropdown-toggle"
-              href="#"
-              id="messagesDropdown"
-              role="button"
-              data-toggle="dropdown"
-              aria-haspopup="true"
-              aria-expanded="false"
-            >
-              <fa-icon [icon]="evelope"></fa-icon>
-              <!-- Counter - Messages -->
-              <span class="badge badge-danger badge-counter">7</span>
-            </a>
-          </li>
           <div class="topbar-divider d-none d-sm-block"></div>
           <!-- Nav Item - User Information -->
-          <li class="nav-item dropdown no-arrow" ngbDropdown>
-            <a class="nav-link dropdown-toggle" role="button" ngbDropdownToggle>
-              <span class="mr-2 d-none d-lg-inline text-gray-600 small"
-                >Admin</span
-              >
-              <img
-                class="img-profile rounded-circle"
-                src="assets/image/author.jpg"
-              />
-            </a>
-            <div
-              class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
-              ngbDropdownMenu
-            >
-              <a class="dropdown-item" ngbDropdownItem>
-                <fa-icon [icon]="userIcon"></fa-icon>
-                Profile
-              </a>
-              <a class="dropdown-item" ngbDropdownItem>
-                <fa-icon [icon]="gear"></fa-icon>
-                Settings
-              </a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item" ngbDropdownItem (click)="logout()">
-                <fa-icon [icon]="logoutIcon"></fa-icon>
-                Logout
-              </a>
-            </div>
+          <li class="nav-item dropdown no-arrow" style="margin-right: 5px;">
+            <button (click)="logout()"  class="nav-link" style="color: #000;">
+              <fa-icon [icon]="logoutIcon"></fa-icon>
+             Logout
+            </button>
           </li>
         </ul>
       </nav>

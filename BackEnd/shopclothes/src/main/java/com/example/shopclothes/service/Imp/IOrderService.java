@@ -18,4 +18,6 @@ public interface IOrderService {
     List<Order> getOrderByUserName(String userName) throws DataNotFoundException;
 
     Map<String,Long> getRevenueByDate(String startDate, String endDate);
+
+    void enableOrder(int id) throws DataNotFoundException;
 }

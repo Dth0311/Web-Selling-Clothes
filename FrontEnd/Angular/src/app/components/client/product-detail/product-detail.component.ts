@@ -28,6 +28,7 @@ export class ProductDetailComponent implements OnInit,PipeTransform {
   isClicked1: boolean = false;
   isClicked2: boolean = false;
   isClicked3: boolean = false;
+  quantityProduct:number = 0;
   constructor(
     private router: Router, 
     private productService: ProductService,
@@ -45,6 +46,7 @@ export class ProductDetailComponent implements OnInit,PipeTransform {
   ngOnInit(): void {
     this.id = this.route.snapshot.params['id'];
     this.getProduct();
+    this.getQuantity();
   }
 
   getProduct(){
@@ -53,6 +55,16 @@ export class ProductDetailComponent implements OnInit,PipeTransform {
         this.product = res;
         console.log(this.product);
         this.getListRelatedProduct();
+      },error: err=>{
+        console.log(err);
+      }
+    })
+  }
+
+  getQuantity(){
+    this.productService.getQuantity(this.id,this.sizeId).subscribe({
+      next: res =>{
+        this.quantityProduct = res;
       },error: err=>{
         console.log(err);
       }
@@ -109,6 +121,7 @@ export class ProductDetailComponent implements OnInit,PipeTransform {
       this.isClicked2 = false;
       this.isClicked3 = false;
       this.isClicked1 = false;
+      this.getQuantity();
       this.ngOnInit();
     }
     if(sizeId == 2){
@@ -116,6 +129,7 @@ export class ProductDetailComponent implements OnInit,PipeTransform {
       this.isClicked2 = false;
       this.isClicked3 = false;
       this.isClicked0 = false;
+      this.getQuantity();
       this.ngOnInit();
     }
     if(sizeId == 3){
@@ -123,6 +137,7 @@ export class ProductDetailComponent implements OnInit,PipeTransform {
       this.isClicked1 = false;
       this.isClicked3 = false;
       this.isClicked0 = false;
+      this.getQuantity();
       this.ngOnInit();
     }
     if(sizeId == 4){
@@ -130,6 +145,7 @@ export class ProductDetailComponent implements OnInit,PipeTransform {
       this.isClicked2 = false;
       this.isClicked1 = false;
       this.isClicked0 = false;
+      this.getQuantity();
       this.ngOnInit();
     }
   }

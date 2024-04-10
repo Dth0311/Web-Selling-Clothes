@@ -13,9 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 @Service
 public class UserService implements IUserService {
@@ -53,5 +51,41 @@ public class UserService implements IUserService {
         user.setPhone(userDTO.getPhone());
         userRepository.save(user);
         return user;
+    }
+
+    @Override
+    public User enableUser(String username) throws DataNotFoundException {
+        User user = userRepository.findByUserName(username);
+        if(user.isEnable()){
+            user.setEnable(false);
+        }else {
+            user.setEnable(true);
+        }
+        userRepository.save(user);
+        return user;
+    }
+
+    @Override
+    public User updateUserRole(String username) throws DataNotFoundException {
+        User user = userRepository.findByUserName(username);
+        if(user == null){
+            throw new DataNotFoundException("Không tìm thấy username: " + username);
+        }
+        Role role = roleRepository.findByName(ERole.ROLE_EMPLOYEE).orElseThrow(()->new DataNotFoundException("Không tìm thấy role"));
+        user.setRole(role);
+        userRepository.save(user);
+        return user;
+    }
+
+    @Override
+    public List<User> getListEmployee() throws DataNotFoundException {
+        List<User> users = userRepository.findAll();
+        List<User> employees = new ArrayList<>();
+        for (var item:users) {
+            if(item.getRole().getId() == 3){
+                employees.add(item);
+            }
+        }
+        return employees;
     }
 }

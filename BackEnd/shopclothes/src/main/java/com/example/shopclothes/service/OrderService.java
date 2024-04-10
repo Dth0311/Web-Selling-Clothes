@@ -89,4 +89,16 @@ public class OrderService implements IOrderService {
     public Map<String, Long> getRevenueByDate(String startDate,String endDate) {
         return orderRepository.getRevenueByDateRange(startDate, endDate);
     }
+
+    @Override
+    public void enableOrder(int id) throws DataNotFoundException {
+        Order order = orderRepository.findById(id).orElseThrow(()-> new DataNotFoundException("Không tìm thấy order id"));
+        if(order.isEnable()){
+            order.setEnable(false);
+        }
+        else {
+            order.setEnable(true);
+        }
+        orderRepository.save(order);
+    }
 }
