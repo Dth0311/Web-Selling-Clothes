@@ -23,7 +23,7 @@ public interface IProductService {
 
     List<Product> getListByPriceRange(int id,int min, int max);
 
-    List<Product> searchProduct(String keyword);
+    Page<Product> searchProduct(String keyword,PageRequest pageRequest);
 
     Product getProduct(int id) throws DataNotFoundException;
 

@@ -10,6 +10,7 @@ import { TokenService } from '../../../services/token.service';
 export class OrderComponent implements OnInit {
   listOrder:any;
   username: any;
+  enable:boolean = true;
   constructor(
     private orderService: OrderService,
     private tokenService: TokenService
@@ -24,6 +25,7 @@ export class OrderComponent implements OnInit {
     this.orderService.getListOrderByUser(this.username).subscribe({
       next: res=>{
         this.listOrder = res;
+        this.enable = res.enable;
         console.log(this.listOrder);
       },error: err =>{
         console.log(err);

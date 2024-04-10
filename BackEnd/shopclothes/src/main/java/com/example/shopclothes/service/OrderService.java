@@ -54,6 +54,7 @@ public class OrderService implements IOrderService {
         order.setPhone(orderDTO.getPhone());
         order.setNote(orderDTO.getNote());
         order.setCreateAt(currentTime);
+        order.setEnable(false);
         orderRepository.save(order);
         long sum = 0;
         for(var item: orderDTO.getOrderDetailDTOS()){

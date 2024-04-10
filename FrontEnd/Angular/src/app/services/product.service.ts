@@ -34,9 +34,12 @@ export class ProductService {
     return this.http.get(PRODUCT_API + '/category/' + id,httpOptions);
   }
 
-  searchProduct(keyword: string):Observable<any>{
+  searchProduct(keyword: string,page: number,limit:number,sort:string):Observable<any>{
     let params = new HttpParams();
-    params =params.append('keyword',keyword)
+    params =params.append('keyword',keyword);
+    params = params.append('page',page);
+    params = params.append('limit',limit);
+    params = params.append('sort',sort);
     return this.http.get(PRODUCT_API + '/search',{params: params});
   }
 

@@ -1,0 +1,30 @@
+.sort-bar{
+    align-items: center;
+    background: rgba(0,0,0,.03);
+    border-radius: 2px;
+    display: flex;
+    font-weight: 400;
+    justify-content: space-between;
+    padding: 0.8125rem 1.25rem;
+    margin-bottom: 20px;
+}
+.sort-by-options{
+    align-items: stretch;
+    display: flex;
+    flex: 1;
+    gap: 0.625rem;
+    justify-content: flex-start;
+}
+
+.sort-by-options section{
+    display: flex;
+    gap: 0.625rem;
+    margin-left: 0.625rem
+}
+
+
+
+.red-button {
+    background-color: rgb(238, 77, 45);
+    color: white;
+}

@@ -5,6 +5,7 @@ import com.example.shopclothes.entity.Product;
 import com.example.shopclothes.entity.ProductSize;
 import com.example.shopclothes.repository.ProductSizeRepository;
 import com.example.shopclothes.response.ProductCategoryResponse;
+import com.example.shopclothes.response.ProductKeywordResponse;
 import com.example.shopclothes.response.ProductListResponse;
 import com.example.shopclothes.request.ProductSizeRequest;
 import com.example.shopclothes.service.ProductService;
@@ -181,14 +182,37 @@ public class ProductController {
     }
 
     @GetMapping("/search")
-    public ResponseEntity<?> searchProduct(@RequestParam("keyword") String keyword){
-        List<Product> list = productService.searchProduct(keyword);
-        List<ProductDTO> productDTOList = new ArrayList<>();
-        for (var item:list) {
-            ProductDTO productDTO = ProductDTO.fromProduct(item);
-            productDTOList.add(productDTO);
+    public ResponseEntity<?> searchProduct(
+            @RequestParam("keyword") String keyword,
+            @RequestParam("page")     int page,
+            @RequestParam("limit")    int limit,
+            @RequestParam("sort")    String sort
+    ){
+        PageRequest pageRequest;
+        if(sort.equals("priceHight")){
+            pageRequest = PageRequest.of(
+                    page, limit,
+                    Sort.by("price").ascending());
         }
-        return ResponseEntity.ok(productDTOList);
+        else if(sort.equals("idHight")){
+            pageRequest = PageRequest.of(
+                    page, limit,
+                    Sort.by("id").ascending());
+        }
+        else {
+            pageRequest = PageRequest.of(
+                    page, limit,
+                    Sort.by(sort).descending());
+        }
+        Page<Product> productPage = productService.searchProduct(keyword,pageRequest);
+        int totalPages = productPage.getTotalPages();
+        List<Product> products = productPage.getContent();
+        return ResponseEntity.ok(ProductKeywordResponse
+                .builder()
+                .keyword(keyword)
+                .products(products)
+                .totalPages(totalPages)
+                .build());
     }
 
     @PostMapping("")

@@ -55,6 +55,9 @@ public class Order {
     @Column(name = "created_At")
     private Date createAt;
 
+    @Column(name = "enable")
+    private boolean enable;
+
     @ManyToOne
     @JoinColumn(name="user_id")
     private User user;
