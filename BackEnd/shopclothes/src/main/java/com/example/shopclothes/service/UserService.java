@@ -88,4 +88,16 @@ public class UserService implements IUserService {
         }
         return employees;
     }
+
+    @Override
+    public List<User> getListUser() throws DataNotFoundException {
+        List<User> users = userRepository.findAll();
+        List<User> employees = new ArrayList<>();
+        for (var item:users) {
+            if(item.getRole().getId() == 2){
+                employees.add(item);
+            }
+        }
+        return employees;
+    }
 }

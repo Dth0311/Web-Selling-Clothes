@@ -54,6 +54,7 @@ import { BannerAdminComponent } from './components/admin/banner-admin/banner-adm
 import { RevenueComponent } from './components/admin/revenue/revenue.component';
 import { DashboardEmpComponent } from './components/client/dashboard-emp/dashboard-emp.component';
 import { EmployeeComponent } from './components/admin/employee/employee.component';
+import { AccountUserComponent } from './components/admin/account-user/account-user.component';
 
 library.add(faBell);
 
@@ -86,6 +87,7 @@ export const routes: Routes = [
         { path:'banner',component: BannerAdminComponent},
         { path:'revenue',component: RevenueComponent},
         { path:'employeeMn',component: EmployeeComponent},
+        { path:'account',component: AccountUserComponent},
       ]
     },
     { path:'employee',component: DashboardEmpComponent,canActivate: [RoleGuard],data: {expectedRole: "ROLE_EMPLOYEE"},
@@ -122,7 +124,8 @@ export const routes: Routes = [
         BannerAdminComponent,
         RevenueComponent,
         DashboardEmpComponent,
-        EmployeeComponent
+        EmployeeComponent,
+        AccountUserComponent
     ],
     imports: [
         HttpClientModule,

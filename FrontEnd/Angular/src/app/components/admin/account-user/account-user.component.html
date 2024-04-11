@@ -1,0 +1,51 @@
+<main class="app-content">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="tile">
+          <div class="tile-body">
+            <button
+            pButton
+            pRipple
+            label="Danh sách tài khoản Người dùng"
+            icon="pi pi-plus"
+            class="p-button-success mr-2 button-action-insert"
+            style="margin-bottom: 10px;"
+          ></button>
+            <table
+              class="table table-hover table-bordered table-data"
+              id="sampleTable"
+              style="box-shadow: 1px 1px 5px 1px rgb(188, 185, 185);"
+            >
+              <thead>
+                <tr>
+                  <th>Tài khoản</th>
+                  <th>Họ tên</th>
+                  <th>Thời gian tạo</th>
+                  <th>Địa chỉ</th>
+                  <th>Số điện thoại</th>
+                  <th>Email</th>
+                  <th>Trạng thái</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let user of listAccount">
+                  <td>{{user.username}}</td>
+                  <td>{{user.lastName}} {{user.firstName}}</td>
+                  <td>{{user.createAt | date:'dd/MM/yyyy HH:mm:ss'}}</td>
+                  <td>{{user.address}}</td>
+                  <td>{{user.phone}}</td>
+                  <td>{{user.email}}</td>
+                  <td>
+                      <button *ngIf="user.enable" (click)="enableEmployee(user.username)" pButton type="button" label="Đang hoạt động" class="btn btn-success"></button>
+                      <button *ngIf="!user.enable" (click)="enableEmployee(user.username)" pButton type="button" label="Khóa tài khoản" class="btn btn-danger"></button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+  
+

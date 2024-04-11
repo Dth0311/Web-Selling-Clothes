@@ -32,6 +32,17 @@ public class UserController {
         }
     }
 
+    @GetMapping("/listUser")
+    public ResponseEntity<?> getListUser(){
+        List<User> users = null;
+        try {
+            users = userService.getListUser();
+            return ResponseEntity.ok(users);
+        } catch (DataNotFoundException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
     @GetMapping("/employee")
     public ResponseEntity<?> getListEmployee(){
         List<User> users = null;
@@ -44,7 +55,6 @@ public class UserController {
     }
 
     @PutMapping("/update")
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<?> updateProfile(@RequestBody UserDTO userDTO){
         User user = null;
         try {
@@ -66,7 +76,6 @@ public class UserController {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
-
     @PutMapping("/enable")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<?> enableEmployee(@RequestParam String username){

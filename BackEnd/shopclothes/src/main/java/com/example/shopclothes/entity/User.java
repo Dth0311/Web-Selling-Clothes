@@ -53,6 +53,9 @@ public class User implements UserDetails {
     @Column(name="enable")
     private boolean enable;
 
+    @Column(name = "created_At")
+    private Date createAt;
+
     @ManyToOne
     @JoinColumn(name = "role_id")
     private Role role;

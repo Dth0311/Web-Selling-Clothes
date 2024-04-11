@@ -18,4 +18,5 @@ public interface IUserService {
     User updateUserRole(String username) throws DataNotFoundException;
 
     List<User> getListEmployee() throws DataNotFoundException;
+    List<User> getListUser() throws DataNotFoundException;
 }

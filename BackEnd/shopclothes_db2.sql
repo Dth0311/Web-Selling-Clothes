@@ -26,9 +26,11 @@ CREATE TABLE user (
     phone VARCHAR(255),
     enable BOOLEAN,
     verification_code VARCHAR(64),
+	created_At DATETIME default current_timestamp,
     role_id int,
      FOREIGN KEY (role_id) REFERENCES role(id)
 );
+
 
 CREATE TABLE orders (
     id int PRIMARY KEY AUTO_INCREMENT,

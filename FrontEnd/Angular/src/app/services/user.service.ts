@@ -24,6 +24,10 @@ export class UserService {
     return this.http.get(USER_API + '/employee',httpOptions)
   }
 
+  getAccountUser():Observable<any>{
+    return this.http.get(USER_API + '/listUser',httpOptions)
+  }
+
   
   getUserByUsername(username: string):Observable<any>{
     return this.http.get(USER_API + "?username=" + username,httpOptions)

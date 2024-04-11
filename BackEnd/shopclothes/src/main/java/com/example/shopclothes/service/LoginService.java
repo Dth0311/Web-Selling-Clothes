@@ -71,13 +71,15 @@ public class LoginService implements ILoginService {
     public boolean addUser(UserRequest userRequest) {
         try {
         User user = new User();
+        Date currentTime = new Date();
         user.setUsername(userRequest.getUserName());
         user.setEmail(userRequest.getEmail());
         user.setPassword(passwordEncoder.encode(userRequest.getPassword()));
         user.setEnable(true);
         Role role = roleRepository.findByName(ERole.ROLE_USER).orElseThrow(() -> new DataNotFoundException("Không có role"));
         user.setRole(role);
-            userRepository.save(user);
+        user.setCreateAt(currentTime);
+        userRepository.save(user);
             return true;
         } catch (Exception ex) {
             return false;

@@ -21,16 +21,18 @@
             >
               <thead>
                 <tr>
+                  <th>Tài khoản</th>
                   <th>Họ tên</th>
                   <th>Chức vụ</th>
                   <th>Địa chỉ</th>
                   <th>Số điện thoại</th>
                   <th>Email</th>
-                  <th>Tình trạng</th>
+                  <th>Trạng thái</th>
                 </tr>
               </thead>
               <tbody>
                 <tr *ngFor="let employee of listEmployee">
+                  <td>{{employee.username}}</td>
                   <td>{{employee.lastName}} {{employee.firstName}}</td>
                   <td>Nhân viên bán hàng</td>
                   <td>{{employee.address}}</td>
