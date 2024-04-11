@@ -7,57 +7,29 @@
       <!-- Sidebar - Brand -->
       <a
         class="sidebar-brand d-flex align-items-center justify-content-center"
-        routerLink="/admin"
+        routerLink="/employee"
       >
         <div class="sidebar-brand-icon rotate-n-15">
           <fa-icon [icon]="faceLaugh"></fa-icon>
         </div>
-        <div class="sidebar-brand-text mx-3">Dash Board Employee</div>
+        <div class="sidebar-brand-text mx-3">Employee dashboard</div>
       </a>
       <!-- Divider -->
       <hr class="sidebar-divider my-0" />
       <!-- Nav Item - Dashboard -->
       <li class="nav-item active">
-        <a class="nav-link" routerLink="/admin">
+        <a class="nav-link" routerLink="/employee">
           <fa-icon [icon]="tachometer"></fa-icon>
           <span>Dashboard</span></a
         >
       </li>
       <!-- Divider -->
       <hr class="sidebar-divider" />
-      <!-- Nav Item - Pages Collapse Menu -->
-      <li class="nav-item">
-        <a
-          class="nav-link collapsed"
-          routerLink="/admin/banner"
-          data-toggle="collapse"
-          data-target="#collapseTwo"
-          aria-expanded="true"
-          aria-controls="collapseTwo"
-        >
-          <fa-icon [icon]="bookmark"></fa-icon>
-          <span>Quản lý banner</span>
-        </a>
-      </li>
-  
-      <li class="nav-item">
-        <a
-          class="nav-link collapsed"
-          routerLink="/admin/category"
-          data-toggle="collapse"
-          data-target="#collapseTwo"
-          aria-expanded="true"
-          aria-controls="collapseTwo"
-        >
-          <fa-icon [icon]="bookmark"></fa-icon>
-          <span>Quản lý danh mục</span>
-        </a>
-      </li>
       <!-- Nav Item - Utilities Collapse Menu -->
       <li class="nav-item">
         <a
           class="nav-link collapsed"
-          routerLink="/admin/product"
+          routerLink="/employee/product"
           data-toggle="collapse"
           data-target="#collapseUtilities"
           aria-expanded="true"
@@ -71,7 +43,7 @@
       <li class="nav-item">
         <a
           class="nav-link collapsed"
-          routerLink="/admin/order"
+          routerLink="/employee/order"
           data-toggle="collapse"
           data-target="#collapsePages"
           aria-expanded="true"
@@ -81,27 +53,14 @@
           <span>Danh sách order</span>
         </a>
       </li>
-      <!-- Nav Item - Charts -->
       <li class="nav-item">
-        <a class="nav-link" routerLink="/admin/tag">
-          <fa-icon [icon]="bookmark"></fa-icon>
-          <span>Quản lý tag</span></a
-        >
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/admin/blog">
-          <fa-icon [icon]="bookmark"></fa-icon>
-          <span>Quản lý blog</span></a
-        >
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/admin/warehouse">
+        <a class="nav-link" routerLink="/employee/warehouse">
           <fa-icon [icon]="bookmark"></fa-icon>
           <span>Quản lý tồn kho</span></a
         >
       </li>
       <li class="nav-item">
-        <a class="nav-link" routerLink="/admin/revenue">
+        <a class="nav-link" routerLink="/employee/revenue">
           <fa-icon [icon]="bookmark"></fa-icon>
           <span>Quản lý doanh thu</span></a
         >

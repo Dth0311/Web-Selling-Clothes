@@ -27,37 +27,40 @@
           >
             <thead>
               <tr>
-                <th>Name</th>
-                <th>Image</th>
-                <th>Price</th>
+                <th>Tên sản phẩm</th>
+                <th>Hình ảnh</th>
+                <th>Giá bán</th>
                 <th>Size</th>
-                <th>Quantity</th>
-                <th>Action</th>
+                <th>Số lượng</th>
+                <th>Thao tác</th>
               </tr>
             </thead>
             <tbody>
-              <ng-container *ngFor="let item of listQuantity; let i = index">
-                <ng-container *ngIf="item.product">
-                    <tr>
-                      <td *ngIf="i === 0 || listQuantity[i - 1].product.name !== item.product.name" [attr.rowspan]="countProducts(item.product.id)">{{item.product.name}}</td>
-                      <td *ngIf="i === 0 || listQuantity[i - 1].product.name !== item.product.name" [attr.rowspan]="countProducts(item.product.id)">
-                        <img
-                          src="http://localhost:8088/api/v1/image/{{item.product.images[0].id}}"
-                          alt=""
-                          width="70px"
-                        />
-                      </td>
-                      <td *ngIf="i === 0 || listQuantity[i - 1].product.name !== item.product.name" [attr.rowspan]="countProducts(item.product.id)">{{item.product.price | currency:'VND':'symbol':'1.0-0'}}</td>            
-                        <td>{{item.size.name}}</td>
-                        <td>{{item.quantity}}</td>
-                        <td>
-                          <button
-                            type="button"
-                            class="button-action-update p-button-rounded p-button-primary fa fa-pen"
-                            (click)="openUpdate(item.product.id, item.size.id)"
-                          ></button>
+              <ng-container *ngFor="let product of listProduct">
+                <ng-container *ngFor="let item of listQuantity; let i = index">
+                  <ng-container *ngIf="item.product">
+                      <tr *ngIf="item.product.id === product.id">
+                        <td *ngIf="(i === 0 || listQuantity[i - 1].product.name !== item.product.name) && item.product.id === product.id" [attr.rowspan]="countProducts(item.product.id)">{{item.product.name}}</td>
+                        <td *ngIf="(i === 0 || listQuantity[i - 1].product.name !== item.product.name) && item.product.id === product.id" [attr.rowspan]="countProducts(item.product.id)">
+                          <img *ngIf="item.product.id === product.id"
+                            src="http://localhost:8088/api/v1/image/{{item.product.images[0].id}}"
+                            alt=""
+                            width="70px"
+                          />
                         </td>
-                    </tr>                    
+                        <td *ngIf="(i === 0 || listQuantity[i - 1].product.name !== item.product.name) && item.product.id == product.id" [attr.rowspan]="countProducts(item.product.id)">{{item.product.price | currency:'VND':'symbol':'1.0-0'}}</td>            
+                          <td *ngIf="item.product.id === product.id">{{item.size.name}}</td>
+                          <td *ngIf="item.product.id === product.id">{{item.quantity}}</td>
+                          <td>
+                            <button
+                            *ngIf="item.product.id === product.id"
+                              type="button"
+                              class="button-action-update p-button-rounded p-button-primary fa fa-pen"
+                              (click)="openUpdate(item.product.id, item.size.id)"
+                            ></button>
+                          </td>
+                      </tr>                    
+                  </ng-container>
                 </ng-container>
               </ng-container>
             </tbody>

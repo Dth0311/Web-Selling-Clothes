@@ -90,13 +90,9 @@ export const routes: Routes = [
     },
     { path:'employee',component: DashboardEmpComponent,canActivate: [RoleGuard],data: {expectedRole: "ROLE_EMPLOYEE"},
     children:[
-        { path:'category',component: CategoryComponent},
         { path:'product',component: ProductComponent},
         { path:'order',component: OrderAdminComponent},
-        { path:'tag',component: TagComponent},
-        { path:'blog',component: BlogAdminComponent},
         { path:'warehouse',component: WarehouseComponent},
-        { path:'banner',component: BannerAdminComponent},
         { path:'revenue',component: RevenueComponent},
       ]
     },

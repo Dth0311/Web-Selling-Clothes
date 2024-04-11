@@ -32,11 +32,22 @@ export class RevenueComponent implements OnInit {
   }
 
   getRevenue() {
-    this.orderService.getRevenue(this.startDate, this.endDate)
-      .subscribe(data => {
-        console.log(data);
-        this.revenue = data.revenue;
-        this.countOrder = data.countId;
+    this.orderService.getRevenue(this.startDate, this.endDate).subscribe({
+        next:res => {
+          console.log(res);
+          if(res.revenue == null){
+            this.revenue = 0;
+            this.countOrder = 0;
+          }
+          else{
+            this.revenue = res.revenue;
+            this.countOrder = res.countId;
+          }
+        },error:err => {
+          this.revenue = 0;
+          this.countOrder = 0;
+          console.log(err);
+        }
       });
   }
 

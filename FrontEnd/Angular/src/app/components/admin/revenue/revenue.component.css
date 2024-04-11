@@ -1,6 +1,5 @@
 .revenue-order {
     display: flex;
-    /* Đặt khoảng cách giữa các phần tử là không gian đều nhau */
     margin-bottom: 50px;
 }
 .revenue-box{
@@ -44,27 +43,27 @@
 }
 
 .filter-container {
-    text-align: center; /* Căn giữa nội dung */
-    margin-bottom: 20px; /* Khoảng cách dưới phần tử */
+    text-align: center; 
+    margin-bottom: 20px; 
 }
 
 .filter-container label {
-    margin-right: 10px; /* Khoảng cách phía bên phải giữa các nhãn và input */
+    margin-right: 10px;
 }
 
 .filter-container input {
-    margin-right: 10px; /* Khoảng cách phía bên phải giữa các input */
+    margin-right: 10px;
 }
 
 .filter-container button {
-    padding: 5px 10px; /* Điều chỉnh độ lớn của nút */
-    border: none; /* Loại bỏ đường viền */
-    background-color: #b81f1f; /* Màu nền */
-    color: #fff; /* Màu chữ */
+    padding: 5px 10px; 
+    border: none; 
+    background-color: #b81f1f; 
+    color: #fff; 
     cursor: pointer; 
-    border-radius: 5px;/* Biểu tượng chuột khi rê chuột vào */
+    border-radius: 5px;
 }
 
 .filter-container button:hover {
-    background-color: #de3737; /* Màu nền khi rê chuột vào */
+    background-color: #de3737; 
 }
