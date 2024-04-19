@@ -9,8 +9,8 @@ import { OrderService } from '../../../services/order.service';
 export class RevenueComponent implements OnInit {
   listOrderDetail:any;
 
-  startDate: string = "";
-  endDate: string = "";
+  startDate: string = "17/04/2024";
+  endDate: string = "18/04/2024";
   revenue: number = 0;
   countOrder:number = 0;
   constructor(

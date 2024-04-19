@@ -5,7 +5,7 @@
       <div class="tile">
         <div class="tile-body">
           <div class="row element-button" style="margin-bottom: 20px">
-            <div class="col-sm-2">
+            <div class="col-sm-12">
               <button
                 pButton
                 pRipple
@@ -14,7 +14,25 @@
                 class="p-button-success mr-2 button-action-insert"
                 (click)="openNew()"
               ></button>
+              <div class="search-product-admin">
+                <form action="#">
+                  <input
+                    type="text"
+                    placeholder="What do you need?"
+                    [(ngModel)]="keyword"
+                    name="keyword"
+                  />
+                  <button
+                    href="javascript:void(0)"
+                    class="product-search-btn"
+                    (click)="getListProductSearch(keyword,currentPage,totalPages)"
+                  >
+                    SEARCH
+                  </button>
+                </form>
+              </div>
             </div>
+           
           </div>
           <table
             class="table table-hover table-bordered table-data"
@@ -165,6 +183,7 @@
                       src="http://localhost:8088/api/v1/image/+{{ image }}"
                       alt=""
                       class="w-full h-full"
+                      style="margin-bottom: 10px;"
                     />
                   </div>
                 </div>

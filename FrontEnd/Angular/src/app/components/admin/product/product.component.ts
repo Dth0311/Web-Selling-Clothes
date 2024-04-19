@@ -42,6 +42,9 @@ export class ProductComponent implements OnInit {
     imageIds: []
   };
 
+  keyword:any = "";
+  sort:string = "idHight";
+
   constructor(
     private messageService: MessageService,
     private productService: ProductService,
@@ -52,7 +55,6 @@ export class ProductComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // this.getListProduct();
     this.getListProductByLimit(this.currentPage,this.itemsPerPage);
     this.getListCategoryEnabled();
     this.getListImage();
@@ -258,5 +260,18 @@ export class ProductComponent implements OnInit {
       // Nếu đã có, loại bỏ class 'clicked'
       element.classList.remove('clicked');
     }
+}
+
+
+getListProductSearch(keyword:string,page:number,limit: number){
+  this.productService.searchProduct(keyword,page,limit,this.sort).subscribe({
+    next:res =>{
+      this.listProduct =res.products;
+      this.totalPages = res.totalPages;
+      this.visiblePages = this.generateVisiblePageArray(this.currentPage,this.totalPages);
+    },error: err =>{
+      console.log(err);
+    }
+  })
 }
 }

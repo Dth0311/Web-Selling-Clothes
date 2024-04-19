@@ -8,7 +8,6 @@ import com.example.shopclothes.repository.OrderDetailRepository;
 import com.example.shopclothes.response.OrderDetailResponse;
 import com.example.shopclothes.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -93,7 +92,6 @@ public class OrderController {
     }
 
     @PostMapping("/create")
-    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_EMPLOYEE')")
     public ResponseEntity<?> placeOrder(@RequestBody OrderDTO orderDTO){
         try {
             orderService.placeOrder(orderDTO);
@@ -101,7 +99,6 @@ public class OrderController {
         } catch (DataNotFoundException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
-
     }
 
     @PutMapping("/{id}")
