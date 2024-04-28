@@ -1,8 +1,6 @@
 package com.example.shopclothes.controller;
 
 import com.example.shopclothes.entity.Banner;
-import com.example.shopclothes.entity.Image;
-import com.example.shopclothes.exception.DataNotFoundException;
 import com.example.shopclothes.repository.BannerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -23,7 +21,7 @@ public class BannerController {
     BannerRepository bannerRepository;
 
     @GetMapping("")
-    public ResponseEntity<?> getList(){
+    public ResponseEntity<List<Banner>> getList(){
         List<Banner> listImage = bannerRepository.findAll();
 
         return  ResponseEntity.ok(listImage);
@@ -48,7 +46,6 @@ public class BannerController {
         try {
             Banner banner = new Banner();
             banner.setImageData(file.getBytes());
-            Banner savedBanner = bannerRepository.save(banner);
             return ResponseEntity.ok(banner);
         } catch (IOException e) {
             return ResponseEntity.badRequest().body(e.getMessage());

@@ -27,7 +27,7 @@ public class OrderController {
     OrderDetailRepository orderDetailRepository;
 
     @GetMapping("")
-    public ResponseEntity<?> getList(){
+    public ResponseEntity<List<Order>> getList(){
         List<Order> list = orderService.getAllListOrder();
         return ResponseEntity.ok(list);
     }
