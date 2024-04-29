@@ -5,6 +5,9 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.*;
+import java.util.stream.Collectors;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -30,4 +33,16 @@ public class Image {
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
+
+    public static List<Image> sortImagesDescending(List<Image> listImage) {
+        // Sử dụng phương thức sort() của Collections và cung cấp một Comparator
+        Collections.sort(listImage, new Comparator<Image>() {
+            @Override
+            public int compare(Image img1, Image img2) {
+                // So sánh ID của hai hình ảnh và trả về kết quả ngược lại
+                return Long.compare(img2.getId(), img1.getId());
+            }
+        });
+        return listImage;
+    }
 }

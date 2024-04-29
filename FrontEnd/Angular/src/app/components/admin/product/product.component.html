@@ -54,7 +54,7 @@
                 <td>
                   <img
                     src="http://localhost:8088/api/v1/image/+ {{
-                      product.images[0].id
+                      getMinImageId(product.images)
                     }}"
                     alt=""
                     width="70px;"
@@ -230,9 +230,9 @@
                     ></button>
                   </div>
                 </div>
-                <div class="grid">
+                <div class="grid" style="max-height: 700px; overflow-y: auto; text-align: center;">
                   <div
-                    class="col-md-12 list-image flex align-items-center"
+                    class="col-md-16 list-image flex align-items-center"
                     style="display: inline"
                     *ngFor="let image of listImage"
                   >
@@ -240,6 +240,7 @@
                       src="http://localhost:8088/api/v1/image/+{{ image.id }}"
                       class="image-upload w-full h-full col-md-4"
                       (click)="selectImage($event, image)"
+                      style="margin-right: 5px;"
                     />
                   </div>
                 </div>

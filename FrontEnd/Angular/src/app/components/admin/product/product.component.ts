@@ -15,7 +15,7 @@ export class ProductComponent implements OnInit {
   listCategory: any;
   listImage: any;
   totalPages:number = 0;
-  itemsPerPage: number = 5;
+  itemsPerPage: number = 6;
   currentPage: number = 0;
   visiblePages: number[] = [];
   
@@ -155,7 +155,7 @@ export class ProductComponent implements OnInit {
   }
 
   getListImage(){
-    this.imageService.getList().subscribe({
+    this.imageService.getListSort().subscribe({
       next:res=>{
         this.listImage =res;
       },error: err=>{
@@ -273,5 +273,12 @@ getListProductSearch(keyword:string,page:number,limit: number){
       console.log(err);
     }
   })
+}
+
+getMinImageId(images: any[]): number {
+  if (!images || images.length === 0) {
+      return 0; // Trả về giá trị mặc định nếu mảng rỗng
+  }
+  return Math.min(...images.map(image => image.id));
 }
 }

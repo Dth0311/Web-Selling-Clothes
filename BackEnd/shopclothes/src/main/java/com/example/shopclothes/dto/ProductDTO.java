@@ -9,7 +9,9 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Comparator;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -37,11 +39,6 @@ public class ProductDTO {
                     .map(Image::getId)
                     .collect(Collectors.toSet()));
         }
-//        if(!product.getSizes().isEmpty()){
-//            productDTO.setSizeIds(product.getSizes().stream()
-//                    .map(Size::getId)
-//                    .collect(Collectors.toSet()));
-//        }
         return productDTO;
     }
 }

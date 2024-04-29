@@ -29,8 +29,15 @@ public class ImageController {
     @Autowired
     ImageService imageService;
 
-    @GetMapping("")
+    @GetMapping("/sort")
     public ResponseEntity<?> getList(){
+        List<Image> listImage = Image.sortImagesDescending(imageService.getListImage());
+
+        return  ResponseEntity.ok(listImage);
+    }
+
+    @GetMapping("")
+    public ResponseEntity<?> getListSort(){
         List<Image> listImage = imageService.getListImage();
 
         return  ResponseEntity.ok(listImage);

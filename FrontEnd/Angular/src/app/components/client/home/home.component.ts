@@ -61,6 +61,7 @@ export class HomeComponent implements OnInit {
       next: res =>{
         debugger
         this.listProductNewest = res;
+        console.log(this.listProductNewest);
       },error: err =>{
         debugger
         console.log(err);
@@ -81,6 +82,7 @@ export class HomeComponent implements OnInit {
       next: res =>{
         debugger
         this.listBlogNewest = res;
+
       },error: err =>{
         debugger
         console.log(err);
@@ -100,4 +102,8 @@ export class HomeComponent implements OnInit {
     alert("Add To Cart Successfully!")
     this.cartService.addToCart(item,1);
   }
+
+  getMinImageId(product: any): number {
+    return Math.min(...product.imageIds);
+}
 }

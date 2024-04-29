@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Random;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -26,4 +28,9 @@ public class ProductSize {
 
     @Column(name = "quantity")
     private Integer quantity;
+
+    public static int getRandomQuantity(int minQuantity, int maxQuantity) {
+        Random random = new Random();
+        return random.nextInt(maxQuantity - minQuantity + 1) + minQuantity;
+    }
 }

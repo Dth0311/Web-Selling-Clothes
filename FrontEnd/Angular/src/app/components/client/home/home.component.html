@@ -49,7 +49,7 @@
     <div class="row featured__filter">
       <div class="col-lg-3 col-md-4 col-sm-6" *ngFor="let product of listProductNewest">
         <div class="featured__item">
-          <div class="featured__item__pic set-bg" [ngStyle]="{'background-image':'url(http://localhost:8088/api/v1/image/' +product.imageIds[0] +')'}">
+          <div class="featured__item__pic set-bg" [ngStyle]="{'background-image':'url(http://localhost:8088/api/v1/image/' + getMinImageId(product) +')'}">
             <ul class="featured__item__pic__hover">
               <li>
                 <a href="javascript:void(0)" (click)="addToWishList(product)" class="fa fa-heart"></a>
@@ -120,7 +120,7 @@
             [ngStyle]="{
               'background-image':
                 'url(http://localhost:8088/api/v1/image/' +
-                product.imageIds[0] +
+                getMinImageId(product) +
                 ')'
             }"
           >

@@ -67,7 +67,8 @@ export class WarehouseComponent implements OnInit {
         this.getListProductByLimit(this.currentPage,this.itemsPerPage);
         this.ngOnInit();
       },error: err =>{
-        alert(err.message);
+        alert("Lỗi nhập sai định dạng!");
+        console.log(err.message);
       }
     })  
   }

@@ -18,7 +18,7 @@ export class ShopGridComponent implements OnInit {
   listProductNewest : any[] = [];
   rangeValues = [0,100];
   totalPages:number = 0;
-  itemsPerPage: number = 5;
+  itemsPerPage: number = 12;
   currentPage: number = 0;
   visiblePages: number[] = [];
   sort:string = "idHight";
@@ -160,4 +160,11 @@ export class ShopGridComponent implements OnInit {
     this.sort = "priceHight";
     this.ngOnInit();
   }
+
+  getMinImageId(images: any[]): number {
+    if (!images || images.length === 0) {
+        return 0; // Trả về giá trị mặc định nếu mảng rỗng
+    }
+    return Math.min(...images.map(image => image.id));
+}
 }

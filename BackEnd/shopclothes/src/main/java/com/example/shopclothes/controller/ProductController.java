@@ -1,9 +1,12 @@
 package com.example.shopclothes.controller;
 
 import com.example.shopclothes.dto.ProductDTO;
+import com.example.shopclothes.entity.Image;
 import com.example.shopclothes.entity.Product;
 import com.example.shopclothes.entity.ProductSize;
+import com.example.shopclothes.entity.Size;
 import com.example.shopclothes.repository.ProductSizeRepository;
+import com.example.shopclothes.repository.SizeRepository;
 import com.example.shopclothes.response.ProductCategoryResponse;
 import com.example.shopclothes.response.ProductKeywordResponse;
 import com.example.shopclothes.response.ProductListResponse;
@@ -32,6 +35,9 @@ public class ProductController {
 
     @Autowired
     ProductSizeRepository productSizeRepository;
+
+    @Autowired
+    SizeRepository sizeRepository;
 
     @GetMapping("")
     public ResponseEntity<?> getAllProduct(){
@@ -220,6 +226,14 @@ public class ProductController {
     public ResponseEntity<?> createProduct(@RequestBody ProductDTO productDTO){
         try{
             Product product = productService.createProduct(productDTO);
+            for (int i = 1; i <= 4; i++) {
+                ProductSize productSize = new ProductSize();
+                productSize.setProduct(product);
+                Size size = sizeRepository.findById(i).orElseThrow();
+                productSize.setSize(size);
+                productSize.setQuantity((Integer)ProductSize.getRandomQuantity(20,300));
+                productSizeRepository.save(productSize);
+            }
             return ResponseEntity.ok(ProductDTO.fromProduct(product));
         }catch (Exception e){
             return ResponseEntity.badRequest().body(e.getMessage());

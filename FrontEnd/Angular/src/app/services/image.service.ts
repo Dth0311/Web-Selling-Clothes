@@ -17,6 +17,10 @@ export class ImageService {
     return this.http.get(IMAGE_API,httpOptions);
   }
 
+  getListSort(){
+    return this.http.get(IMAGE_API + "/sort",httpOptions);
+  }
+
   upload(file:File){
     const formData: FormData = new FormData();
     formData.append('file',file);
