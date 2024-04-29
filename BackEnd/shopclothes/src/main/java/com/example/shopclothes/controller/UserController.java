@@ -3,6 +3,7 @@ package com.example.shopclothes.controller;
 import com.example.shopclothes.dto.UserDTO;
 import com.example.shopclothes.entity.User;
 import com.example.shopclothes.exception.DataNotFoundException;
+import com.example.shopclothes.service.ResetPasswordService;
 import com.example.shopclothes.service.UserService;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Encoders;
@@ -20,6 +21,9 @@ import java.util.List;
 public class UserController {
     @Autowired
     UserService userService;
+
+    @Autowired
+    ResetPasswordService resetPasswordService;
 
     @GetMapping("")
     public ResponseEntity<?> getuser(@RequestParam("username") String username){
@@ -86,5 +90,17 @@ public class UserController {
         } catch (DataNotFoundException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
+    }
+
+    @PostMapping("/resetPw")
+    public ResponseEntity<?> resetPassword(@RequestParam String email) {
+        try {
+            if (resetPasswordService.sendResetPasswordEmail(email)){
+                return ResponseEntity.ok("Reset password email sent successfully");
+            }
+        }catch (Exception e){
+            return ResponseEntity.badRequest().body("Email không tồn tại hoặc " + e.getMessage());
+        }
+        return ResponseEntity.badRequest().body("Email không tồn tại");
     }
 }

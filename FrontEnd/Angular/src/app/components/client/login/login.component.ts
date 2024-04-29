@@ -18,6 +18,9 @@ export class LoginComponent {
   userName: string;
   password: string;
 
+  email: string;
+  displayForm:boolean = false;
+
   constructor(
     private loginService: LoginService,
     private router: Router,
@@ -26,11 +29,12 @@ export class LoginComponent {
     ){
     this.userName = '';
     this.password = '';
+    this.email = '';
     //Inject
   }
 
-  goToRegister() {
-    this.router.navigate(['/register']);
+  goToReset() {
+    this.displayForm = !this.displayForm;
   }
 
   login(){
@@ -80,6 +84,23 @@ export class LoginComponent {
         }
       }
     })
+  }
+
+  resetPw(){
+    this.userService.resetPassword(this.email).subscribe({
+      next:res => {
+
+      },error:err => {
+        if(err.status === 200){
+          alert("Mật khẩu mới đã được gửi về mail!");
+          this.displayForm = !this.displayForm;
+        }
+        else{
+          alert("Mail không tồn tại!")
+          console.log(err)
+        }
+      }
+    });
   }
 }
 

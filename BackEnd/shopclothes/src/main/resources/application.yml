@@ -18,6 +18,19 @@ spring:
   main:
     allow-circular-references: true
     allow-bean-definition-overriding: true
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: danghai3112002@gmail.com
+    password: cwbf knku sgrz cwtk
+    properties:
+      mail:
+        smtp:
+          auth: true
+          transport:
+            protocol: smtp
+          starttls:
+            enable: true
 
 jwt:
   privateKey: BuyWkVX1rtFgUgIMNDTAmXMfs7t4TbvhZxOJWfULYSQ=

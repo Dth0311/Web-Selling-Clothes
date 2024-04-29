@@ -49,4 +49,8 @@ export class UserService {
     return this.http.put(USER_API +'/update',{userName,firstName,lastName,email,country,state,address,phone},httpOptions);
   }
 
+  resetPassword(email: string):Observable<any>{
+    return this.http.post(USER_API + '/resetPw?email=' + email,httpOptions)
+  }
+
 }

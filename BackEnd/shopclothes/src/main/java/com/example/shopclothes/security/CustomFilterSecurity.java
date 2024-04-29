@@ -62,6 +62,8 @@ public class CustomFilterSecurity {
                             .permitAll()
                             .requestMatchers(POST,
                                     String.format("%s/login/signup", apiPrefix)).permitAll()
+                            .requestMatchers(POST,
+                                    String.format("%s/user/resetPw", apiPrefix)).permitAll()
                             .requestMatchers(GET,
                                     String.format("%s/category/**", apiPrefix)).permitAll()
                             .requestMatchers(GET,

@@ -5,7 +5,7 @@
         <div
           class="d-flex align-items-center h-custom-2 px-5 ms-xl-4 mt-5 pt-5 pt-xl-0 mt-xl-n5"
         >
-          <form style="width: 23rem; margin: 20px" #loginForm="ngForm">
+          <form style="width: 23rem; margin: 20px" #loginForm="ngForm" *ngIf="!displayForm">
             <img
               src="assets/img/logo.png"
               style="height: 70px; margin-bottom: 50px"
@@ -53,14 +53,46 @@
             </div>
 
             <p>
-              Don't have an account?
               <a
                 href="javascript:void(0)"
-                class="link-info"
-                (click)="goToRegister()"
-                >Register here</a
+                (click)="goToReset()"
+                >Quên mật khẩu?</a
               >
             </p>
+          </form>
+
+          <form style="width: 23rem; margin: 20px" #loginForm="ngForm" *ngIf="displayForm">
+            <img
+              src="assets/img/logo.png"
+              style="height: 70px; margin-bottom: 50px"
+              alt=""
+            />
+            <h3 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px">
+              Reset Password
+            </h3>
+
+            <div class="form-outline mb-3">
+              <input
+                type="email"
+                id="form2Example18"
+                class="form-control form-control-lg"
+                [(ngModel)]="email"
+                required
+                [ngModelOptions]="{ standalone: true }"
+                name="email"
+              />
+              <label class="form-label" for="form2Example18">Email</label>
+            </div>
+            <div class="pt-1 mb-4">
+              <button
+                class="btn btn-info btn-lg btn-block"
+                type="button"
+                style="background-color: #d46407;"
+                (click)="resetPw()"
+              >
+                Reset
+              </button>
+            </div>
           </form>
         </div>
       </div>
