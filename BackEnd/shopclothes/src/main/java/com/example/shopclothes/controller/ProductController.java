@@ -226,10 +226,19 @@ public class ProductController {
     public ResponseEntity<?> createProduct(@RequestBody ProductDTO productDTO){
         try{
             Product product = productService.createProduct(productDTO);
-            for (int i = 1; i <= 4; i++) {
+            if(product.getCategory().getId() != 3){
+                for (int i = 1; i <= 4; i++) {
+                    ProductSize productSize = new ProductSize();
+                    productSize.setProduct(product);
+                    Size size = sizeRepository.findById(i).orElseThrow();
+                    productSize.setSize(size);
+                    productSize.setQuantity((Integer)ProductSize.getRandomQuantity(20,300));
+                    productSizeRepository.save(productSize);
+                }
+            }else {
                 ProductSize productSize = new ProductSize();
                 productSize.setProduct(product);
-                Size size = sizeRepository.findById(i).orElseThrow();
+                Size size = sizeRepository.findById(5).orElseThrow();
                 productSize.setSize(size);
                 productSize.setQuantity((Integer)ProductSize.getRandomQuantity(20,300));
                 productSizeRepository.save(productSize);

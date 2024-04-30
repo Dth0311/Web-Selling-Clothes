@@ -28,6 +28,7 @@ export class ProductDetailComponent implements OnInit,PipeTransform {
   isClicked1: boolean = false;
   isClicked2: boolean = false;
   isClicked3: boolean = false;
+  isClicked4: boolean = true;
   quantityProduct:number = 0;
   constructor(
     private router: Router, 
@@ -53,6 +54,10 @@ export class ProductDetailComponent implements OnInit,PipeTransform {
     this.productService.getProdct(this.id).subscribe({
       next: res =>{
         this.product = res;
+        if(this.product.sizeIds[0] === 5){
+          this.sizeId = 5;
+          this.getQuantity();
+        }
         console.log(this.product);
         this.getListRelatedProduct();
       },error: err=>{
@@ -145,6 +150,12 @@ export class ProductDetailComponent implements OnInit,PipeTransform {
       this.isClicked2 = false;
       this.isClicked1 = false;
       this.isClicked0 = false;
+      this.getQuantity();
+      this.ngOnInit();
+    }
+
+    if(sizeId == 5){
+      // this.isClicked4 = !this.isClicked4;
       this.getQuantity();
       this.ngOnInit();
     }
