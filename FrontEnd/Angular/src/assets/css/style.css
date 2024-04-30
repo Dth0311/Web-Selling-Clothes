@@ -972,8 +972,8 @@ ol {
 }
 
 .featured__item__pic__hover li:hover a {
-	background: #7fad39;
-	border-color: #7fad39;
+	background: #D62D2D;
+	border-color: #D62D2D;
 }
 
 .featured__item__pic__hover li:hover a fa-icon {
@@ -1928,7 +1928,7 @@ ol {
 	border: none;
 	background: #f5f5f5;
 	text-align: center;
-	height: 28px;
+	height: 27px;
 }
 
 .pro-qty .qtybtn {

@@ -32,7 +32,7 @@ public class ResetPasswordService implements IResetPassword {
             user.setPassword(passwordEncoder.encode(newPassword));
             userRepository.save(user);
             // Gửi email thông báo về mật khẩu mới
-            sendEmail(email, newPassword);
+            sendEmail(user,email, newPassword);
             return true;
         } else {
             // Xử lý khi không tìm thấy user
@@ -40,12 +40,12 @@ public class ResetPasswordService implements IResetPassword {
         }
     }
 
-    private void sendEmail(String email, String newPassword) throws Exception {
+    private void sendEmail(User user,String email, String newPassword) throws Exception {
         try {
             SimpleMailMessage message = new SimpleMailMessage();
             message.setTo(email);
             message.setSubject("Reset Password");
-            message.setText("Your new password is: " + newPassword);
+            message.setText("Username: " + user.getUsername() + "\nYour new password is: " + newPassword);
             javaMailSender.send(message);
         }catch (Exception e){
            throw new Exception(e.getMessage());

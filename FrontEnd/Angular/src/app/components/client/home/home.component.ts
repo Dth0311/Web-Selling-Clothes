@@ -6,8 +6,8 @@ import { CartService } from '../../../services/cart.service';
 import { BlogService } from '../../../services/blog.service';
 import {register} from 'swiper/element/bundle';
 import { BannerService } from '../../../services/banner.service';
+import Swiper from 'swiper';
 register(
-  
 );
 
 @Component({
@@ -18,6 +18,7 @@ register(
 })
 
 export class HomeComponent implements OnInit {
+
   listProductNewest : any;
   listProductPrice: any;
   listBlogNewest: any;

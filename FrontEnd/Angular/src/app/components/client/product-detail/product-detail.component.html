@@ -47,11 +47,16 @@
               <div class="quantity">
                 <span style="margin-right: 40px;">Size</span>
                 <div class="pro-qty1">
-                    <button [ngClass]="{'red-button': isClicked0}" (click)="selectSize(product.sizeIds[0])" *ngIf="product.sizeIds[0] == 1">S</button>
-                    <button [ngClass]="{'red-button': isClicked1}" (click)="selectSize(product.sizeIds[1])" *ngIf="product.sizeIds[1] == 2">M</button>
-                    <button [ngClass]="{'red-button': isClicked2}" (click)="selectSize(product.sizeIds[2])" *ngIf="product.sizeIds[2] == 3">L</button>
-                    <button [ngClass]="{'red-button': isClicked3}" (click)="selectSize(product.sizeIds[3])" *ngIf="product.sizeIds[3] == 4">XL</button>
+                    <button [ngClass]="{'red-button': isClicked0}" (click)="selectSize(product.sizeIds[0])" *ngIf="product.sizeIds[0] == 1  && product.categoryId != 4">S</button>
+                    <button [ngClass]="{'red-button': isClicked1}" (click)="selectSize(product.sizeIds[1])" *ngIf="product.sizeIds[1] == 2 && product.categoryId != 4">M</button>
+                    <button [ngClass]="{'red-button': isClicked2}" (click)="selectSize(product.sizeIds[2])" *ngIf="product.sizeIds[2] == 3 && product.categoryId != 4">L</button>
+                    <button [ngClass]="{'red-button': isClicked3}" (click)="selectSize(product.sizeIds[3])" *ngIf="product.sizeIds[3] == 4 && product.categoryId != 4">XL</button>
                     <button style="margin-right: 300px;" [ngClass]="{'red-button': isClicked4}" (click)="selectSize(product.sizeIds[0])" *ngIf="product.sizeIds[0] == 5">OverSize</button>
+
+                    <button [ngClass]="{'red-button': isClicked0}" (click)="selectSize(product.sizeIds[0])" *ngIf="product.sizeIds[0] == 1 && product.categoryId == 4">39</button>
+                    <button [ngClass]="{'red-button': isClicked1}" (click)="selectSize(product.sizeIds[1])" *ngIf="product.sizeIds[1] == 2 && product.categoryId == 4">40</button>
+                    <button [ngClass]="{'red-button': isClicked2}" (click)="selectSize(product.sizeIds[2])" *ngIf="product.sizeIds[2] == 3 && product.categoryId == 4">41</button>
+                    <button [ngClass]="{'red-button': isClicked3}" (click)="selectSize(product.sizeIds[3])" *ngIf="product.sizeIds[3] == 4 && product.categoryId == 4">42</button>
                 </div>
               </div>
               <div class="quantity" style="margin-bottom: 10px;">

@@ -1,23 +1,5 @@
-<!-- <section class="header-img">
-  <div class="">
-    <div class="justify-content-end">
-      <div class="">
-        <div
-          class="hero__item set-bg right"
-          style="background-image: url('assets/img/hero/banner.jpg')">
-          <div class="hero__text">
-            <h2>FASHION HAS TO <br />REFLECT WHO YOU ARE</h2>
-            <p>WHAT YOU FEEL AT THE MOMENT WHERE YOU COME HERE?</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section> -->
-  <!-- <swiper-slide *ngFor="let product of listProductNewest">
-    <img class="swiperImage" src='assets/img/hero/banner.jpg' height="800px" width="100%" alt="">
-  </swiper-slide> -->
-<swiper-container  navigation="true" pagination="true">
+
+  <swiper-container navigation="true" pagination="false" autoplay="true" autoplay-delay="2000"  loop="true">
   <swiper-slide *ngFor="let banner of listBanner; let i = index; let count = count">
        <div *ngIf="i == 0"
           class="hero__item set-bg right"

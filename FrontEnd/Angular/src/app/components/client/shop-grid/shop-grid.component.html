@@ -19,20 +19,13 @@
     <section class="product spad">
         <div class="container">
             <div class="row">
-                <div class="col-lg-3 col-md-5">
+                <div class="col-lg-3 col-md-6">
                     <div class="sidebar">
                         <div class="sidebar__item">
                             <h4>Department</h4>
                             <ul>
                                 <li><a href="javascript:void(0)" routerLink="/category/{{category.id}}" *ngFor="let category of listCategory">{{category.name}}</a></li>
                             </ul>
-                        </div>
-                        <div class="sidebar__item">
-                            <h4>Price</h4>
-                            <p-slider [(ngModel)]="rangeValues" [range]="true" [min]="0" [max]="500" [style]="{'background':'#dd2222'}" (onChange)="getListProductByPriceRange()"></p-slider>
-                            <div class="price-input mt-3">
-                                {{rangeValues[0] | currency}} - {{rangeValues[1] | currency}} 
-                            </div>
                         </div>
                         <div class="sidebar__item">
                             <div class="latest-product__text">
